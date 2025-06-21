@@ -1,0 +1,152 @@
+---
+title: "Vorbereitungen"
+author: "Norman Markgraf"
+format: html
+---
+
+# Vorbereitungen
+
+Zunächst prüfen wir, ob die notwenidigen Pakete installiert sind und installieren diese ggf.:
+
+```{r}
+#| echo: true
+if (!require("pak")) {
+    cat("Wir müssen das Paket 'pak' installieren!\n")
+    install.packages("pak")
+} else {
+    cat("Das Paket 'pak' ist installiert!\n")
+}
+
+pakete <- c("tidyverse", 
+            "charlatan", 
+            "dbplyr", 
+            "data.table", 
+            "dtplyr", 
+            "DBI", 
+            "RSQLite")
+
+pak::pkg_install(
+    pakete,
+    dependencies = TRUE
+)
+```
+
+Zur Sicherheit sorgen wir für Reproduzierbarkeit bei der (Pseudo-)Zufallszahlengenerierung:
+```{r}
+# Für Reproduzierbarkeit sorgen
+set.seed(2009)
+```
+
+
+Es sind die folgenden Pakete (Name/Version) installiert:
+```{r}
+pkg_status(pakete)[c("package", "version", "title")]
+```
+
+Nun erzeugen wir ein paar Tabellen für unsere Datenbanken
+```{r}
+#| echo: true
+library(charlatan)
+library("DBI")
+library("RSQLite")
+
+# Verbindung zur SQLite-Datenbank herstellen
+con <- dbConnect(SQLite(), "mitarbeiter.db")
+
+# Tabelle ggf. löschen
+dbExecute(con, "DROP TABLE IF EXISTS mitarbeiter")
+
+# Neue Tabelle anlegen
+dbExecute(con, "
+CREATE TABLE mitarbeiter (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  vorname TEXT,
+  nachname TEXT,
+  abteilung TEXT,
+  eintrittsdatum DATE,
+  gehalt REAL
+)")
+
+# Abteilungen
+abteilungen <- c("Vertrieb", "Marketing", "IT", "HR", "Finanzen")
+
+# Daten einfügen
+for (i in 1:20) {
+  voller_name <- ch_name(locale = "de_DE")
+  name_parts <- strsplit(voller_name, " ")[[1]]
+  start_at <- ifelse(length(name_parts) > 2, 2, 1)
+  vorname <- name_parts[start_at]
+  title <- ifelse(length(name_parts) < 3, "", name_parts[1])
+  title <- ifelse(title %in% c("Frau", "Herr"), "", title)
+  nachname <- ifelse(length(name_parts) < 2, "Mustermann", name_parts[start_at + 1])
+  abteilung <- sample(abteilungen, 1)
+  eintrittsdatum <- as.character(sample(seq.Date(as.Date("2010-01-01"), as.Date("2023-12-31"), by = "day"), 1))
+  gehalt <- round(runif(1, 35000, 90000), 2)
+
+  dbExecute(con, sprintf(
+    "INSERT INTO mitarbeiter (title, vorname, nachname, abteilung, eintrittsdatum, gehalt) 
+     VALUES ('%s', '%s', '%s', '%s', '%s', %.2f)",
+    title, vorname, nachname, abteilung, eintrittsdatum, gehalt
+  ))
+}
+
+# Verbindung schließen
+dbDisconnect(con)
+
+```
+
+```{r}
+#| echo: true
+library(DBI)
+library(RSQLite)
+library(tidyverse)
+library(data.table)
+
+# Verbindung zur SQLite-Datenbank herstellen
+con <- dbConnect(SQLite(), "mitarbeiter.db")
+
+# Tabelle einlesen
+dbReadTable(con, "mitarbeiter") |>
+    as.data.table() -> daten_dt
+
+# Verbindung schließen
+dbDisconnect(con)
+
+# Daten in data.table anzeigen
+print(daten_dt)
+
+# Optional: Daten filtern und transformieren mit tidyverse/dplyr
+daten_dt |>
+  filter(abteilung == "HR") |>
+#  mutate(gehalt_neu = gehalt * 0.90) |>
+  as.data.table() -> daten_dt_gefiltert
+
+print(daten_dt_gefiltert)
+```
+
+```{r}
+#| echo: true
+library(DBI)
+library(RSQLite)
+library(tidyverse)
+library(data.table)
+
+# Verbindung zur SQLite-Datenbank herstellen
+con <- dbConnect(SQLite(), "mitarbeiter.db")
+daten_db <-tbl(con, "mitarbeiter")
+
+# Daten in tbl anzeigen
+print(daten_db)
+
+# Optional: Daten filtern und transformieren mit tidyverse/dplyr
+daten_db |>
+  filter(abteilung == "HR") |>
+#  mutate(gehalt_neu = gehalt * 0.90) |>
+  as.data.table() -> daten_dt_gefiltert
+
+print(daten_dt_gefiltert)
+
+
+```
+
