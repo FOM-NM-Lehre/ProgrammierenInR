@@ -3,3 +3,90 @@
 # Datenbanken als Quelle
 
 -->
+
+## Für den Einstieg eine SQLite Datenbank
+
+Um mit einer Datenbank zu Arbeiten gibt es mehrere Wege.
+
+Wir brauchen um Beginn ein paar neine  Pakete:
+
+```{r}
+#| echo: true
+#| eval: false
+#| warning: false
+install.packages(c("DBI", "RSQLite", "RPostgreSQL", "dbplyr", "odbc"))
+```
+
+Wir beginnen mit einer ODBC-Verbindung.
+```{r}
+#| echo: true
+#| eval: false
+library(DBI)
+library(odbc)
+con <- dbConnect(
+    odbc(), 
+    .connection_string = "Driver={SQLite3};Database=sqlite-db/mitarbeiter.db",
+    timeout = 10)
+```
+```{r}
+library(tidyverse)
+library(DBI)
+library("RSQLite")
+con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
+```
+
+## Auslesen aus der Datenbank
+
+Wir können einfach eine komplette Tabelle aus der Datenbank auslesen und lokal speichern:
+
+```{r}
+# Tabelle einlesen
+dbReadTable(con, "mitarbeiter") |>
+    as_tibble() -> daten_tib
+
+# Verbindung schließen
+dbDisconnect(con)
+
+# Tabelle ausgeben
+glimpse(daten_tib)
+
+```
+
+## Beispiel
+
+Mit dieser Tabelle können wir wie gewohnt arbeiten:
+
+```{r}
+# Daten in data.table anzeigen
+# Optional: Daten filtern und transformieren mit tidyverse/dplyr
+daten_tib |>
+  filter(abteilung == "HR") |>
+  as_tibble() -> daten_tib_gefiltert
+
+glimpse(daten_tib_gefiltert)
+
+```
+
+
+## Auslesen in der Datenbank
+
+Alternativ kännen wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden. Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
+
+```{r}
+# Verbindung zur SQLite-Datenbank herstellen
+con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
+
+# Link auf die Tabelle in der Datenbank
+daten_db <-tbl(con, "mitarbeiter")
+
+# Daten in tbl anzeigen
+glimpse(daten_db)
+
+# Optional: Daten filtern und transformieren mit tidyverse/dplyr
+daten_db |>
+  filter(abteilung == "HR") |>
+  as_tibble() -> daten_db_gefiltert
+
+glimpse(daten_db_gefiltert)
+```
+

@@ -3,3 +3,28 @@
     ShinyApp
 
 -->
+
+## Was ist eine Shiny-App?
+
+Eine Shiny-App ist eine interaktive Webanwendung, die mit der Programmiersprache R erstellt wird. Das Shiny-Paket ermöglicht es, benutzerfreundliche Web-Apps zu bauen, die R-Code im Hintergrund ausführen und dabei Daten, Visualisierungen oder Modelle dynamisch an die Benutzereingaben anpassen.
+
+
+## Kernpunkte zu Shiny-Apps:
+
+Sie bestehen aus zwei Hauptkomponenten:
+
+User Interface (UI): Definiert das Aussehen und die Bedienungselemente für den Benutzer.
+
+Server: Enthält die Logik, wie auf Benutzereingaben reagiert und Ausgaben generiert werden.
+
+##
+
+Shiny nutzt reaktives Programmieren, sodass Änderungen an den Eingaben automatisch die entsprechenden Ausgaben aktualisieren.
+
+Shiny-Apps laufen lokal im Browser oder online auf einem Shiny-Server und benötigen keine Kenntnisse in HTML, CSS oder JavaScript, da dies vom Paket automatisch gehandhabt wird.
+
+Damit lassen sich z.B. interaktive Dashboards, Visualisierungen, Berichte oder datengetriebene Webtools schnell und unkompliziert umsetzen.
+
+Kurz gesagt: Eine Shiny-App verbindet die R-Programmierung mit modernen interaktiven Webtechnologien, um leicht bedienbare und dynamische Anwendungen für Datenanalyse und Visualisierung bereitzustellen.
+
+## Ein Beispiel

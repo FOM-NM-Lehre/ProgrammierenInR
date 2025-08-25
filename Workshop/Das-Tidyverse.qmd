@@ -3,3 +3,422 @@
 # Das Tidyverse
 
 -->
+
+## Vorbereitung
+
+Pakete kann mensch bequem über die IDE installieren, oder einfach mit einem Befehl:
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.packages(c("tidyverse", "palmerpenguins", "nycflights13", "gapminder", "janitor", "lubridate", "stringr", "forcats"))
+
+```
+
+Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. -- Aber keine Angst, sollten Sie ein Paket schon istalliert haben, dann wird es maximal auf die aktuelle Version upgedated!
+
+
+## Das `tidyverse`
+
+`tidyverse` ist eine Sammlung von aufeinander abgestimmter Pakete für die Arbeit mit Daten.
+
+**Kernpakete:** [`readr`](https://readr.tidyverse.org) (Einlesen),
+[`tibble`](https://tibble.tidyverse.org) (Datenstruktur),
+[`dplyr`](https://dplyr.tidyverse.org/reference/tbl.html) (Transformation), 
+[`tidyr`](https://tidyr.tidyverse.org) (Umformen), 
+[`ggplot2`](https://ggplot2.tidyverse.org) (Graphiken), 
+[`stringr`](https://stringr.tidyverse.org) (Text), 
+[`forcats`](https://forcats.tidyverse.org) (Kategorielle Variablen/Faktoren), 
+[`lubridate`](https://lubridate.tidyverse.org) (Daten/Zeit).
+
+
+**Philosophie:** Ein Datenzusammenhang pro Tabelle, eine Variable pro Spalte, eine Beobachtung pro Zeile; klare, “verb”-artige Funktionen.
+
+
+**Pipes:** Kette Schritte mit dem Base-Pipe `|>` (oder `%>%`), um lineare, lesbare Workflows zu bauen.
+
+## Anmerkung zu den Beispiel Daten "palmerpenguins"
+
+Wir schauen uns die Daten der "[Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/)" an.
+
+Es wurden auf drei Inseln ("Biscoe" "Dream" und "Torgersen") der Antarktic drei Arten von Piguinen ("Adelie", "Chinstrap" und "Gentoo") beobachtet.^[Paper zu den Daten finden Sie [hier](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081)]
+
+![.](./images/iter_penguins.png)
+
+## Anmerkung zu den Beispiel Daten "palmerpenguins"
+
+![.](./images/palmerpenguins_orte.png)
+
+
+## Beispiel 
+
+Wir haben schon ein wenig mit dem `tidyverse` gearbeitet, daher können Sie sich sicher denken, was wir hier ausgeben wollen:
+
+```{r}
+#| warning: false
+#| echo: true
+#| eval: false
+library(tidyverse)
+library(palmerpenguins)
+
+penguins |>
+  drop_na() |>
+  mutate(bmi = body_mass_g / flipper_length_mm) |>
+  group_by(species) |>
+  summarise(mean_bmi = mean(bmi), n = n(), .groups = "drop") |>
+  arrange(desc(mean_bmi))
+```
+
+## Und? 
+
+Ist das die von Ihnen vermutete Ausgabe?
+
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
+library(tidyverse)
+library(palmerpenguins)
+
+penguins |>
+  drop_na() |>
+  mutate(bmi = body_mass_g / flipper_length_mm) |>
+  group_by(species) |>
+  summarise(mean_bmi = mean(bmi), n = n(), .groups = "drop") |>
+  arrange(desc(mean_bmi))
+
+```
+## Einlesen von Daten - Vorbereitung
+
+Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org). Es gibt aber auch Bord-Mittel. Schauen Sie sich gerne einmal die Befehle `read.csv()" und `read.csv2()` an. 
+
+```{r}
+#| echo: true
+#| eval: true
+
+library(readr)
+```
+
+## Einlesen
+
+```{r}
+df <- read_csv("data/sales.csv") 
+```
+
+```{r}
+colnames(df)
+```
+
+Sind diese Variabel-/Spaltennamen "schön"? - Was ist Ihre Meinung?
+
+
+## Einlesen von Daten und Variabelnamen vereinheitlich
+
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
+library(janitor)
+
+read_csv("data/sales.csv") |>
+    clean_names()  ->  # macht spalten_namen_einheitlich 
+    df
+```
+
+Und wie schauen die Spaltennamen nun aus?
+
+```{r}
+colnames(df) 
+```
+
+## Nochmal etwas Selektieren und Filtern
+
+Wir erinnern uns: Mit `select()` wählen wir Spalten aus. Mit `filter()` können wir Zeilen filtieren.
+
+Erzeugen wir also eine neue Tabelle mit dem Namen `df_small`, die nur die Spalten *order_date*, *regoon* und alle Spalten die mit *total_* beginnen enthält. Und danach nur die Regionen "Europa" und "North America" enthält, die einen "total_revenue" von mit als 50000 Dollar haben: 
+
+```{r}
+library(dplyr)
+df |>
+    select(order_date, region, starts_with("total_")) |>
+    filter(region %in% c("Europe", "North America"), total_revenue > 50000) ->
+    df_small
+```
+
+
+## Den margin hinzufügen
+
+Fügen wir nun die neue Spalte *margin* hinzu, welche der Quotient aus *total_profit* und *total_revenue* ist. Sortieren wir dann das Ergebnis absteigend (vgl: `desc()`) bzgl. der Spalte *margin*. Und geben die ersten 6 Zeilen der neuen Tabele danach aus:
+
+```{r}
+df_small |>
+    mutate(margin = total_profit / total_revenue) |>
+    arrange(desc(margin)) -> 
+    df_aug
+
+head(df_aug)
+```
+
+## Eine kurze Zusammenfassung der Daten
+
+Wenn wir nun die mittleren Marge (*mean_margin*) und die Gesamtumsatz (*total_rev*) für unsere beiden Regionen bestimmen wollen, so geht das mittels:
+
+```{r}
+df_aug |>
+    group_by(region) |>
+    summarise(
+        mean_margin = mean(margin, na.rm = TRUE),
+        total_rev   = sum(total_revenue, na.rm = TRUE),
+        .groups = "drop"
+    ) -> 
+    by_region
+
+by_region
+```
+
+## Eine andere Aufgabe
+
+Etwas trikreichen müssen wir vorgehen, wenn wir für den Gesamtumsatz (*total_revenue*), die Gesamtkosten (*total_cots*) und den Gesamtgewinn (*total_profit*) die Durchschnitte und deren Standardabweichungen in eine neue Tabelle speichern wollen: 
+
+Wir beginnen mit einer Funktion, die uns für jeden übergebenen Wert eine Tabelle mit dem Mittelwert *mean* und der Standardabweiung *sd* zurückliefert:
+```{r}
+mean_sd <- function(x) {
+    tibble(
+        mean = mean(x),
+        sd = sd(x)
+    )
+}
+```
+
+Diese Funktion nutzen wir und erzeugen eine neue Tabelle, in dem wir durch alle Spalten von *total_revenue* bis *total_profit* durchlaufen und diese der Funktion `mean_sd()` übergeben. Das Ergebnis kommt dann in die Tabelle *df_stats*:
+
+```{r}
+df |>
+    reframe(
+        across(
+            total_revenue:total_profit, 
+            mean_sd,
+            .unpack = TRUE
+        )
+    ) -> df_stats    
+
+df_stats
+```
+
+## Ein neues Beispiel: New York City Flüge aus dem Jahre 2013
+
+Wir schauen uns zunächst die Daten an:
+
+```{r}
+library(nycflights13)
+
+colnames(flights)
+```
+
+
+![.](./images/nycflights13-er-diagramm.png)
+
+## Wir identifizieren Fluggesellschaft über ihre Abkürzungen
+
+Dazu erstellen wir einen *left join*, so wie Sie ihn als SQL sicher schon kennen:
+
+```{r}
+flights |>
+    left_join(airlines, by = "carrier")  ->
+    flights_named
+
+colnames(flights_named)
+
+flights_named %>%
+    select(carrier, name) %>%
+    head()
+```
+
+## Nur die A320 Maschinen bitte!
+
+Wir wollen wissen welche Fluggesellschaften im Februar mit einem Airbus A320 (egal welcher Baureihe) in New York City war:
+
+```{r}
+flights_named |>
+    left_join(planes, by = "tailnum") |>
+    filter(month == 2) |>
+    filter(str_detect(model, "^A320")) |>
+    select(name) |>
+    unique()
+```
+
+## Umformen mittels `tidyr`
+
+Manchmal möchten wir Tabellen für Menschen lesbarer machen. Oder umgekehrt, für den Computer. 
+
+Hier kann das Paket `tidyr` helfen.
+
+```{r}
+#| echo: true
+#| eval: true
+library(tidyr)
+```
+
+Stellen wir uns vor, wie möchten wissen wie viele Tiere welcher Art (*species*) auf welcher Insel (*island*) gesichtet wurden, dann geht das sehr gut mir dem Befehl `count()`:
+
+```{r}
+penguins |>
+  count(species, island) 
+```
+Das Problem ist, es ist nicht die Tabelle, die wir als Menschen gut lesen können. Daher nutzen wir die Funktion `pivot_wider()` aus dem Paket `tidyr`:
+
+```{r}
+penguins |>
+  count(species, island) |>
+  pivot_wider(names_from = island, values_from = n, values_fill = 0)
+```
+
+
+## Visualisierung mit dem Paket `ggplot2`
+
+### Die Grundidee
+
+Der erste Teil von "_gg_plot2" steht für "Grammar of Graphics", also "Grammatik der Grafiken".
+
+Diese Idee Grafiken nicht einfach nur zu Programmieren, sonden den gesamtn Prozess der Erstellung von Grafiken zu analysieren und für Nutzer:innen handhabbar zu machen geht u.a. auf das Buch "The Grammar of Graphics" <https://doi.org/10.1007/0-387-28695-0> von _Leland Wilkinson_ zurück.
+
+Es versucht die Bereiche
+
+Daten + Ästhetiken (aes) + Geome + Skalen + Facets + Themen
+
+zu komibieren, so Grafiken einfach,klar zu beschreiben und den Computer dann daraus eine Graphik erstellen zu lassen.
+
+
+## Beispiel: Streudiagram Körpermasse vs. Flossenlänge:
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+penguins |>
+    ggplot(aes(x = flipper_length_mm, 
+               y = body_mass_g, 
+               color = species, 
+               shape = species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(title = "Penguin Größe, Palmer Station LTER",
+       subtitle = "Flossenlänge und Körpermasse von Adelie, Chinstrap und Gentoo Penguinen",
+       x = "Flossenlänge (in mm)", 
+       y = "Körpermasse (in g)", 
+       color = "Penguin Art", 
+       shape = "Penguin Art") +
+  theme_minimal()
+```
+
+## Beispiel: Flossenlänge vs. Schnabellänge
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+ggplot(
+    data = penguins, 
+    aes(x = flipper_length_mm, 
+        y = bill_length_mm, 
+        color = species, 
+        shape = species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(title = "Flossen- und Schnabellänge",
+       subtitle = "Dimensionen von Adelie, Chinstrap and Gentoo Penguinen",
+       x = "Flossenlänge (in mm)", 
+       y = "Schnabellänge (in mm)", 
+       color = "Penguin Art", 
+       shape = "Penguin Art") +
+  theme_minimal()
+```
+
+## Beispiel: Histogramm der Körpermasse:
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+
+ggplot(data = penguins, aes(x = body_mass_g)) +
+  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
+  labs(title = "Verteilung der Körpermasse von Palmer Penguinen", x = "Körpergewicht (in g)", y = "Anzahl") +
+  theme_minimal()
+```
+
+
+## Beispiel: Boxplot der Körpermasse nach Art
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+ 
+ggplot(data = penguins, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot() +
+  labs(title = "Körpermasse der Penguin Arten", x = "Arten", y = "Körpermasse (in g)") +
+  theme_minimal()
+```
+
+## Datum mit dem Paket `labridate`
+
+Die R-Bibliothek `lubridate` wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
+
+Wir nutzen hier die Befehle `make_datetime()` um aus den Datumsangaben eine `datetime()` zu bilden.
+
+Und den Befehl `wday()`, der und aus einem Datum den Wochentag berechnet.
+
+
+## Vorbereitung
+
+Wir schauen uns jetzt nur die Flüge im Januar an und fügen den Wochentag (*wday*) und die Abflugszeit (*dep_datetime*) hinzu:
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+
+flights |> 
+    filter(month == 1) |>
+    mutate(
+        dep_datetime = make_datetime(year, month, day, hour, minute),
+        wday = wday(dep_datetime, label = TRUE, locale="de_DE")) -> jan_flights
+```
+
+
+
+## Säulendiagramm: Flüge nach Wochentag im Januar
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+
+ggplot(jan_flights, aes(x = wday)) +
+  geom_bar(fill = "coral") +
+  labs(title = "Flüge nach Wochentag im Januar", x = "Wochentag", y = "Anzahl Flüge")
+```
+
+## Streudiagramm Ankunfts- vs. Abflugverzögerungen im Januar
+
+```{r}
+#| warning: false
+#| echo: true
+#| evel: true
+
+ggplot(jan_flights, 
+       aes(x = dep_delay, y = arr_delay, color = carrier)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Ankunfts- vs. Abflugverzögerungen im Januar", 
+       x = "Abflugverspätung (in Minuten)", 
+       y = "Ankunftsverspätung (in Minuten)")
+```
+
+## Aufgaben
+
+1. Erstellen Sie eine Tabelle für den August mit dem Namen *aug_flights*
+
+2. Fügen Sie von den Fluggesellschaftkürzen auch die ensprechenden Namen der Fluggesellschaften in diese Tabelle ein.
+
+3. Eben Sie die Flüge nach Wochentag im August als Säulendiagramm aus.
+

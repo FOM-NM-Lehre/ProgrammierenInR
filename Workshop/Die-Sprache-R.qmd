@@ -316,7 +316,7 @@ Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
 tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
 ```
 
-oder:
+## Alternative
 
 ```{r}
 #| eval: true
@@ -326,7 +326,7 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 ```
 
 
-## Aufgabe
+## Aufgaben
 
 1. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Varable *BMI*.
 
@@ -335,7 +335,7 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 
 ## Streudiagramme
 
-Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mittel dem Geom: *geom_point*:
+Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: *geom_point*):
 
 ```{r}
 #| eval: true
@@ -354,10 +354,11 @@ Der Korrellationkoeffizent berechnet sich zu:
 cor(tib3$Groesse, tib3$Gewicht)
 ```
 
-Eine lineare Regression scheint keine schlechte Idee zu sein.
 
 
 ## Eine lineare Regression
+
+Eine lineare Regression scheint keine schlechte Idee zu sein:
 
 ```{r}
 #| eval: true
@@ -416,20 +417,22 @@ tib3 |>
 
 ## Tabellen und das Dollarzeichen
 
-Intern speichert R Tabellen Spalten und nicht, wie zum Beispiel die meisten relationalen Datenbanken, Zeilenweise.
+Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meisten relationalen Datenbanken, _zeilenweise_!
 
-Das ermöglicht auf der einen Seite schnellen Zugriff aus einzelne Spalten:
+Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
 ```{r}
 #| echo: true
 #| eval: true
 
-tib$Gewicht. # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
+tib$Gewicht   # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
 
 tib["Gewicht"] #. Eine Tabelle mit nur den Einträgen aus der Spalte Gewicht
 ```
 
 
 ## Spalten und Zeilen in R
+
+**Aber Vorsicht!** Reines R kann ab und zu sehr ähnlich aussehen, aber unterschiedliche Ergebnisse liefern:
 
 ```{r}
 #| echo: true
@@ -442,12 +445,16 @@ tib[1, ] # Liefert die erste Zeile!
 
 ## Spalten und Zeilen auswählen mit dem Paket `dplyr`
 
+Besser ist es daher mit dem Paket `dplyr`zu arbeiten. Spalten können wir mit dem Befehl `select()` auswählen:
+
 ```{r}
 #| echo: true
 #| eval: true
 
 tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 ```
+
+Auch in einen Vektor umwandeln:
 
 ```{r}
 #| echo: true
@@ -456,12 +463,16 @@ tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 tib3 |> select(Geschlecht) |> c() # Als Vektor
 ```
 
+Zeilen mit dem Befehl `filter()` herausfiltern:
+
 ```{r}
 #| echo: true
 #| eval: true
 
 tib3 |> filter(Geschlecht == "männlich")
 ```
+
+
 ## Etwas komplizierter
 
 Wir wollen eine Zusammenfassung (eng. *summarise*) bei den Männern erstellen. Dabei geben wir die Anzahl (*n*), den Mittelwert des Gewichts (*mean*) und den Median der Größe (*median*) an:
@@ -496,7 +507,7 @@ tib3 |>
 
 ## Daten aus einer Datei einlesen (CSV-Version)
 
-Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()
+Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
 ```{r}
 #| warning: false
 #| echo: true
@@ -506,7 +517,11 @@ library(readr)
 
 here("data", "tips.csv") |> read_csv() -> tips_csv
 ```
+
 ```{r}
+#| echo: true
+#| eval: true
+
 spec(tips_csv)
 ```
 
@@ -558,7 +573,7 @@ library(readxl)
 here("data", "tips.xlsx") |> read_xlsx(sheet="tips") -> tips_xslx
 ```
 
-Und auch hier erhaölten wir den selben Inhalt:
+Und auch hier erhalten wir den selben Inhalt:
 
 ```{r}
 #| echo: true
@@ -567,8 +582,24 @@ Und auch hier erhaölten wir den selben Inhalt:
 glimpse(tips_xslx)
 ```
 
+## Aufgaben
+
+1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen (Tipp: `sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben
+
+
+2. Gruppieren Sie nun die Ausgabe aus Aufage 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
+
+
+3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen sie im Paket `dplyr`. ;-) ) 
+
+    a) Einmal in aufsteigender Reihenfolge!
+
+    b) Einmal in nabsteigender Reihenfolge!
+
 
 ## Etwas den Speicher aufräumen!
+
+Ab und zu ist einfach mal Zeit zum Aufräumen. Und einer kleinen Pause.
 
 ```{r}
 #| echo: true
