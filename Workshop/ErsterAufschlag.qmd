@@ -1,0 +1,216 @@
+---
+title: "Teil 1"
+format: revealjs
+---
+
+# Ziel und erste Schritt
+
+In diesem Abschnitt richten eine Umgebung ein in der wir zusammen Arbeiten wollen. 
+
+## R Einrichten - Aber Einfach
+
+Wir nutzen posit.cloud als Cloud-Version von R bzw. RStudio.
+
+Für diese Einführung reicht das vollkommen aus. Sie sollten aber, wenn sie öfters mit R arbeiten, darüber nachdenken R und R Studio oder Positron lokal auf ihren Rechner zu installieren. Anteiltungen finden Sie dazu reichtlich im Internet oder auf den Seiten der FOM unter <....>
+
+## Installation in unseres Umgebung
+
+Zunächst wollen wir ein paar Pakete installieren:
+
+```r
+install.packages(c("tidyverse", "palmerpenguins", "nycflights13", "gapminder", "janitor", "lubridate", "stringr", "forcats"))
+```
+
+## Projekt anlegen
+
+Projekt anlegen: In RStudio über 'File > New Project' ein neues Projekt-Verzeichnis erstellen.
+
+
+## Das `tidyverse`
+
+`tidyverse` ist eine Sammlung aufeinander abgestimmter Pakete für Datenarbeit.
+
+
+**Kernpakete:** [`readr`](https://readr.tidyverse.org) (Einlesen),
+[`tibble`](https://tibble.tidyverse.org) (Datenstruktur),
+[`dplyr`](https://dplyr.tidyverse.org/reference/tbl.html) (Transformation), 
+[`tidyr`](https://tidyr.tidyverse.org) (Umformen), 
+[`ggplot2`](https://ggplot2.tidyverse.org) (Graphiken), 
+[`stringr`](https://stringr.tidyverse.org) (Text), 
+[`forcats`](https://forcats.tidyverse.org) (Kategorielle Variablen/Faktoren), 
+[`lubridate`](https://lubridate.tidyverse.org) (Daten/Zeit).
+
+
+**Philosophie:** Ein Datenzusammenhang pro Tabelle, eine Variable pro Spalte, eine Beobachtung pro Zeile; klare, “verb”-artige Funktionen.
+
+
+**Pipes:** Kette Schritte mit dem Base-Pipe `|>` (oder `%>%`), um lineare, lesbare Workflows zu bauen.
+
+
+## Beispiel
+
+```{r}
+#| echo: true
+#| eval: true
+library(tidyverse)
+library(palmerpenguins)
+
+penguins |>
+  drop_na() |>
+  mutate(bmi = body_mass_g / flipper_length_mm) |>
+  group_by(species) |>
+  summarise(mean_bmi = mean(bmi), n = n(), .groups = "drop") |>
+  arrange(desc(mean_bmi))
+
+```
+
+## Einlesen von Daten - Vorbereitung
+
+Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org)
+
+```{r}
+#| echo: true
+#| eval: true
+
+library(readr)
+```
+
+## Einlesen
+
+```{r}
+df <- read_csv("data/sales.csv") 
+```
+
+```{r}
+colnames(df)
+```
+
+Sind diese Variabel-/Spaltennamen "schön"?
+
+## Einlesen von Daten und Variabelnamen vereinheitlich
+
+```{r}
+#| echo: true
+library(janitor)
+
+df <- read_csv("data/sales.csv") |>
+  clean_names()  # macht spalten_namen_einheitlich
+```
+
+Und wie schauen die Spaltennamen nun aus?
+
+```{r}
+colnames(df) 
+```
+
+##
+
+```{r}
+library(dplyr)
+
+df_small <- df |>
+  select(order_date, region, starts_with("total_")) |>
+  filter(region %in% c("Europe", "North America"), total_revenue > 50000)
+```
+
+
+##
+
+```{r}
+df_small |>
+  mutate(margin = total_profit / total_revenue) |>
+  arrange(desc(margin)) -> df_aug
+```
+
+##
+
+```{r}
+df_aug |>
+  group_by(region) |>
+  summarise(
+    mean_margin = mean(margin, na.rm = TRUE),
+    total_rev   = sum(total_revenue, na.rm = TRUE),
+    .groups = "drop"
+  ) -> by_region
+```
+
+##
+
+```{r}
+by_region
+```
+
+##
+
+```{r}
+df |>
+  summarise(across(total_revenue:total_profit, 
+            list(mean = mean, sd = sd), 
+            na.rm = TRUE)) -> df_stats
+
+df_stats
+```
+
+##
+
+```{r}
+library(nycflights13)
+
+colnames(flights)
+
+flights_named <- flights |>
+  left_join(airlines, by = "carrier")  
+
+colnames(flights_named)
+
+flights_named %>%
+    select(carrier, name) %>%
+    head()
+```
+
+## Umformen mittels tidyr
+
+```{r}
+library(tidyr)
+
+wide <- penguins |>
+  count(species, island) |>
+  pivot_wider(names_from = island, values_from = n, values_fill = 0)
+```
+
+# Visualisierung mit ggplot2
+
+## Grundidee
+
+Der erste Teil von "_gg_plot2" steht für "Grammar of Graphics", also "Grammatik der Grafiken".
+
+Diese Idee Grafiken nicht einfach nur zu Programmieren, sonden den gesamtn Prozess der Erstellung von Grafiken zu analysieren und für Nutzer:innen handhabbar zu machen geht u.a. auf das Buch "The Grammar of Graphics" <https://doi.org/10.1007/0-387-28695-0> von _Leland Wilkinson_ zurück.
+
+Es versucht die Bereiche
+
+Daten + Ästhetiken (aes) + Geome + Skalen + Facets + Themen
+
+zu komibieren, so Grafiken einfach,klar zu beschreiben und den Computer dann daraus eine Graphik erstellen zu lassen.
+
+
+## Beispiel
+
+Wir schauen uns die Daten der "[Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/)" an.
+
+Es wurden auf drei Inseln ("Biscoe" "Dream" und "Torgersen") der Antarktic drei Arten von Piguinen ("Adelie", "Chinstrap" und "Gentoo") beobachtet.^[Paper zu den Daten finden Sie [hier](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081)]
+
+![.](./images/iter_penguins.png)
+
+## Beispiel (Fortsetung)
+
+![.](./images/palmerpenguins_orte.png)
+
+
+## Unser Setup
+
+
+Ziel: Daten einlesen, transformieren, visualisieren und als HTML/PDF-Report in R Markdown dokumentieren.
+Was du lernst: tidyverse-Grundprinzipien, dplyr-Workflows, ggplot2-Plots, R Markdown-Struktur.
+Voraussetzungen: R und RStudio installiert (aktuelle Versionen), Grundkenntnisse in Verzeichnissen/Dateien.
+
+## 

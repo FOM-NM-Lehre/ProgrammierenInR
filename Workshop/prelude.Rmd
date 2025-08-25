@@ -1,0 +1,15 @@
+```{r}
+#if (knitr::is_html_output()) knitr::knit_hooks$set(
+#  plot = function(x, options) {
+#    cap  <- options$fig.cap  # figure caption
+#    tags <- htmltools::tags
+#    width <- options$out.width  # output width
+#    as.character(tags$figure(
+#      tags$img(src = x, alt = cap, width = width),
+#      tags$figcaption(cap, width = width)
+#    ))
+#  }
+#)
+
+# knitr::knit_engines$set(yaml = knitr::knit_engines$get("js"))
+```

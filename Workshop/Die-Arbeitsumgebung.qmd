@@ -1,0 +1,36 @@
+<!--
+
+# Ein kurze Einfühung in unser Arbeitsumgebung
+
+-->
+
+## RStudio, posit.cloud oder Positron? 
+
+- [R](https://www.r-project.org) \
+    Die Skript-Sprache mit der wir hier arbeiten werden. Dazu ein eigenen Abschnitt später.
+
+
+- [RStudio (Desktop)](https://posit.co/download/rstudio-desktop/) \
+    Eine *Integrierte Entwicklungsumgeben* (IDE) für R, die uns den Umgang sehr strakt erleichtert.
+
+- [posit.cloud](https://posit.cloud) \
+    Ursprunglich *RStudio cloud*, jetzt aber *posit.cloud* ist eine Cloud-Version von *RStudio Desktop*. Wir nutzen hier diesen Zugang, da er einen schnellern Zungang ermöglicht.
+
+- Die Zukunft: [positron](https://positron.posit.co) \
+    Der Nachfolger von RStudio Desktop ist schon in der Pipeline. Er heisst _Positron_
+
+
+
+## posit.cloud
+
+Wir nutzen **posit.cloud** als Cloud-Version von *R* bzw. *RStudio*.
+
+Für diese Einführung reicht das vollkommen aus. Sie sollten aber, wenn sie öfters mit R arbeiten, darüber nachdenken R und R Studio oder Positron lokal auf ihren Rechner zu installieren. Anteiltungen finden Sie dazu reichtlich im Internet oder auf den Seiten der FOM unter <https://fomshinyapps.shinyapps.io/Installation-R-RStudio-mosaic/> oder <https://raw.githubusercontent.com/luebby/Datenanalyse-mit-R/master/Installation/Install.pdf>
+
+
+## Wo ist was?
+
+Live die ersten Schritt in der *posit.cloud*!
+
+
+

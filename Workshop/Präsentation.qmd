@@ -1,0 +1,62 @@
+---
+title: "Präsentation: Sechs Dinge über R"
+author: "Norman Markgraf"
+#date: today
+copyright: "Norman Markgaf in 2025"
+lang: de-DE
+slide-number: c
+format:
+  revealjs:
+    toc: true
+    toc-depth: 1
+    number-sections: true
+    reference-location: document
+    mermaid-format: png
+    footer: "Workshop: Sechs Dinge über R &nbsp; | &nbsp; Dipl.-Math. Norman Markgraf"
+    html-math-method: katex
+    main-font: Arial
+    monofont: "Courier New" #Roboto
+# 16x10 : 1920 x 1200 (Apple macOS)
+# 16x 9 : 1920 x 1080 (?)
+    width: 1920
+    height: 1200 #    height: 1200 oder 1080
+    margin: 0
+    history: true
+    center: false
+    slide-number: true
+    theme:
+      - fom.scss
+---
+
+{{< include prelude.Rmd >}}
+
+
+# Ein kurze Einfühung in unser Arbeitsumgebung
+
+{{< include Die-Arbeitsumgebung.qmd >}}
+
+
+# Die Sprache R
+
+{{< include Die-Sprache-R.qmd >}}
+
+
+# Das Tidyverse
+
+{{< include Das-Tidyverse.qmd >}}
+
+
+# Datenbanken als Quelle
+
+{{< include Datenbanken-als-Quelle.qmd >}}
+
+
+# Quarto - Für Berichte
+
+{{< include quarto.qmd >}}
+
+
+# ShinyApp - Für Dashboards 
+
+{{< include ShinyApp.qmd >}}
+

@@ -1,0 +1,588 @@
+<!--
+
+# Die Sprache R - Erste Schritte in R
+    
+-->
+
+
+## R die Geschichte in kurz (I/II)
+
+- Die Geschichte von R als Programmiersprache begann 1992 an der Universität Auckland in Neuseeland. 
+
+- R wurde von den Statistikern Ross Ihaka und Robert Gentleman entwickelt. 
+
+- Sie orientierten sich dabei stark an der Programmiersprache S, die in den Bell Laboratories in den 1970er Jahren entstanden war und für statistische Datenverarbeitung genutzt wurde. 
+
+- R kann als freie Implementierung von S angesehen werden, wobei viele Programme für S auch mit R kompatibel sind. 
+
+- Der Name „R“ leitet sich von den Anfangsbuchstaben der Vornamen der Entwickler Ross und Robert ab, gleichzeitig als Anspielung auf die Sprache S.
+
+## R die Geschichte in kurz (II/II)
+
+- Die Motivation für die Entwicklung von R lag in der Verbesserung bestimmter Eigenschaften von S, wie etwa der Speicherverwaltung und der Flexibilität bei der Implementierung neuer analytischer Verfahren. 
+
+- Für den Anfang wurde der Interpreter auf Basis von Scheme entwickelt, geschrieben wurde R in C, Fortran und der eigenen Sprache R. 
+
+- Die Sprache wurde erstmals 1993 öffentlich zugänglich gemacht und seit 1995 unter der GNU General Public License als freie Software verbreitet. 
+
+- Ein wichtiges Ereignis war 1997 die Gründung des R Development Core Teams sowie die Einrichtung des Comprehensive R Archive Network (CRAN), einer zentralen Plattform für Pakete und Erweiterungen.
+
+- R hat sich seitdem zu einer Standardprogrammiersprache für statistische Analysen entwickelt und wird weltweit in Wissenschaft und Wirtschaft eingesetzt. 
+
+- Die Sprache bietet eine breite Palette an statistischen Methoden und Möglichkeiten zur grafischen Visualisierung und wird von einer großen Community stetig weiterentwickelt.
+
+## Noch ein paar Meilensteine in der Entwickliung
+
+
+Bis 2010 prägten mehrere Meilensteine die Entwicklung der Programmiersprache R:
+
+- 1997: Gründung von CRAN (Comprehensive R Archive Network) als zentrale Plattform für Pakete und Erweiterungen, die es Anwendern ermöglicht, selbst geschriebene Funktionen einfach zu teilen und damit die Verbreitung und Nutzung von R erheblich zu fördern.
+
+- 2000: Veröffentlichung von R Version 1.0, der ersten stabilen Version von R, die wichtige Funktionen wie Fehlerbehandlung (try()), Datenrahmenbearbeitung (by(), merge()) enthielt.
+
+- 2001: Gründung von Bioconductor, ein Open-Source-Projekt für Genomdatenanalysen, das neben CRAN über 2000 weitere Pakete bereitstellt.
+
+- 2007: Veröffentlichung von ggplot2, einem Paket basierend auf der Grammar of Graphics von Leland Wilkinson, entwickelt von Hadley Wickham. Dieses Paket revolutionierte die grafische Darstellung in R und wurde zu einem zentralen Bestandteil der R-Community und später des tidyverse.
+
+- 2009: Einführung des R Journals, das die R News ersetzte und als Fachjournal Themen rund um R-Abdeckte, z. B. Erweiterungspakete, Reviews und Anwendungen.
+
+- 2014: Das Paket dplyr mit seinen modernen Datenmanipulationsfunktionen wurde veröffentlicht. Eines der einflussreichsten Pakete im R-Ökosystem.
+
+Diese Meilensteine zeigen eine kontinuierliche Verbesserung von R bezüglich Stabilität, Erweiterbarkeit und Benutzerfreundlichkeit.
+
+
+## Unser erstes R, ein R-Skript
+
+Wir beginnen in dem wir uns in *posit.cloud* ein R-Skript Dokument erstellen und gemeinsam einige Schritte durch gehen um unser erstes (gemeinsames) R zu programmieren.
+
+Wir beginnen mit den folgenden Zeilen:
+
+```{r, erstesBeispiel}
+#| eval: false
+#| echo: true
+
+x <- c(1, 2, 3, 9, 8, 7)
+y <- c(10, 2.3, 4.5, 6.7, -1.2, -9.0)
+
+x
+y
+
+mean(x)
+median(y)
+
+x+y
+
+z <- x*y
+
+z
+```
+
+**Beachten Sie:** _Zuweisungen an eine Variable erfolgen durch "<-" oder "->"! An der Pfeilspitze steht immer die Variabel, auf der anderen Seite das, was sie Zuweisen wollen!_
+
+
+## Was passiert, wenn wir das in R ausführen?
+
+Wir erhalten die folgende Ausgabe:
+
+```{r, ref.label="erstesBeispiel", echo=F}
+```
+
+
+## Wir machen etwas einfache Statistik
+
+Zu nächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektoren mit dem *combine*-Befehl `c()`:
+
+```{r}
+#| eval: true
+#| echo: true
+Gewicht <- c(60, 72, 57, 90, 95, 72)
+Groesse <- c(1.75, 1.80, 1.65, 1.90, 1.74, 1.91)
+```
+
+Jetzt können wir den BMI (also den _Body Mass Index_) einfach berechnen:
+
+```{r}
+#| eval: true
+#| echo: true
+BMI <- Gewicht / Groesse^2
+
+BMI
+```
+
+
+## Noch ein paar Zeilen
+
+Den Mittelwert können wir, quasi von Hand, berechnen in dem wir die Summe durch die Anzahl teilen:
+
+```{r}
+#| eval: true
+#| echo: true
+
+sum(Gewicht)
+length(Gewicht)
+sum(Gewicht) / length(Gewicht)
+```
+
+Es gibt aber auch den Befehl `mean()` dafür:
+```{r}
+#| eval: true
+#| echo: true
+
+mean(Gewicht)
+```
+
+## Noch ein paar weitere Zeilen
+
+Die Standardabweichung ist die Wurzel der Varianz, welches wiederum die durchschnittliche Summe der quadratischen Abweichungen vom Mittelwert ist:
+```{r}
+#| eval: true
+#| echo: true
+
+mittelwert <-  sum(Gewicht) / length(Gewicht)
+Gewicht - mittelwert
+sqrt((sum((Gewicht - mittelwert)^2))/(length(Gewicht)-1))
+```
+
+
+Aber auch hierfür gibt es einfachere Befehle:
+
+```{r}
+#| eval: true
+#| echo: true
+
+sqrt(var(Gewicht))
+```
+Oder noch kürzer mit dem Befehl `sd()` ( _sd_ = _standard derivation_, zu deutsch _Standardabweichung_ ):
+
+```{r}
+#| eval: true
+#| echo: true
+
+sd(Gewicht)
+```
+
+
+## Unsere erste Tabelle
+
+Normalerweise werden in R Datenrahmen (data.frame) zur Speicherung von Tabellen benutzt. 
+
+Wir nutzen hier aber *tibble*s aus dem Paket `tibble`. 
+Es sind im Prinzip Datenrahmen nur etwas moderner implementiert:
+
+```{r}
+#| eval: true
+#| echo: true
+library(tibble)
+
+tib <- tibble(
+    Gewicht = Gewicht,
+    Groesse = Groesse
+)
+tib
+```
+**Bitte beachten Sie:** _Parameterzuweisungen, also Zuweisungen innerhalb von Funktionsaufrufen, erfolgen mit "="!_
+
+## Die Struktur einer Tabelle 
+
+Um auch in Skripten die Struktur einer Tabelle darstellen zu können nutzen wir den Befehl `str()`:
+
+```{r}
+#| eval: true
+#| echo: true
+
+str(tib)
+```
+
+Oder auch moderner mit dem Befehl `glimpse()`:
+
+```{r}
+#| eval: true
+#| echo: true
+
+glimpse(tib)
+```
+
+
+## Unterschied zu Datenrahmen?
+
+Hätten wir die im R normalerweise implementierten Datenrahmen (data.frames) benutzt hätten wir das folgende Ergebnis:
+
+```{r}
+#| eval: true
+#| echo: true
+
+df <- data.frame(
+    Gewicht = Gewicht,
+    Groesse = Groesse
+)
+df
+str(df)
+glimpse(tib)
+```
+
+Für uns als Nutzer:in sind diese beiden Datentabellenarten (annähernd) gleich zu benutzen.
+
+
+## Umwandeln von `tibble` nach `data.frame` und zurück
+
+Wir können wie folgend zwischen den beiden Datentypen umwandeln:
+
+```{r}
+#| eval: true
+#| echo: true
+
+str(as_tibble(df))
+str(as.data.frame(tib))
+```
+
+
+## Unsere erste Graphik
+
+Für Grafiken wollen wir *ggplot* aus dem Paket `ggplot2` benutzen. Dafür müssen wir zunächst das Paket laden:
+
+```{r}
+#| warning: false
+#| eval: true
+#| echo: true
+
+library(ggplot2)
+```
+
+Nun wollen wir ein Säulendiagramm erstellen:
+
+```{r}
+#| eval: true
+#| echo: true
+
+ggplot(data = tib,                       # Woher die Daten?
+       mapping = aes(x = Gewicht)) +     # Was kommt wohin?
+    geom_bar()                           # Was soll damit gemacht werden?
+```
+
+## Oder etwas kompakter:
+
+```{r}
+#| eval: true
+#| echo: true
+
+ggplot(tib, aes(x = Gewicht)) + geom_bar()
+```
+
+## Die Kennzahlen
+
+Die Kennzahlen erhalten wir z.B. wie folgt:
+```{r}
+#| eval: true
+#| echo: true
+
+table(tib$Gewicht)
+
+table(tib$Groesse)
+```
+
+## Aufgabe
+
+1. Erzeugen sie eine neue Tabelle mit dem Namen *tib2*, welche die Spalten _Groesse_, _Gewicht_ und _BMI_ enthält.
+
+2. Geben Sie die Mittelwerte aller drei Spalten aus.
+
+3. Geben Sie ein Säulendiagramm des BMI an.
+
+
+## Spalten zu Tabellen hinzufügren mit `mutate()```
+
+Wir nutzen dazu das Paket *dplyr* und den Befehl *mutate()*:
+
+```{r}
+#| eval: true
+#| echo: true
+
+library(dplyr)
+
+tib |> mutate(BMI = Gewicht / Groesse^2) -> tib2
+head(tib2)
+
+tib2 |> mutate(Geschlecht = rep(c("weiblich", "männlich"), 3)) -> tib3
+```
+
+## Geben wir nun einen Boxplot aus
+
+Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
+
+```{r}
+#| eval: true
+#| echo: true
+
+tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
+```
+
+oder:
+
+```{r}
+#| eval: true
+#| echo: true
+
+tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
+```
+
+
+## Aufgabe
+
+1. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Varable *BMI*.
+
+2. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Variable *BMI*, aber nach Geschlechtern getrennt!
+
+
+## Streudiagramme
+
+Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mittel dem Geom: *geom_point*:
+
+```{r}
+#| eval: true
+#| echo: true
+
+tib3 |>
+    ggplot(aes(x = Groesse, y = Gewicht)) +
+    geom_point()
+```
+
+Der Korrellationkoeffizent berechnet sich zu:
+```{r}
+#| echo: true
+#| eval: true
+
+cor(tib3$Groesse, tib3$Gewicht)
+```
+
+Eine lineare Regression scheint keine schlechte Idee zu sein.
+
+
+## Eine lineare Regression
+
+```{r}
+#| eval: true
+#| echo: true
+
+linreg <- lm(Gewicht ~ Groesse, data = tib3)
+linreg
+```
+
+Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls _summary()_:
+
+```{r}
+#| eval: true
+#| echo: true
+
+summary(linreg)
+```
+
+
+## Eine Grafik dazu
+
+Wir können nun diese Regressiongrade in unsere Grafik einbauen:
+```{r}
+#| echo: true
+#| eval: true
+tib3 |>
+    ggplot(aes(x = Groesse, y = Gewicht)) +
+    geom_point() +
+    geom_smooth(method = lm, se=FALSE, formula = y ~ x)
+```
+
+
+## Ein kleiner Ausblick
+
+```{r}
+#| echo: true
+#| eval: true
+tib3 |>
+    ggplot(aes(x = Groesse, y = Gewicht, color = Geschlecht)) +
+    geom_point() +
+    geom_smooth(
+        mapping = aes(x = Groesse, y = Gewicht), 
+        inherit.aes = FALSE,
+        method = lm, 
+        se=F,
+        formula = y ~ x) +
+    labs(
+        title = "Unser Streudiagramm",
+        subtitle = "Daten nach 'männlich' und 'weiblich' unterschieden",
+        caption = "Etwas mehr Text als vielleicht nötig?",
+        tag = "WICHTIG!"
+    )
+
+```
+
+
+## Tabellen und das Dollarzeichen
+
+Intern speichert R Tabellen Spalten und nicht, wie zum Beispiel die meisten relationalen Datenbanken, Zeilenweise.
+
+Das ermöglicht auf der einen Seite schnellen Zugriff aus einzelne Spalten:
+```{r}
+#| echo: true
+#| eval: true
+
+tib$Gewicht. # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
+
+tib["Gewicht"] #. Eine Tabelle mit nur den Einträgen aus der Spalte Gewicht
+```
+
+
+## Spalten und Zeilen in R
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib[1] # Liefert die erste Spalte!
+tib[1, ] # Liefert die erste Zeile!
+```
+
+
+## Spalten und Zeilen auswählen mit dem Paket `dplyr`
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
+```
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib3 |> select(Geschlecht) |> c() # Als Vektor
+```
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib3 |> filter(Geschlecht == "männlich")
+```
+## Etwas komplizierter
+
+Wir wollen eine Zusammenfassung (eng. *summarise*) bei den Männern erstellen. Dabei geben wir die Anzahl (*n*), den Mittelwert des Gewichts (*mean*) und den Median der Größe (*median*) an:
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib3 |> 
+    filter(Geschlecht == "männlich") |> 
+    select(Gewicht, Groesse) |> 
+    summarise(n = n(), mean = mean(Gewicht), median = median(Groesse))
+```
+
+## Gruppieren
+
+Mit dem Befehl `group_by()` können wir kategoriale Variablen (also Spalten) nutzen um einzelne Fälle (also Kategorien) zu unterscheiden:
+
+```{r}
+#| echo: true
+#| eval: true
+
+tib3 |> 
+    group_by(Geschlecht) |> 
+    summarise(
+        Anzahl = n(), 
+        Mittelwert = mean(Gewicht), 
+        Standardabw. = sd(Gewicht)
+    )
+```
+
+
+## Daten aus einer Datei einlesen (CSV-Version)
+
+Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
+library(here)
+library(readr)
+
+here("data", "tips.csv") |> read_csv() -> tips_csv
+```
+```{r}
+spec(tips_csv)
+```
+
+## Daten aus einer Datei einlesen (CSV2-Version)
+
+Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv2()`:
+
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
+library(here)
+library(readr)
+
+here("data", "tips.csv2") |> read_csv2() -> tips_csv2
+
+```
+
+```{r}
+#| echo: true
+#| eval: true
+
+spec(tips_csv2)
+```
+
+
+## Vergleich
+
+Wir erhalten damit die selben Inhalte:
+
+```{r}
+#| echo: true
+#| eval: true
+
+glimpse(tips_csv)
+glimpse(tips_csv2)
+```
+
+
+## Daten aus einer Datei einlesen (Excel-Version)
+
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
+library(here)
+library(readxl)
+
+here("data", "tips.xlsx") |> read_xlsx(sheet="tips") -> tips_xslx
+```
+
+Und auch hier erhaölten wir den selben Inhalt:
+
+```{r}
+#| echo: true
+#| eval: true
+
+glimpse(tips_xslx)
+```
+
+
+## Etwas den Speicher aufräumen!
+
+```{r}
+#| echo: true
+#| eval: true
+
+rm(tib)
+rm(tib2)
+rm(tips_csv2)
+rm(tips_xslx)
+rm(df)
+rm(BMI)
+rm(Gewicht)
+rm(Groesse)
+rm(mittelwert)
+rm(linreg)
+```
+
