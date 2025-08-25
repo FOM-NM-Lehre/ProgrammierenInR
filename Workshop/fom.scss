@@ -19,6 +19,10 @@ $presentation-title-slide-text-align: right;
   padding-left: 200px;
 }
 
+.reveal #TOC nav {
+/*  padding-left: 40px; */
+}
+
 .reveal .quarto-title-block .quarto-title-authors .quarto-title-author,
 .reveal .quarto-title-block .quarto-title-authors {
   padding-right: 0px;
@@ -58,6 +62,7 @@ section.slide.level2 {
  Gehört zu section.slide und hält recht genug Platz frei für das Logo.
  Zusätzlich wird der Text mit "..." an der rechten Seite abgeschnitten.
 */
+.reveal #TOC h2,
 .reveal .slide h2:not(.default) {
   background-image: url("../../../../../images/layout/fom-kopfzeile.png");
   background-repeat: no-repeat;
@@ -79,7 +84,9 @@ section.slide.level2 {
 .reveal .slides section {
 
 }
-
+.reveal #TOC nav p,
+.reveal #TOC nav ul,
+.reveal #TOC nav ol,
 .reveal .slide code,
 .reveal .slide p,
 .reveal .slide ol,
@@ -87,6 +94,14 @@ section.slide.level2 {
     padding-left: 50px!important;
     padding-right: 50px!important;
   }
+
+.reveal #TOC nav ul {
+    list-style-type: none;
+}
+
+.reveal span.header-section-number::after {
+    content: ".  ";
+}
 
 .reveal div.footnote,
 .reveal div.footnote p,
