@@ -34,6 +34,9 @@ con <- dbConnect(
 Wir können auch direkt mit dem Paket `RSQLite` eine Verbindung mit der Datenbank herstellen:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 library(tidyverse)
 library(DBI)
 library("RSQLite")
@@ -45,6 +48,9 @@ con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
 Aus der Datenbank können wir dann komplette Tabellen herunterladen und lokal speichern:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 # Tabelle einlesen
 dbReadTable(con, "mitarbeiter") |>
     as_tibble() -> daten_tib
@@ -62,6 +68,9 @@ glimpse(daten_tib)
 Mit dieser Tabelle können wir wie gewohnt arbeiten:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 # Daten in data.table anzeigen
 # Optional: Daten filtern und transformieren mit tidyverse/dplyr
 daten_tib |>
@@ -81,6 +90,9 @@ dbDisconnect(con)
 Alternativ können wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden. Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
 
 ```{r}
+#| echo: true
+#| eval: true
+
 # Verbindung zur SQLite-Datenbank herstellen
 con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
 
@@ -105,10 +117,15 @@ Es gibt einige Befehle, mit denen wirk dirket mit der Datenbank kommunizieren k�
 Zum Beispiel können wir die Liste aller Tabellen in der Datenbank abfragen:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 tabellen_namen <- dbListTables(con)
 tabellen_namen
 ```
 
+## Weiter ..
 
+... geht es Live ...
 
 

@@ -23,14 +23,16 @@ Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. --
 
 `tidyverse` ist eine Sammlung von aufeinander abgestimmter Pakete für die Arbeit mit Daten.
 
-**Kernpakete:** [`readr`](https://readr.tidyverse.org) (Einlesen),
-[`tibble`](https://tibble.tidyverse.org) (Datenstruktur),
-[`dplyr`](https://dplyr.tidyverse.org/reference/tbl.html) (Transformation), 
-[`tidyr`](https://tidyr.tidyverse.org) (Umformen), 
-[`ggplot2`](https://ggplot2.tidyverse.org) (Graphiken), 
-[`stringr`](https://stringr.tidyverse.org) (Text), 
-[`forcats`](https://forcats.tidyverse.org) (Kategorielle Variablen/Faktoren), 
-[`lubridate`](https://lubridate.tidyverse.org) (Daten/Zeit).
+**Kernpakete:** 
+
+- [`readr`](https://readr.tidyverse.org) (Einlesen),
+- [`tibble`](https://tibble.tidyverse.org) (Datenstruktur),
+- [`dplyr`](https://dplyr.tidyverse.org/reference/tbl.html) (Transformation), 
+- [`tidyr`](https://tidyr.tidyverse.org) (Umformen), 
+- [`ggplot2`](https://ggplot2.tidyverse.org) (Graphiken), 
+- [`stringr`](https://stringr.tidyverse.org) (Text), 
+- [`forcats`](https://forcats.tidyverse.org) (Kategorielle Variablen/Faktoren), 
+- [`lubridate`](https://lubridate.tidyverse.org) (Daten/Zeit).
 
 
 **Philosophie:** Ein Datenzusammenhang pro Tabelle, eine Variable pro Spalte, eine Beobachtung pro Zeile; klare, “verb”-artige Funktionen.
@@ -42,13 +44,13 @@ Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. --
 
 Wir schauen uns die Daten der "[Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/)" an.
 
-Es wurden auf drei Inseln ("Biscoe" "Dream" und "Torgersen") der Antarktic drei Arten von Piguinen ("Adelie", "Chinstrap" und "Gentoo") beobachtet.^[Paper zu den Daten finden Sie [hier](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081)]
+Es wurden auf drei Inseln ("Biscoe", "Dream" und "Torgersen") der Antarktic drei Arten von Piguinen ("Adelie", "Chinstrap" und "Gentoo") beobachtet.^[Paper zu den Daten finden Sie [hier](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081)]
 
-![.](./images/iter_penguins.png)
+![.](./images/iter_penguins.png){width=60%}
 
 ## Anmerkung zu den Beispiel Daten "palmerpenguins"
 
-![.](./images/palmerpenguins_orte.png)
+![.](./images/palmerpenguins_orte.png){width=60%}
 
 
 ## Beispiel 
@@ -103,10 +105,16 @@ library(readr)
 ## Einlesen
 
 ```{r}
+#| echo: true
+#| eval: true
+
 df <- read_csv("data/sales.csv") 
 ```
 
 ```{r}
+#| echo: true
+#| eval: true
+
 colnames(df)
 ```
 
@@ -129,6 +137,9 @@ read_csv("data/sales.csv") |>
 Und wie schauen die Spaltennamen nun aus?
 
 ```{r}
+#| echo: true
+#| eval: true
+
 colnames(df) 
 ```
 
@@ -139,6 +150,9 @@ Wir erinnern uns: Mit `select()` wählen wir Spalten aus. Mit `filter()` können
 Erzeugen wir also eine neue Tabelle mit dem Namen `df_small`, die nur die Spalten *order_date*, *regoon* und alle Spalten die mit *total_* beginnen enthält. Und danach nur die Regionen "Europa" und "North America" enthält, die einen "total_revenue" von mit als 50000 Dollar haben: 
 
 ```{r}
+#| echo: true
+#| eval: true
+
 library(dplyr)
 df |>
     select(order_date, region, starts_with("total_")) |>
@@ -152,6 +166,9 @@ df |>
 Fügen wir nun die neue Spalte *margin* hinzu, welche der Quotient aus *total_profit* und *total_revenue* ist. Sortieren wir dann das Ergebnis absteigend (vgl: `desc()`) bzgl. der Spalte *margin*. Und geben die ersten 6 Zeilen der neuen Tabele danach aus:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 df_small |>
     mutate(margin = total_profit / total_revenue) |>
     arrange(desc(margin)) -> 
@@ -165,6 +182,9 @@ head(df_aug)
 Wenn wir nun die mittleren Marge (*mean_margin*) und die Gesamtumsatz (*total_rev*) für unsere beiden Regionen bestimmen wollen, so geht das mittels:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 df_aug |>
     group_by(region) |>
     summarise(
@@ -183,6 +203,9 @@ Etwas trikreichen müssen wir vorgehen, wenn wir für den Gesamtumsatz (*total_r
 
 Wir beginnen mit einer Funktion, die uns für jeden übergebenen Wert eine Tabelle mit dem Mittelwert *mean* und der Standardabweiung *sd* zurückliefert:
 ```{r}
+#| echo: true
+#| eval: true
+
 mean_sd <- function(x) {
     tibble(
         mean = mean(x),
@@ -194,6 +217,9 @@ mean_sd <- function(x) {
 Diese Funktion nutzen wir und erzeugen eine neue Tabelle, in dem wir durch alle Spalten von *total_revenue* bis *total_profit* durchlaufen und diese der Funktion `mean_sd()` übergeben. Das Ergebnis kommt dann in die Tabelle *df_stats*:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 df |>
     reframe(
         across(
@@ -211,6 +237,9 @@ df_stats
 Wir schauen uns zunächst die Daten an:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 library(nycflights13)
 
 colnames(flights)
@@ -224,6 +253,9 @@ colnames(flights)
 Dazu erstellen wir einen *left join*, so wie Sie ihn als SQL sicher schon kennen:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 flights |>
     left_join(airlines, by = "carrier")  ->
     flights_named
@@ -240,6 +272,9 @@ flights_named %>%
 Wir wollen wissen welche Fluggesellschaften im Februar mit einem Airbus A320 (egal welcher Baureihe) in New York City war:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 flights_named |>
     left_join(planes, by = "tailnum") |>
     filter(month == 2) |>
@@ -263,12 +298,18 @@ library(tidyr)
 Stellen wir uns vor, wie möchten wissen wie viele Tiere welcher Art (*species*) auf welcher Insel (*island*) gesichtet wurden, dann geht das sehr gut mir dem Befehl `count()`:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 penguins |>
   count(species, island) 
 ```
 Das Problem ist, es ist nicht die Tabelle, die wir als Menschen gut lesen können. Daher nutzen wir die Funktion `pivot_wider()` aus dem Paket `tidyr`:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 penguins |>
   count(species, island) |>
   pivot_wider(names_from = island, values_from = n, values_fill = 0)

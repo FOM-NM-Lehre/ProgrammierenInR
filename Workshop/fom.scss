@@ -13,6 +13,11 @@ $presentation-title-slide-text-align: right;
   padding-left: 10px;*/
 }
 
+.reveal .slide h1 {
+  /*background-color: #00998A;
+  color: white; */
+  padding-left: 200px;
+}
 
 .reveal .quarto-title-block .quarto-title-authors .quarto-title-author,
 .reveal .quarto-title-block .quarto-title-authors {
@@ -21,12 +26,12 @@ $presentation-title-slide-text-align: right;
   display: block;
 }
 
-div.quarto-title-block > div.slide-background-content { 
+div.quarto-title-block > div.slide-background-content {
   background-image: url("../../../../../images/layout/fom-background-neu.png");
   background-repeat: no-repeat;
   background-size: 100% 100% !important;
 }
-/* */ 
+/* */
 
 .reveal h1.title {
   font-size: 80px!important;
@@ -34,7 +39,7 @@ div.quarto-title-block > div.slide-background-content {
   margin-left: 30%;
   margin-top: 25%;
   margin-right: 5%;
-  
+
 }
 
 .reveal #title-slide p.subtitle,
@@ -70,16 +75,17 @@ section.slide.level2 {
   font-size: 40px;
 }
 
-.reveal p, 
+.reveal p,
 .reveal .slides section {
-  
+
 }
 
 .reveal .slide code,
 .reveal .slide p,
 .reveal .slide ol,
 .reveal .slide ul {
-    padding-left: 25px!important;
+    padding-left: 50px!important;
+    padding-right: 50px!important;
   }
 
 .reveal div.footnote,
@@ -94,7 +100,7 @@ div.footer {
   padding-top: 8px;
 }
 
-.reveal div.footer p, 
+.reveal div.footer p,
 div.footer p {
   font-size: 22px!important;
 }
@@ -147,7 +153,7 @@ figcaption {
 /*
 By default, KaTeX math is rendered in a 1.21× larger font than the surrounding context, which makes super- and subscripts easier to read. You can control this using CSS, for example, to set to 1.1×:
 */
-.katex { 
+.katex {
   font-size: 1.0em!important;
 }
 
@@ -159,11 +165,11 @@ By default, KaTeX math is rendered in a 1.21× larger font than the surrounding 
   }
   @page {
     size: landscape;
-    margin: 0 15pt; 
+    margin: 0 15pt;
   }
   @page {
     size: A4 landscape;
-    margin: 0 15pt; 
+    margin: 0 15pt;
   }
   @page:first div.footer{
     display:none !important;
