@@ -20,7 +20,7 @@ format:
 # 16x 9 : 1920 x 1080 (?)
     width: 1920
     height: 1200 #    height: 1200 oder 1080
-    margin: 1
+    margin: 0
     history: true
     center: false
     slide-number: true

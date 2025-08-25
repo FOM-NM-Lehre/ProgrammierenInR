@@ -1,0 +1,32 @@
+---
+title: "Wirtschaftinformatik ist unwichtig!"
+subtitle: "Ein Streitpapier"
+author: "Walther von der Vogelweide"
+date: 1510-10-25
+lang: de
+format:
+  html:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+---
+
+## Die aktuelle Situation
+
+Cras vitae libero sem. Nam ut metus in sem egestas pellentesque in a libero. Quisque mollis ut lacus at tempor. Aenean accumsan, nulla aliquam porttitor ullamcorper, nisi augue elementum dolor, eget sodales mi quam id justo. Aenean a nibh quis quam pulvinar fringilla varius vitae tortor. Etiam et purus feugiat, vulputate enim sit amet, viverra risus. Nunc aliquet lobortis lorem, ut laoreet dui sodales interdum. Aliquam maximus commodo diam, sit amet egestas diam suscipit at. Morbi tincidunt orci id sem sollicitudin, sed cursus lacus sagittis. Suspendisse consectetur ac mauris eu mollis. Praesent rutrum in metus nec suscipit.
+
+## Wie es weiter geht
+
+Cras a dictum nunc. Maecenas luctus sem id lectus rutrum ullamcorper. Nunc ut quam sit amet quam maximus commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque a lacus porttitor, porttitor nulla porttitor, pharetra tellus. Morbi at rhoncus metus, at congue ipsum. Phasellus elementum quam orci, a dictum orci suscipit eget. Ut maximus mollis orci, in blandit magna maximus ut. Vivamus tristique purus nec commodo semper. Vestibulum at vehicula elit. Phasellus pretium orci vel suscipit auctor. Phasellus est libero, laoreet a gravida eu, dapibus sed erat. Praesent condimentum est at est rhoncus, nec semper nisl efficitur.
+
+## Was wir ändern müssen
+
+Sed sit amet dolor sit amet velit dignissim elementum at viverra libero. Quisque eu nulla id libero placerat vehicula bibendum sit amet enim. Praesent finibus dolor at turpis ullamcorper viverra. Donec scelerisque tortor quis aliquam molestie. Vivamus sed sodales nibh. Sed fringilla nulla nec velit eleifend, congue faucibus mauris scelerisque. Pellentesque mi risus, gravida ac augue vitae, accumsan scelerisque ex. Proin ac ultrices justo. Etiam commodo vehicula venenatis. Phasellus ut fringilla sapien. Nam egestas purus at tempus aliquet.
+
+## Warum wir einiges übernehmen können
+
+Nunc eu dolor in quam sagittis cursus vitae et mi. Cras sapien ipsum, dignissim quis congue et, dignissim vitae massa. Phasellus non tortor vel ex vulputate auctor in non nisi. Morbi imperdiet, nulla eget tempus cursus, nulla ipsum eleifend nunc, quis tempor elit libero eget risus. Fusce congue tempus porttitor. Etiam ornare vel nunc sed ornare. Vestibulum non augue ac ex lobortis fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;

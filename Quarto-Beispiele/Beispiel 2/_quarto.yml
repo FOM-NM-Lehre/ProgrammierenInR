@@ -1,0 +1,10 @@
+titel: "Eine einfache Demonstation"
+subtitle: "Mit Verwendung der Datei '_quarto.yml'"
+author: "Norman Markgraf"
+lang: de
+date: today
+format: 
+  revealjs: 
+    toc: false
+    footer: "Workshop: Quarto &nbsp; | &nbsp; Norman Markgraf"
+    embed-resources: true

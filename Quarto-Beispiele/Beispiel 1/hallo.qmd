@@ -1,0 +1,49 @@
+---
+title: "Hallo Quarto!"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Triff Quarto
+
+Quarto ermöglicht es Ihnen, Inhalte und ausführbaren Code zu einem fertigen Dokument zu verweben. Um mehr über Quarto zu erfahren, besuchen Sie <https://quarto.org>.
+
+## Triff die Pinguine
+
+![](https://raw.githubusercontent.com/quarto-dev/quarto-web/main/docs/get-started/hello/rstudio/lter_penguins.png){style="float:right;" fig-alt="Illustration von drei Arten von Pinguinen des Palmer-Archipels: Chinstrap (Zügelpinguin), Gentto (Eselspinguin) und Adelie (Adeliepinguin). Kunstwerk von @allison_horst" width="401"}
+
+Die `penguins`-Daten aus dem [**palmerpenguins**](https://allisonhorst.github.io/palmerpenguins "palmerpenguins R package") enthalten Größenmessungen für
+
+```{r}
+nrow(penguins) 
+```
+
+Pinguine aus drei Arten, die auf drei Inseln im Palmer-Archipel, Antarktis, beobachtet wurden.
+
+Das Diagramm unten zeigt die Beziehung zwischen Flipper- und Schnabellängen dieser Pinguine.
+
+```{r}
+#| label: plot-penguins
+#| warning: false
+#| echo: false
+
+ggplot(penguins, 
+       aes(x = flipper_length_mm, y = bill_length_mm)) +
+  geom_point(aes(color = species, shape = species)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(
+    title = "Flipper- und Schnabellänge",
+    subtitle = "Maße für Pinguine an der Palmer Station LTER",
+    x = "Flipperlänge (mm)", y = "Schnabellänge (mm)",
+    color = "Penguin Art", shape = "Penguin Art"
+  ) +
+  theme_minimal()
+```
