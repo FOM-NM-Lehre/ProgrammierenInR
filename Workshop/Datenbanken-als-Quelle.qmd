@@ -28,6 +28,11 @@ con <- dbConnect(
     .connection_string = "Driver={SQLite3};Database=sqlite-db/mitarbeiter.db",
     timeout = 10)
 ```
+
+## Alternativ eine Verbindung direkt mit dem RSQLite-Treiber
+
+Wir können auch direkt mit dem Paket `RSQLite` eine Verbindung mit der Datenbank herstellen:
+
 ```{r}
 library(tidyverse)
 library(DBI)
@@ -37,7 +42,7 @@ con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
 
 ## Auslesen aus der Datenbank
 
-Wir können einfach eine komplette Tabelle aus der Datenbank auslesen und lokal speichern:
+Aus der Datenbank können wir dann komplette Tabellen herunterladen und lokal speichern:
 
 ```{r}
 # Tabelle einlesen
@@ -52,7 +57,7 @@ glimpse(daten_tib)
 
 ```
 
-## Beispiel
+## Wie immer in R weiter machen
 
 Mit dieser Tabelle können wir wie gewohnt arbeiten:
 
@@ -65,12 +70,15 @@ daten_tib |>
 
 glimpse(daten_tib_gefiltert)
 
+# Verbindung beenden:
+dbDisconnect(con)
+
 ```
 
 
 ## Auslesen in der Datenbank
 
-Alternativ kännen wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden. Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
+Alternativ können wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden. Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
 
 ```{r}
 # Verbindung zur SQLite-Datenbank herstellen
@@ -89,4 +97,18 @@ daten_db |>
 
 glimpse(daten_db_gefiltert)
 ```
+
+## Direktes Arbeiten mit der Datenbank
+
+Es gibt einige Befehle, mit denen wirk dirket mit der Datenbank kommunizieren können:
+
+Zum Beispiel können wir die Liste aller Tabellen in der Datenbank abfragen:
+
+```{r}
+tabellen_namen <- dbListTables(con)
+tabellen_namen
+```
+
+
+
 

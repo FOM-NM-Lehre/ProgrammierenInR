@@ -17,7 +17,7 @@ User Interface (UI): Definiert das Aussehen und die Bedienungselemente für den 
 
 Server: Enthält die Logik, wie auf Benutzereingaben reagiert und Ausgaben generiert werden.
 
-##
+## Mehr
 
 Shiny nutzt reaktives Programmieren, sodass Änderungen an den Eingaben automatisch die entsprechenden Ausgaben aktualisieren.
 
@@ -28,3 +28,5 @@ Damit lassen sich z.B. interaktive Dashboards, Visualisierungen, Berichte oder d
 Kurz gesagt: Eine Shiny-App verbindet die R-Programmierung mit modernen interaktiven Webtechnologien, um leicht bedienbare und dynamische Anwendungen für Datenanalyse und Visualisierung bereitzustellen.
 
 ## Ein Beispiel
+
+Live-Beispiel im Verzeichnis "KleineShinyApp" ..
