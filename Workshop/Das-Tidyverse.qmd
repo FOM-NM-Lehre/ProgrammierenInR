@@ -12,7 +12,7 @@ Pakete kann mensch bequem über die IDE installieren, oder einfach mit einem Bef
 #| eval: false
 #| echo: true
 
-install.packages(c("tidyverse", "palmerpenguins", "nycflights13", "gapminder", "janitor", "lubridate", "stringr", "forcats"))
+install.packages(c("tidyverse", "palmerpenguins", "nycflights13", "janitor", "lubridate", "stringr"))
 
 ```
 
