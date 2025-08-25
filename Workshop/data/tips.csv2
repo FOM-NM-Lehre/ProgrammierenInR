@@ -59,7 +59,7 @@
 26,41;1,5;"Female";"No";"Sat";"Dinner";2
 11,24;1,76;"Male";"Yes";"Sat";"Dinner";2
 48,27;6,73;"Male";"No";"Sat";"Dinner";4
-20,;3,21;"Male";"Yes";"Sat";"Dinner";2
+20,29;3,21;"Male";"Yes";"Sat";"Dinner";2
 13,81;2;"Male";"Yes";"Sat";"Dinner";2
 11,02;1,98;"Male";"Yes";"Sat";"Dinner";2
 18,29;3,76;"Male";"Yes";"Sat";"Dinner";4
@@ -99,7 +99,9 @@
 12,03;1,5;"Male";"Yes";"Fri";"Dinner";2
 21,01;3;"Male";"Yes";"Fri";"Dinner";2
 12,46;1,5;"Male";"No";"Fri";"Dinner";2
-14,3;2,5;"Female";"Yes";"Sat";"Dinner";3
+11,35;2,5;"Female";"Yes";"Fri";"Dinner";2
+15,38;3;"Female";"Yes";"Fri";"Dinner";2
+44,3;2,5;"Female";"Yes";"Sat";"Dinner";3
 22,42;3,48;"Female";"Yes";"Sat";"Dinner";2
 20,92;4,08;"Female";"No";"Sat";"Dinner";2
 15,36;1,64;"Male";"Yes";"Sat";"Dinner";2
@@ -133,7 +135,8 @@
 12,26;2;"Female";"No";"Thur";"Lunch";2
 18,26;3,25;"Female";"No";"Thur";"Lunch";2
 8,51;1,25;"Female";"No";"Thur";"Lunch";2
-10,33;2;"Female";"No";;"Female";"No";"Thur";"Lunch";2
+10,33;2;"Female";"No";"Thur";"Lunch";2
+14,15;2;"Female";"No";"Thur";"Lunch";2
 16;2;"Male";"Yes";"Thur";"Lunch";2
 13,16;2,75;"Female";"No";"Thur";"Lunch";2
 17,47;3,5;"Female";"No";"Thur";"Lunch";2
@@ -170,7 +173,9 @@
 15,81;3,16;"Male";"Yes";"Sat";"Dinner";2
 7,25;5,15;"Male";"Yes";"Sun";"Dinner";2
 31,85;3,18;"Male";"Yes";"Sun";"Dinner";2
-16,8le";"Yes";"Sun";"Dinner";2
+16,82;4;"Male";"Yes";"Sun";"Dinner";2
+32,9;3,11;"Male";"Yes";"Sun";"Dinner";2
+17,89;2;"Male";"Yes";"Sun";"Dinner";2
 14,48;2;"Male";"Yes";"Sun";"Dinner";2
 9,6;4;"Female";"Yes";"Sun";"Dinner";2
 34,63;3,55;"Male";"Yes";"Sun";"Dinner";2
@@ -204,7 +209,8 @@
 38,73;3;"Male";"Yes";"Sat";"Dinner";4
 24,27;2,03;"Male";"Yes";"Sat";"Dinner";2
 12,76;2,23;"Female";"Yes";"Sat";"Dinner";2
-30,06;2;"Male";"Yes";"Sat";"Dnner";4
+30,06;2;"Male";"Yes";"Sat";"Dinner";3
+25,89;5,16;"Male";"Yes";"Sat";"Dinner";4
 48,33;9;"Male";"No";"Sat";"Dinner";4
 13,27;2,5;"Female";"Yes";"Sat";"Dinner";2
 28,17;6,5;"Female";"Yes";"Sat";"Dinner";3
