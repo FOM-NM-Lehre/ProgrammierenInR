@@ -6,7 +6,7 @@ format: html
 
 # Vorbereitungen
 
-Zunächst prüfen wir, ob die notwenidigen Pakete installiert sind und installieren diese ggf.:
+Zunächst prüfen wir, ob die notwendidigen Pakete installiert sind und installieren diese ggf.:
 
 ```{r}
 #| echo: true
@@ -146,7 +146,6 @@ daten_db |>
   as.data.table() -> daten_dt_gefiltert
 
 print(daten_dt_gefiltert)
-
 
 ```
 
