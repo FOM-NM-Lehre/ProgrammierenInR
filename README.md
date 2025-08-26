@@ -16,13 +16,13 @@ und sollen eine kurze Einführung in R für die Anwendung von R im Berichtswesen
 Sie können das gesamte Dokument erzeugen in dem Sie in das Verzeichnis "Workshop" wechseln und dort die Datei "Präsentation.qmd" laden und mit Hilfe von RStudio/posit.cloud oder positron rendern.
 Es stehen Ihnen zur Auswahl:
 
-- **revealjs** : um eine RevealJS-Präsentation zu erstellen
+- **revealjs** : Um eine RevealJS-Präsentation zu erstellen.
 
-- **HTML** : um die gesamte Präsentation auf eine HTML-Seite zu rendern
+- **HTML** : Um die gesamte Präsentation auf eine HTML-Seite zu rendern.
 
-- **MS Word** : um eine docx Datei zu erstellen, die Sie ggf.mit MS Word weiterbearbeten können.
+- **MS Word** : Um eine docx-Datei zu erstellen, die Sie ggf. mit MS Word weiterbearbeten können.
 
-Beachten Sie, dass sie zu beginn die Datei "Workshop/setup/setup.R" ausführen, da hiermit alle notwendigen B-Bibliotheken/Pakte installiert werden!
+Beachten Sie, dass Sie zu Beginn die Datei "Workshop/setup/setup.R" ausführen, da hiermit alle notwendigen B-Bibliotheken/Pakte installiert werden!
 
 Dieses Repository steht unter der CC Lizenz, genauer CC-BY-ND-SA 4.0. Brauchen Sie eine andere Lizenzform, so sprechen Sie mich, Norman Markgraf, bitte an.
 

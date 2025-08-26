@@ -4,6 +4,17 @@
 
 -->
 
+## Die Verbindung zu einer Datenbank
+
+Für die Verbindung zu einer Datenbank ist das Paket `DBI` zuständig. 
+Sie brauchen zusätzlich einen Treiber. 
+Dieser kann ein ODBC-Treiber sein.
+
+[ODBC](https://de.wikipedia.org/wiki/Open_Database_Connectivity)  (englisch für etwa Offene Datenbank-Verbindungsfähigkeit) ist, so sagt Wikipedia, "eine standardisierte Datenbankschnittstelle, die SQL als Datenbanksprache verwendet. Es bietet also eine Programmierschnittstelle (API), die es einem Programmierer erlaubt, seine Anwendung relativ unabhängig vom verwendeten Datenbankmanagementsystem (DBMS) zu entwickeln, wenn dafür ein ODBC-Treiber existiert."
+
+Ebenso sind aber auch direkte R-Treiben möglich, wie etwa [RPostgreSQL](https://github.com/tomoakin/RPostgreSQL), [RSQLite](https://rsqlite.r-dbi.org) und [RMariaDB](https://github.com/r-dbi/RMariaDB), die nur bestimmte Datenbanken unterstützen. (RMariaDB z.B. neben MariaDB auch MySQL)
+
+
 ## Für den Einstieg eine SQLite Datenbank
 
 Um mit einer Datenbank zu Arbeiten gibt es mehrere Wege.
@@ -17,21 +28,34 @@ Wir brauchen um Beginn ein paar neine  Pakete:
 install.packages(c("DBI", "RSQLite", "RPostgreSQL", "dbplyr", "odbc"))
 ```
 
-Wir beginnen mit einer ODBC-Verbindung.
+Wir beginnen damit die nötigen Pakete für eine einer ODBC-Verbindung zu laden:
+
+```{r}
+#| echo: true
+#| eval: true
+library(DBI)
+library(odbc)
+```
+
+Danach erstellen wir die eigentliche Verbindung zur Datenbank mit dem Befehl `
+dbConnect()`:
+
 ```{r}
 #| echo: true
 #| eval: false
-library(DBI)
-library(odbc)
+
 con <- dbConnect(
     odbc(), 
     .connection_string = "Driver={SQLite3};Database=sqlite-db/mitarbeiter.db",
     timeout = 10)
 ```
 
+Die Angabe von "Database=sqlite-db/mitarbeiter.db" referenziert auf die Datei "mitarbeiter.db" im Verzeichnis "sqlit-db" in der eine solche Datenbank liegt.
+
+
 ## Alternativ eine Verbindung direkt mit dem RSQLite-Treiber
 
-Wir können auch direkt mit dem Paket `RSQLite` eine Verbindung mit der Datenbank herstellen:
+Wir können mit dem Paket `RSQLite` direkt eine Verbindung mit der Datenbank herstellen,. Nachdem wir die notwendigen Pakete geladen haben:
 
 ```{r}
 #| echo: true
@@ -40,32 +64,43 @@ Wir können auch direkt mit dem Paket `RSQLite` eine Verbindung mit der Datenban
 library(tidyverse)
 library(DBI)
 library("RSQLite")
+```
+
+Erzeugen wir nun die Verbindung zur Datenbank mit Hilfe des `dbConnect`-Befehls:
+
+```{r}
+#| echo: true
+#| eval: true
 con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
 ```
 
+Wieder wird hier die Datei im Verzeichnis "sqlite-db" angegeben.
+
+
 ## Auslesen aus der Datenbank
 
-Aus der Datenbank können wir dann komplette Tabellen herunterladen und lokal speichern:
+Aus der Datenbank können wir komplette Tabellen herunterladen und lokal speichern:
 
 ```{r}
 #| echo: true
 #| eval: true
 
 # Tabelle einlesen
-dbReadTable(con, "mitarbeiter") |>
-    as_tibble() -> daten_tib
+dbReadTable(con, "mitarbeiter") |> # Laden der Tablle 'mitarbeit'
+    as_tibble() ->                 # Umwandeln in de tibbel-Datentabelle
+    daten_tib                      # Speichern der Tabele in der Variable daten_tib
 
 # Verbindung schließen
 dbDisconnect(con)
 
-# Tabelle ausgeben
+# Informationen über die Tabelle ausgeben:
 glimpse(daten_tib)
 
 ```
 
-## Wie immer in R weiter machen
+## Weiter in R
 
-Mit dieser Tabelle können wir wie gewohnt arbeiten:
+Mit dieser Tabelle können wir wie gewohnt arbeiten in R arbeiten, denn wir haben die lokal gespeichert:
 
 ```{r}
 #| echo: true
@@ -74,9 +109,11 @@ Mit dieser Tabelle können wir wie gewohnt arbeiten:
 # Daten in data.table anzeigen
 # Optional: Daten filtern und transformieren mit tidyverse/dplyr
 daten_tib |>
-  filter(abteilung == "HR") |>
-  as_tibble() -> daten_tib_gefiltert
+    filter(abteilung == "HR") |>  # Nur die Abteilung HR
+    as_tibble() ->                # In ein Tibble umwandeln
+    daten_tib_gefiltert           # und lokal speichern
 
+# Informationen über die Tabelle ausgeben:
 glimpse(daten_tib_gefiltert)
 
 # Verbindung beenden:
@@ -87,7 +124,8 @@ dbDisconnect(con)
 
 ## Auslesen in der Datenbank
 
-Alternativ können wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden. Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
+Alternativ können wir auch eine Verbindung mit der Tabelle in der Datenbank herstellen, ohne immer gleich alle Daten lokal herunter zu laden! 
+Mit dem Befehl `tbl()`erstellen wir quasi eine Verlinkung her.
 
 ```{r}
 #| echo: true
@@ -99,8 +137,15 @@ con <- dbConnect(SQLite(), "sqlite-db/mitarbeiter.db")
 # Link auf die Tabelle in der Datenbank
 daten_db <-tbl(con, "mitarbeiter")
 
-# Daten in tbl anzeigen
+# Informationen über die Tabelle ausgeben:
 glimpse(daten_db)
+```
+
+## Auslesen in der Datenbank
+
+```{r}
+#| echo: true
+#| eval: true
 
 # Optional: Daten filtern und transformieren mit tidyverse/dplyr
 daten_db |>
@@ -109,6 +154,7 @@ daten_db |>
 
 glimpse(daten_db_gefiltert)
 ```
+
 
 ## Direktes Arbeiten mit der Datenbank
 
@@ -124,8 +170,19 @@ tabellen_namen <- dbListTables(con)
 tabellen_namen
 ```
 
-## Weiter ..
+## SQL oder `d(b)plyr` ?
 
-... geht es Live ...
+Das Paket `dplyr` merkt, wenn es auf Datenbank-Tabellen arbeitet und übersitzt, mit Hilfe des Paketes `dbplyr` im Hintergrund die R-Befehle in SQL-Befehl!
+Schauen wir uns das einmal am Beispiel des `filter()`-Befehls an:
 
+```{r}
+daten_db |>
+    filter(abteilung == "HR") |>
+    show_query()
+```
 
+Sie sehen, die R-Befehl wird hier in eine SQL-Anweisung übersetzt. Diese wird an die Datenbank gesendet und die Ergebnisse wieder nach R transformiert.
+
+## LIVE!
+
+... Weiter in der Live-Demo ...
