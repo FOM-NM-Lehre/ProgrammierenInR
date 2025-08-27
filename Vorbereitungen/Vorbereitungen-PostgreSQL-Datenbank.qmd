@@ -95,7 +95,7 @@ con <- dbConnect(
             port = 5432,               # Port 
             user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
             password = "<passwort>", # Passwort
-            dbname = "netflix"         # Name der Datenbank im PostgreSQL-Server
+            dbname = "nycflights13"         # Name der Datenbank im PostgreSQL-Server
         )
 ```
 
@@ -107,12 +107,76 @@ con <- dbConnect(
             drv,
             host = "localhost",    # IP4 - Adresse der PostgreSQL-Servers
             port = 5432,               # Port 
-            user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
+            user = "norman",         # Benutzer:innen-Name mit entsprechenden Rechten
             password = "", # Passwort
-            dbname = "netflix"         # Name der Datenbank im PostgreSQL-Server
+            dbname = "nycflights13"         # Name der Datenbank im PostgreSQL-Server
         )
 ```
 
 
 Jetzt haben wir eine Verbindung zum PostgreSQL-Server.
+
+ata sets in package ‘nycflights13’:
+
+airlines                Airline names.
+airports                Airport metadata
+flights                 Flights data
+planes                  Plane metadata.
+weather                 Hourly weather data
+
+
+```{r}
+# install.packages("nycflights13")
+library(nycflights13)
+
+dbWriteTable(con, "flights", flights, overwrite=TRUE, temporary=FALSE)
+dbWriteTable(con, "airlines", airlines, overwrite=TRUE, temporary=FALSE)
+dbWriteTable(con, "airports", airports, overwrite=TRUE, temporary=FALSE)
+dbWriteTable(con, "weather", weather, overwrite=TRUE, temporary=FALSE)
+dbWriteTable(con, "planes", planes, overwrite=TRUE, temporary=FALSE)
+
+# Namen der erzeugten Tabellen in der Datenbank
+dbListTables(con)
+```
+
+```{r}
+
+
+library(dplyr)
+library(dbplyr)
+library(tibble)
+
+airlines <- tbl(con, "airlines") #                Airline names.
+airports <- tbl(con, "airports") #                Airport metadata
+flights  <- tbl(con, "flights")  #                Flights data
+planes   <- tbl(con, "planes")   #                 Plane metadata.
+weather  <- tbl(con, "weather")  # 
+
+```
+
+
+Ausgabe aller Flugzeuge am 1. Januar:
+
+```{r}
+#| echo: false
+#| output: asis
+library(xtable)
+flights |>
+    filter(month == 1, day == 1) |>
+    select("dest", "origin", "tailnum", "carrier") |>
+    left_join(airlines, by = "carrier") |>
+    left_join(planes, by = "tailnum") |>
+    select("dest", "origin", "tailnum", "carrier", "name", "model") |>
+    left_join(airports, by = join_by(dest == faa)) |>
+    select("name.y", "origin", "tailnum", "carrier", "name.x", "model") |>
+    left_join(airports, by = join_by(origin == faa)) |>
+    select("name.y", "name", "tailnum", "name.x", "model") |>
+    rename("dest_name" = "name.y") |>
+    rename("origin_name" = "name") |>
+    rename("carrier_name" = "name.x" ) |>
+    relocate(origin_name, carrier_name, tailnum, model, dest_name) |>
+    as_tibble() |>
+    xtable() |>
+    print(type="html")
+```
 
