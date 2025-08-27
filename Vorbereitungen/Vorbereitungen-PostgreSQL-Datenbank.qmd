@@ -91,13 +91,28 @@ Um mit der Datenbank verbuden zu werden brauchen wir die Zugangsdaten:
 drv <- dbDriver("PostgreSQL")
 con <- dbConnect(
             drv,
-            host = "192.168.2.200",    # IP4 - Addresse der PostgreSQL-Servers
+            host = "<IP-Adresse>",    # IP4 - Adresse der PostgreSQL-Servers
             port = 5432,               # Port 
             user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
-            password = "postgresdemo", # Passwort
+            password = "<passwort>", # Passwort
             dbname = "netflix"         # Name der Datenbank im PostgreSQL-Server
         )
 ```
+
+```{r}
+#| eval: true
+#| echo: false
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(
+            drv,
+            host = "localhost",    # IP4 - Adresse der PostgreSQL-Servers
+            port = 5432,               # Port 
+            user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
+            password = "", # Passwort
+            dbname = "netflix"         # Name der Datenbank im PostgreSQL-Server
+        )
+```
+
 
 Jetzt haben wir eine Verbindung zum PostgreSQL-Server.
 
