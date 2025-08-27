@@ -59,3 +59,45 @@ Ich starte daher `psql`:
 ```
 
 
+## Vorbereitungen in R
+
+Zuerst bauchen wir das R-Paket `RPostgreSQL`:
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.package("RPostgreSQL")
+```
+
+
+Danach laden wir die entsprechenden Pakete in R:
+
+```{r}
+#| warning: false
+#| eval: true
+#| echo: true
+library(DBI)
+library(RPostgreSQL)
+library(dplyr)
+```
+
+
+Um mit der Datenbank verbuden zu werden brauchen wir die Zugangsdaten:
+
+```{r}
+#| eval: false
+#| echo: true
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(
+            drv,
+            host = "192.168.2.200",    # IP4 - Addresse der PostgreSQL-Servers
+            port = 5432,               # Port 
+            user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
+            password = "postgresdemo", # Passwort
+            dbname = "netflix"         # Name der Datenbank im PostgreSQL-Server
+        )
+```
+
+Jetzt haben wir eine Verbindung zum PostgreSQL-Server.
+
