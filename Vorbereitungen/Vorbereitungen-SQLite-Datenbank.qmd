@@ -9,9 +9,9 @@ execute:
 format: html
 ---
 
-Mit diesem Markdown erstellen wir die Datenbank "mitarbeiter.db" also SQLite Datei im aktuellen Ordner. 
+Mit diesem Markdown erstellen wir die Datenbank "mitarbeiter.db" als SQLite-Datei im aktuellen Verzeichnis. 
 
-Diese wird im Abschnitt "Datenbanken-als-Quelle.qmd" verwendet.
+Diese Datei wird im Abschnitt "Datenbanken-als-Quelle.qmd" verwendet und muss daher vorher erzeugt und an die richtie Stelle kopiert werden!
 
 ## Pakete prüfen
 
@@ -83,7 +83,7 @@ CREATE TABLE mitarbeiter (
 # Abteilungen
 abteilungen <- c("Vertrieb", "Marketing", "IT", "HR", "Finanzen")
 
-# Daten einfügen
+# 20 zufällig erzeugte Daten einfügen
 for (i in 1:20) {
     voller_name <- ch_name(locale = "de_DE")
     name_parts <- strsplit(voller_name, " ")[[1]]
@@ -103,7 +103,7 @@ for (i in 1:20) {
     ))
 }
 
-# Verbindung schließen
+# Verbindung zur Datenbank schließen
 dbDisconnect(con)
 
 ```
@@ -133,11 +133,11 @@ print(daten_dt)
 # Optional: Daten filtern und transformieren mit tidyverse/dplyr
 daten_dt |>
   filter(abteilung == "HR") |>
-#  mutate(gehalt_neu = gehalt * 0.90) |>
   as.data.table() -> daten_dt_gefiltert
 
 print(daten_dt_gefiltert)
 ```
+
 
 ## Prüfen ob die Tabelle auch mit `dplyr` funktioniert:
 
@@ -159,9 +159,9 @@ print(daten_db)
 daten_db |>
   filter(abteilung == "HR") |>
 #  mutate(gehalt_neu = gehalt * 0.90) |>
-  as.data.table() -> daten_dt_gefiltert
+  as.data.table() -> daten_db_gefiltert
 
-print(daten_dt_gefiltert)
+print(daten_db_gefiltert)
 
 ```
 
