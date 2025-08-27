@@ -1,15 +1,25 @@
 ---
-title: "Vorbereitungen"
+title: "Vorbereitungen SQLite-Datenbank"
 author: "Norman Markgraf"
+date: today
+lang: de
+execute:
+  echo: true
+  eval: true
 format: html
 ---
 
-# Vorbereitungen
+Mit diesem Markdown erstellen wir die Datenbank "mitarbeiter.db" also SQLite Datei im aktuellen Ordner. 
 
-Zunächst prüfen wir, ob die notwendidigen Pakete installiert sind und installieren diese ggf.:
+Diese wird im Abschnitt "Datenbanken-als-Quelle.qmd" verwendet.
+
+## Pakete prüfen
+
+Zunächst prüfen wir, ob die notwendidigen Pakete installiert sind und installieren diese ggf. neu:
 
 ```{r}
 #| echo: true
+#| eval: true
 if (!require("pak")) {
     cat("Wir müssen das Paket 'pak' installieren!\n")
     install.packages("pak")
@@ -43,7 +53,9 @@ Es sind die folgenden Pakete (Name/Version) installiert:
 pkg_status(pakete)[c("package", "version", "title")]
 ```
 
-Nun erzeugen wir ein paar Tabellen für unsere Datenbanken
+## Erzeugen der Datenbank und der Tabelle
+
+Nun erzeugen wir eine Tabellen für unsere Datenbanken
 ```{r}
 #| echo: true
 library(charlatan)
@@ -73,28 +85,30 @@ abteilungen <- c("Vertrieb", "Marketing", "IT", "HR", "Finanzen")
 
 # Daten einfügen
 for (i in 1:20) {
-  voller_name <- ch_name(locale = "de_DE")
-  name_parts <- strsplit(voller_name, " ")[[1]]
-  start_at <- ifelse(length(name_parts) > 2, 2, 1)
-  vorname <- name_parts[start_at]
-  title <- ifelse(length(name_parts) < 3, "", name_parts[1])
-  title <- ifelse(title %in% c("Frau", "Herr"), "", title)
-  nachname <- ifelse(length(name_parts) < 2, "Mustermann", name_parts[start_at + 1])
-  abteilung <- sample(abteilungen, 1)
-  eintrittsdatum <- as.character(sample(seq.Date(as.Date("2010-01-01"), as.Date("2023-12-31"), by = "day"), 1))
-  gehalt <- round(runif(1, 35000, 90000), 2)
-
-  dbExecute(con, sprintf(
-    "INSERT INTO mitarbeiter (title, vorname, nachname, abteilung, eintrittsdatum, gehalt) 
-     VALUES ('%s', '%s', '%s', '%s', '%s', %.2f)",
-    title, vorname, nachname, abteilung, eintrittsdatum, gehalt
-  ))
+    voller_name <- ch_name(locale = "de_DE")
+    name_parts <- strsplit(voller_name, " ")[[1]]
+    start_at <- ifelse(length(name_parts) > 2, 2, 1)
+    vorname <- name_parts[start_at]
+    title <- ifelse(length(name_parts) < 3, "", name_parts[1])
+    title <- ifelse(title %in% c("Frau", "Herr"), "", title)
+    nachname <- ifelse(length(name_parts) < 2, "Mustermann", name_parts[start_at + 1])
+    abteilung <- sample(abteilungen, 1)
+    eintrittsdatum <- as.character(sample(seq.Date(as.Date("2010-01-01"), as.Date("2023-12-31"), by = "day"), 1))
+    gehalt <- round(runif(1, 35000, 90000), 2)
+    
+    dbExecute(con, sprintf(
+        "INSERT INTO mitarbeiter (title, vorname, nachname, abteilung, eintrittsdatum, gehalt) 
+         VALUES ('%s', '%s', '%s', '%s', '%s', %.2f)",
+        title, vorname, nachname, abteilung, eintrittsdatum, gehalt
+    ))
 }
 
 # Verbindung schließen
 dbDisconnect(con)
 
 ```
+
+## Prüfen der Datenbank und der Tabelle:
 
 ```{r}
 #| echo: true
@@ -125,6 +139,8 @@ daten_dt |>
 print(daten_dt_gefiltert)
 ```
 
+## Prüfen ob die Tabelle auch mit `dplyr` funktioniert:
+
 ```{r}
 #| echo: true
 library(DBI)
@@ -149,3 +165,6 @@ print(daten_dt_gefiltert)
 
 ```
 
+## Ende
+
+Sollte das Skript bis hier hin durchlaufen, haben wir eine SQLite Datenbank in der Datei mitarbeiter.db erzeugt. Diese muss nun noch (von Hand) an die richtige Stelle, nämlich "Workshop/sqlite-db/mitarbeiter.db" kopiert werden.
