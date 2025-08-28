@@ -33,6 +33,9 @@ format:
     html: 
         toc: true
         html-math-method: katex
+        fig-width: 8
+        fig-height: 6
+        fig-align: "center"
     docx: 
         toc: true
         number-sections: true
