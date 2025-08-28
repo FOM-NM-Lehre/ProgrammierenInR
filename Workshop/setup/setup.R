@@ -7,5 +7,5 @@ install.packages(c(
     "knitr", "rmarkdown", "quarto",
     "tidyverse",  "here", "lubridate", "janitor", "plotly", "sessioninfo",
     "DBI", "odbc"," RSQLite", "RPostgreSQL",
-    "palmerpenguins", "nycflights13",
+    "palmerpenguins", "nycflights13"
 ))
