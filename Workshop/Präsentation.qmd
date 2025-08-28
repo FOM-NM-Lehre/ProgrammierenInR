@@ -24,6 +24,10 @@ format:
         history: true
         center: false
         slide-number: true
+        fig-width: 8
+        fig-height: 6
+        fig-align: "center"
+        lightbox: true
         theme:
           - fom.scss
     html: 
@@ -70,10 +74,10 @@ format:
 -------------------------------------------------------------------------------
 
 
-## Wir sind am Ende ...
+## Wir sind am Ende ... {.unnumbered}
 
 \ 
-... unserer kleinen Reise von der Idee zum Dokument mit Quarto angelangt. 
+... unserer kleinen Reise der "Sechs Dinge über R" angekommen
 
 \
 
@@ -81,25 +85,25 @@ Sicher sind viele Fragen noch offen. -- Falls Sie auch noch nicht gleich eine zu
 
 \
 
-Sie erreichen mich unter [norman.markgraf@fom-net.de](mailto:norman.markgraf@fom-net.de?subject=Quarto-Workshop-2024)!
+Sie erreichen mich unter [norman.markgraf@fom-net.de](mailto:norman.markgraf@fom-net.de?subject=Sechs-Dinge-über-R-2025)!
 
 \
 
-Die (jeweils) aktuelle Version dieses Workships finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/WS-quarto.git>
+Die (jeweils) aktuelle Version dieses Workships finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/ProgrammierenInR.git>
 
 ::: {.callout-important}
-### WICHTIG!
+### WICHTIG! {.unnumbered}
 
 ::: {layout-ncol=2}
-###
+### {.unnumbered}
 ::: {}
-Copyright in 2024 by Norman Markgraf all right reserved!
+Copyright in 2025 by Norman Markgraf all right reserved!
 
 Weitergabe im ganzen erwünscht! Verwendung, auch auszugsweise,
 unterliegt der nebenstehenden Lizenzvereinbarung!
 :::
 
-###
+### {.unnumbered}
 ::: {}
 Dieses Werk steht unter der [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.de) Lizenz!
 
@@ -113,7 +117,7 @@ Dieses Werk steht unter der [CC BY-NC-ND 4.0](https://creativecommons.org/licens
 Vielen Dank für Ihre Aufmerksamkeit.
 
 
-##  Just for the records
+##  Just for the records {.unnumbered}
 
 ```{r}
 #| label: sessioninfo

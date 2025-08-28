@@ -13,6 +13,10 @@ $presentation-title-slide-text-align: right;
   padding-left: 10px;*/
 }
 
+.reveal .slide figure {
+    text-align: center;
+}
+
 .reveal .slide h1 {
   /*background-color: #00998A;
   color: white; */
@@ -54,6 +58,32 @@ div.quarto-title-block > div.slide-background-content {
 
 }
 
+/* Source-Code */
+
+.reveal div.cell-output,
+.reveal div.sourceCode {
+    margin-left: 20px!important;
+    margin-right: 20px!important;
+}
+
+.reveal div.sourceCode {
+    background-color: #EEE!important;
+}
+
+.reveal div.cell-output{
+    background-color: #EFF;
+}
+
+.reveal pre.sourceCode code {
+    color: #111!important;
+    background-color: #EEE!important;
+}
+
+.reveal div.cell pre code,
+.reveal div.cell pre {
+    background-color: #EFF;
+}
+
 
 section.slide.level2 {
 }
@@ -77,7 +107,7 @@ section.slide.level2 {
 }
 
 .reveal code {
-  font-size: 40px;
+/*  font-size: 40px; */
 }
 
 .reveal p,
@@ -87,7 +117,7 @@ section.slide.level2 {
 .reveal #TOC nav p,
 .reveal #TOC nav ul,
 .reveal #TOC nav ol,
-.reveal .slide code,
+/*.reveal .slide code, */
 .reveal .slide p,
 .reveal .slide ol,
 .reveal .slide ul {
