@@ -42,7 +42,7 @@ format:
 {{< include prelude.Rmd >}}
 
 
-# Ein kurze Einfühung in unser Arbeitsumgebung
+# Ein kurze Einführung in unser Arbeitsumgebung
 
 {{< include Die-Arbeitsumgebung.qmd >}}
 
