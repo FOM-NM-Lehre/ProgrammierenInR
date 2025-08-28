@@ -5,7 +5,7 @@
 -->
 
 
-## R die Geschichte in kurz (I/II)
+## Eine kurze Geschichte von R
 
 - Die Geschichte von R als Programmiersprache begann 1992 an der Universität Auckland in Neuseeland. 
 
@@ -17,7 +17,7 @@
 
 - Der Name „R“ leitet sich von den Anfangsbuchstaben der Vornamen der Entwickler Ross und Robert ab, gleichzeitig als Anspielung auf die Sprache S.
 
-## R die Geschichte in kurz (II/II)
+## Eine kurze Geschichte von R
 
 - Die Motivation für die Entwicklung von R lag in der Verbesserung bestimmter Eigenschaften von S, wie etwa der Speicherverwaltung und der Flexibilität bei der Implementierung neuer analytischer Verfahren. 
 
@@ -90,7 +90,7 @@ Wir erhalten die folgende Ausgabe:
 
 ## Wir machen etwas einfache Statistik
 
-Zu nächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektoren mit dem *combine*-Befehl `c()`:
+Zunächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektoren mit dem *combine*-Befehl `c()`:
 
 ```{r}
 #| eval: true
@@ -98,6 +98,7 @@ Zu nächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektore
 Gewicht <- c(60, 72, 57, 90, 95, 72)
 Groesse <- c(1.75, 1.80, 1.65, 1.90, 1.74, 1.91)
 ```
+
 
 Jetzt können wir den BMI (also den _Body Mass Index_) einfach berechnen:
 
@@ -123,7 +124,9 @@ length(Gewicht)
 sum(Gewicht) / length(Gewicht)
 ```
 
+
 Es gibt aber auch den Befehl `mean()` dafür:
+
 ```{r}
 #| eval: true
 #| echo: true
@@ -131,9 +134,11 @@ Es gibt aber auch den Befehl `mean()` dafür:
 mean(Gewicht)
 ```
 
+
 ## Noch ein paar weitere Zeilen
 
 Die Standardabweichung ist die Wurzel der Varianz, welches wiederum die durchschnittliche Summe der quadratischen Abweichungen vom Mittelwert ist:
+
 ```{r}
 #| eval: true
 #| echo: true
@@ -152,6 +157,8 @@ Aber auch hierfür gibt es einfachere Befehle:
 
 sqrt(var(Gewicht))
 ```
+
+
 Oder noch kürzer mit dem Befehl `sd()` ( _sd_ = _standard derivation_, zu deutsch _Standardabweichung_ ):
 
 ```{r}
@@ -182,6 +189,7 @@ tib
 ```
 **Bitte beachten Sie:** _Parameterzuweisungen, also Zuweisungen innerhalb von Funktionsaufrufen, erfolgen mit "="!_
 
+
 ## Die Struktur einer Tabelle 
 
 Um auch in Skripten die Struktur einer Tabelle darstellen zu können nutzen wir den Befehl `str()`:
@@ -192,6 +200,7 @@ Um auch in Skripten die Struktur einer Tabelle darstellen zu können nutzen wir 
 
 str(tib)
 ```
+
 
 Oder auch moderner mit dem Befehl `glimpse()`:
 
@@ -205,7 +214,7 @@ glimpse(tib)
 
 ## Unterschied zu Datenrahmen?
 
-Hätten wir die im R normalerweise implementierten Datenrahmen (data.frames) benutzt hätten wir das folgende Ergebnis:
+Hätten wir die im R normalerweise implementierten Datenrahmen (`data.frames`) benutzt hätten wir das folgende Ergebnis:
 
 ```{r}
 #| eval: true
@@ -238,7 +247,8 @@ str(as.data.frame(tib))
 
 ## Unsere erste Graphik
 
-Für Grafiken wollen wir *ggplot* aus dem Paket `ggplot2` benutzen. Dafür müssen wir zunächst das Paket laden:
+Für Grafiken wollen wir `ggplot()` aus dem Paket `ggplot2` benutzen.
+Dafür müssen wir zunächst das Paket laden:
 
 ```{r}
 #| warning: false
@@ -247,6 +257,7 @@ Für Grafiken wollen wir *ggplot* aus dem Paket `ggplot2` benutzen. Dafür müss
 
 library(ggplot2)
 ```
+
 
 Nun wollen wir ein Säulendiagramm erstellen:
 
@@ -259,6 +270,7 @@ ggplot(data = tib,                       # Woher die Daten?
     geom_bar()                           # Was soll damit gemacht werden?
 ```
 
+
 ## Oder etwas kompakter:
 
 ```{r}
@@ -268,9 +280,11 @@ ggplot(data = tib,                       # Woher die Daten?
 ggplot(tib, aes(x = Gewicht)) + geom_bar()
 ```
 
+
 ## Die Kennzahlen
 
 Die Kennzahlen erhalten wir z.B. wie folgt:
+
 ```{r}
 #| eval: true
 #| echo: true
@@ -279,6 +293,7 @@ table(tib$Gewicht)
 
 table(tib$Groesse)
 ```
+
 
 ## Aufgabe
 
@@ -289,9 +304,9 @@ table(tib$Groesse)
 3. Geben Sie ein Säulendiagramm des BMI an.
 
 
-## Spalten zu Tabellen hinzufügren mit `mutate()```
+## Spalten zu Tabellen hinzufügren mit `mutate()`
 
-Wir nutzen dazu das Paket *dplyr* und den Befehl *mutate()*:
+Wir nutzen dazu das Paket `dplyr``` und den Befehl `mutate()`:
 
 ```{r}
 #| eval: true
@@ -305,6 +320,7 @@ head(tib2)
 tib2 |> mutate(Geschlecht = rep(c("weiblich", "männlich"), 3)) -> tib3
 ```
 
+
 ## Geben wir nun einen Boxplot aus
 
 Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
@@ -316,7 +332,8 @@ Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
 tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
 ```
 
-## Alternative
+
+## Alternative (y- und x-Achse getauscht)
 
 ```{r}
 #| eval: true
@@ -335,7 +352,7 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 
 ## Streudiagramme
 
-Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: *geom_point*):
+Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: `geom_point`):
 
 ```{r}
 #| eval: true
@@ -346,7 +363,9 @@ tib3 |>
     geom_point()
 ```
 
+
 Der Korrellationkoeffizent berechnet sich zu:
+
 ```{r}
 #| echo: true
 #| eval: true
@@ -368,7 +387,8 @@ linreg <- lm(Gewicht ~ Groesse, data = tib3)
 linreg
 ```
 
-Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls _summary()_:
+
+Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls `summary()`:
 
 ```{r}
 #| eval: true
@@ -380,10 +400,12 @@ summary(linreg)
 
 ## Eine Grafik dazu
 
-Wir können nun diese Regressiongrade in unsere Grafik einbauen:
+Wir können nun diese Regressionsgerade in unsere Grafik einbauen:
+
 ```{r}
 #| echo: true
 #| eval: true
+#| 
 tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht)) +
     geom_point() +
@@ -420,6 +442,7 @@ tib3 |>
 Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meisten relationalen Datenbanken, _zeilenweise_!
 
 Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
+
 ```{r}
 #| echo: true
 #| eval: true
@@ -445,7 +468,8 @@ tib[1, ] # Liefert die erste Zeile!
 
 ## Spalten und Zeilen auswählen mit dem Paket `dplyr`
 
-Besser ist es daher mit dem Paket `dplyr`zu arbeiten. Spalten können wir mit dem Befehl `select()` auswählen:
+Einfacher ist es mit dem Paket `dplyr` zu arbeiten. 
+Spalten können wir mit dem Befehl `select()` auswählen:
 
 ```{r}
 #| echo: true
@@ -454,7 +478,8 @@ Besser ist es daher mit dem Paket `dplyr`zu arbeiten. Spalten können wir mit de
 tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 ```
 
-Auch in einen Vektor umwandeln:
+
+Die Tabellenspalten können wir in einen Vektor umwandeln:
 
 ```{r}
 #| echo: true
@@ -463,7 +488,8 @@ Auch in einen Vektor umwandeln:
 tib3 |> select(Geschlecht) |> c() # Als Vektor
 ```
 
-Zeilen mit dem Befehl `filter()` herausfiltern:
+
+Zeilen werden mit dem Befehl `filter()` ausgewählt:
 
 ```{r}
 #| echo: true
@@ -475,7 +501,8 @@ tib3 |> filter(Geschlecht == "männlich")
 
 ## Etwas komplizierter
 
-Wir wollen eine Zusammenfassung (eng. *summarise*) bei den Männern erstellen. Dabei geben wir die Anzahl (*n*), den Mittelwert des Gewichts (*mean*) und den Median der Größe (*median*) an:
+Wir wollen eine Zusammenfassung (eng. *summarise*) erstellen. 
+Wir wollen wissen wie viele Beobachtungen (*n*) die Grundlage für den Mittelwert des Gewichts (*mean*) bzw des Median der Größe (*median*) sind:
 
 ```{r}
 #| echo: true
@@ -486,6 +513,7 @@ tib3 |>
     select(Gewicht, Groesse) |> 
     summarise(n = n(), mean = mean(Gewicht), median = median(Groesse))
 ```
+
 
 ## Gruppieren
 
@@ -505,9 +533,41 @@ tib3 |>
 ```
 
 
+## Ein Datenaustauschformal CSV
+
+**CSV** steht für *Comma-Separated Values* und ist ein einfaches, textbasiertes Dateiformat, mit dem tabellarische Daten gespeichert werden können. 
+Jede Zeile in einer CSV-Datei entspricht einer Datenzeile; die einzelnen Datenfelder einer Zeile werden in der Regel durch ein Komma getrennt.
+CSV-Dateien werden häufig für den Datenaustausch zwischen verschiedenen Programmen, Datenbanken und Tabellenkalkulationen (wie Microsoft Excel oder R) verwendet. 
+Aufgrund der Einfachheit ist das Format weit verbreitet, aber nicht streng standardisiert. Häufig sind die erste Zeile die Spaltennamen (*Header*) und jede Zeile danach enthält die eigentlichen Daten. 
+Ein Beispiel für eine typische CSV-Struktur:
+
+```
+Name,Alter,Beruf
+Anna,34,Lehrerin
+Bert,29,Ingenieur
+```
+
+Komma ist das Standardtrennzeichen, jedoch werden manchmal auch Semikolon, Tabulator oder andere Zeichen verwendet, abhängig von den regionalen und programmbezogenen Einstellungen.
+
+### Deutsche Besonderheiten führen zu CSV2
+
+**CSV2** ist eine Variation des CSV-Formats, die vor allem im deutschsprachigen Raum verwendet wird. 
+Hierbei werden als Feldtrennzeichen **Semikolons** (`;`) statt Kommas genutzt, da das Komma oft als Dezimaltrennzeichen (z.B. bei Zahlenwerten) verwendet wird.
+
+Hierbei erwartet die Funktion, dass Felder durch Semikolons getrennt sind und Zahlen das Komma als Dezimaltrennzeichen verwenden. Beispielhafter Aufbau einer CSV2-Datei:
+
+```
+Name;Alter;Beruf
+Anna;34;Lehrerin
+Bert;29;Ingenieur
+```
+
+Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendungen, die diese Formatierung benötigen.
+
 ## Daten aus einer Datei einlesen (CSV-Version)
 
 Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
+
 ```{r}
 #| warning: false
 #| echo: true
@@ -527,7 +587,7 @@ spec(tips_csv)
 
 ## Daten aus einer Datei einlesen (CSV2-Version)
 
-Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv2()`:
+Zum Einlesen einer CSV2-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv2()`:
 
 ```{r}
 #| warning: false
@@ -548,7 +608,7 @@ spec(tips_csv2)
 ```
 
 
-## Vergleich
+## Vergleich der eingelesenen Tabellen
 
 Wir erhalten damit die selben Inhalte:
 
@@ -567,11 +627,13 @@ glimpse(tips_csv2)
 #| warning: false
 #| echo: true
 #| eval: true
+
 library(here)
 library(readxl)
 
 here("data", "tips.xlsx") |> read_xlsx(sheet="tips") -> tips_xslx
 ```
+
 
 Und auch hier erhalten wir den selben Inhalt:
 
@@ -581,6 +643,7 @@ Und auch hier erhalten wir den selben Inhalt:
 
 glimpse(tips_xslx)
 ```
+
 
 ## Aufgaben
 
@@ -599,7 +662,8 @@ glimpse(tips_xslx)
 
 ## Etwas den Speicher aufräumen!
 
-Ab und zu ist einfach mal Zeit zum Aufräumen. Und einer kleinen Pause.
+Ab und zu ist einfach mal Zeit zum Aufräumen. 
+Und einer kleinen Pause.
 
 ```{r}
 #| echo: true
