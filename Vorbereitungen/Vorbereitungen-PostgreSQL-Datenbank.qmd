@@ -96,6 +96,7 @@ con <- dbConnect(
             user = "postgres",         # Benutzer:innen-Name mit entsprechenden Rechten
             password = "<passwort>", # Passwort
             dbname = "nycflights13"         # Name der Datenbank im PostgreSQL-Server
+...)
         )
 ```
 
@@ -116,7 +117,7 @@ con <- dbConnect(
 
 Jetzt haben wir eine Verbindung zum PostgreSQL-Server.
 
-ata sets in package ‘nycflights13’:
+Data sets in package ‘nycflights13’:
 
 airlines                Airline names.
 airports                Airport metadata

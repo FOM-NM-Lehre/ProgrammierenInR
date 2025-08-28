@@ -176,12 +176,16 @@ Das Paket `dplyr` merkt, wenn es auf Datenbank-Tabellen arbeitet und übersitzt,
 Schauen wir uns das einmal am Beispiel des `filter()`-Befehls an:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 daten_db |>
     filter(abteilung == "HR") |>
     show_query()
 ```
 
 Sie sehen, die R-Befehl wird hier in eine SQL-Anweisung übersetzt. Diese wird an die Datenbank gesendet und die Ergebnisse wieder nach R transformiert.
+
 
 ## LIVE!
 
