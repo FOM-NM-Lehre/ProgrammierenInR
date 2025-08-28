@@ -67,3 +67,59 @@ format:
 
 {{< include ShinyApp.qmd >}}
 
+-------------------------------------------------------------------------------
+
+
+## Wir sind am Ende ...
+
+\ 
+... unserer kleinen Reise von der Idee zum Dokument mit Quarto angelangt. 
+
+\
+
+Sicher sind viele Fragen noch offen. -- Falls Sie auch noch nicht gleich eine zur Hand haben, aber später dennoch Fragen wollen:
+
+\
+
+Sie erreichen mich unter [norman.markgraf@fom-net.de](mailto:norman.markgraf@fom-net.de?subject=Quarto-Workshop-2024)!
+
+\
+
+Die (jeweils) aktuelle Version dieses Workships finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/WS-quarto.git>
+
+::: {.callout-important}
+### WICHTIG!
+
+::: {layout-ncol=2}
+###
+::: {}
+Copyright in 2024 by Norman Markgraf all right reserved!
+
+Weitergabe im ganzen erwünscht! Verwendung, auch auszugsweise,
+unterliegt der nebenstehenden Lizenzvereinbarung!
+:::
+
+###
+::: {}
+Dieses Werk steht unter der [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.de) Lizenz!
+
+[![](./images/by-nc-nd.png){.nostretch fig-align="center" width="30%"}](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.de) 
+:::
+:::
+:::
+
+\
+
+Vielen Dank für Ihre Aufmerksamkeit.
+
+
+##  Just for the records
+
+```{r}
+#| label: sessioninfo
+#| echo: true
+#| eval: true
+sessioninfo::session_info()
+```
+
+
