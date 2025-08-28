@@ -681,3 +681,102 @@ rm(mittelwert)
 rm(linreg)
 ```
 
+
+## Logische Vergleiche
+
+Wir können in R zwei Zahlen miteinander vergleichen und feststellen, ob diese gleich oder ungleich sind.
+Wir können auch überprüfen, ob eine Zahl größer oder kleiner ist als eine andere Zahl.
+Eine solche Frage wird dann in *R* mit entweder _Ja_ (`TRUE`) oder _Nein_ (`FALSE```) beantwortet. 
+Solche Vergleiche werden _logische Vergleich_ genannt und sind auch nicht nur auf Zahlen beschränkt.
+
+Wenn wir uns zum Beispiel dafür interessieren, ob die Zahl 5 größer ist als die Zahl 3 können wir dies mit dem Code 5 > 3 herausfinden:
+
+```{r}
+#| echo: true
+#| eval: true
+
+5 > 3
+```
+
+Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE```.
+
+## Vergleichsoperatoren
+
+
+| Symbol auf der Tastatur | Rechnung oder Operation |
+|:------------------------|:------------------------|  
+| `==`                    | Gleich                  |
+| `!=`                    | Ungleich                |
+| `>`  bzw. `<`           | Größer bzw. Kleiner     |
+| `>=` bzw. `<=`          | Größergleich bzw. Kleinergleich |
+
+
+```{r}
+5 > 3
+5 < 3
+3 == 3
+5 == 3
+5 != 3
+```
+
+
+## Die logische Verknüpfungen _UND_ bzw. _ODER_
+
+Neben den einfachen Vergleichsoperatoren ist es auch möglich, mehrere logische Vergleiche miteinander zu kombinieren. 
+Als Verknüpfung sind vor allem das logische _UND_ sowie das logische _ODER_ relevant.
+
+| Symbol auf der Tastatur | Operation        | Bedeutung |
+|:------------------------|:-----------------|:----------|  
+| `&`                     | logisches _UND_  | Sind beide Vergleiche wahr? |
+| `|`                     | logisches _ODER_ | Ist mindestens eine der Vergleiche wahr? |
+
+Als Antwort eines kombinierten logischen Vergleichs erhält man erneut entweder den Rückgabewert `TRUE` oder `FALSE`. 
+
+**Tipp:** Um sicherzugehen, dass _R_ alle Symbole in der von uns gewünschten Reihenfolge auswertet, kann es sinnvoll sein Klammern zu setzen!
+
+## Beispiele
+
+**Beispiel 1:** \
+
+Ist die Zahl 6 größer als 5 UND ist die Zahl 7 kleiner als 6?
+
+```{r}
+#| echo: true
+#| eval: true
+
+(6 > 5) & (7 < 6)
+```
+
+
+**Beispiel 2:** \
+
+Ist die Zahl 7 größer als 5 ODER ist die Zahl 9 kleiner als 8 (oder beides)?
+
+```{r}
+(7 > 5) | (9 < 8)
+```
+
+
+
+## Datentypen
+
+numeric, integer, double
+: Intern wird für Zahlen in _R_ der Begriff _numeric_ verwendet. 
+    Es gibt manchmal Situationen, in denen R weiter unterscheidet ob es sich um eine ganze Zahl (_integer_) oder eine Dezimalzahl (_double_) handelt. 
+    Mit jedem dieser drei Datentypen können mathematische Berechnungen vorgenommen werden. 
+    Für unsere Anwendungen ist es in der Regel egal, ob eine Zahl von _R_ als _numeric_, _integer_ oder _double_ verstanden wird. 
+    Wir werden die Unterschiede daher nicht im Detail besprechen.
+
+logical
+: Wir haben gesehen, dassnach einem logischen Vergleich eine Information erhalten, die nur zwei Ausprägungen haben kann: `TRUE` oder `FALSE`. 
+    Diese Informationen haben in _R_ den Datentyp _logical_. 
+    Ist für einen Wert nun der Datentyp logical hinterlegt, weiß _R_, dass eben nur diese beiden Ausprägungen möglich sind.
+    
+character (string)
+: Eine weitere wichtige Funktion von _R_ ist der Umgang mit Texten. 
+    Ein Text kann dabei unterschiedlich lang sein (ein Buchstabe, ein Name, ein Absatz, ein ganzes Buch). 
+    Dadurch dass Text eine beliebige Länge haben kann, die Reihenfolge der einzelnen Buchstaben jedoch ungeheuer wichtig ist (sonst wäre der Text ja nicht lesbar), spricht man von _Zeichenketten_. 
+    Die Übersetzung dieses Begriffs auf Englisch wäre _character string_. 
+    Deshalb findet sich in _R_ für Text häufig die Bezeichnung _character_ oder _string_ die synonym verwendet werden.
+
+
