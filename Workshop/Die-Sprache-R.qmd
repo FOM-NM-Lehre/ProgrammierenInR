@@ -780,3 +780,4 @@ character (string)
     Deshalb findet sich in _R_ für Text häufig die Bezeichnung _character_ oder _string_ die synonym verwendet werden.
 
 
+## 

@@ -59,7 +59,7 @@ format:
 {{< include Das-Tidyverse.qmd >}}
 
 
-# Datenbanken als Quelle
+# Datenbanken als Datenquelle
 
 {{< include Datenbanken-als-Quelle.qmd >}}
 
@@ -79,11 +79,11 @@ format:
 ## Wir sind am Ende ... {.unnumbered}
 
 \ 
-... unserer kleinen Reise der "Sechs Dinge über R" angekommen
+... unserer kleinen Reise der "Sechs Dinge über R" angekommen.
 
 \
 
-Sicher sind viele Fragen noch offen. -- Falls Sie auch noch nicht gleich eine zur Hand haben, aber später dennoch Fragen wollen:
+Sicher sind viele Fragen offen. -- Falls Sie noch nicht gleich eine zur Hand haben, aber später dennoch Fragen wollen:
 
 \
 
@@ -91,7 +91,7 @@ Sie erreichen mich unter [norman.markgraf@fom-net.de](mailto:norman.markgraf@fom
 
 \
 
-Die (jeweils) aktuelle Version dieses Workships finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/ProgrammierenInR.git>
+Die (jeweils) aktuelle Version dieses Workshops finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/ProgrammierenInR.git>
 
 ::: {.callout-important}
 ### WICHTIG! {.unnumbered}
