@@ -240,7 +240,9 @@ str(df)
 glimpse(tib)
 ```
 
-Für uns als Anfänger:in sind die unterschiedlichen Datentypen (`tibble`, `data.frame`, `datatable`, `tbl`, ..)  (annähernd) gleich zu benutzen. Auch wenn die Implementierungen sich teilweise strakt unterscheiden.
+Für uns als Anfänger:in sind die unterschiedlichen Datentypen (`[tibble](https://tibble.tidyverse.org)`, `data.frame`, `[data.table](https://rdatatable.gitlab.io/data.table/)`, `tbl`, ..) 
+(annähernd) gleich zu benutzen. 
+Auch wenn die Implementierungen sich teilweise starkt unterscheiden.
 
 
 ## Umwandeln von `tibble` nach `data.frame` und zurück
@@ -318,9 +320,40 @@ table(tib$Groesse)
 3. Geben Sie ein Säulendiagramm des BMI an.
 
 
-## Spalten zu Tabellen hinzufügren mit `mutate()`
+## Das Paket `dplyr`
 
-Wir nutzen dazu das Paket `dplyr``` und den Befehl `mutate()`:
+`dplyr` ist eine Grammatik zur Datenmanipulation und bietet eine konsistente Sammlung von Verben, die helfen, die häufigsten Herausforderungen bei der Datenbearbeitung zu lösen:
+
+- `mutate()` fügt neue Variablen hinzu, die Funktionen bestehender Variablen sind.
+- `select()` wählt Variablen basierend auf ihren Namen aus.
+- `filter()` wählt Fälle basierend auf ihren Werten aus.
+- `summarise()` reduziert mehrere Werte auf eine einzelne Zusammenfassung.
+- `arrange()` verändert die Reihenfolge der Zeilen.
+
+Diese Funktionen lassen sich mit `group_by()` kombinieren, wodurch jede Operation „nach Gruppe“ ausgeführt werden kann.
+
+
+## Backends zu `dplyr`
+
+Neben der Arbeit mit Data Frames bzw. Tibbles ermöglicht `dplyr` auch einen effizienten und benutzerfreundlichen Umgang mit verschiedenen Backends. 
+Nachfolgend dine Übersicht alternativer Backends:
+
+- **[arrow](https://arrow.apache.org/docs/r/)**: Für Datensätze, die größer sind als der verfügbare Arbeitsspeicher – einschließlich solcher, die in entfernten Cloud-Speichern wie AWS S3 abgelegt sind.
+
+- **[dtplyr](https://dtplyr.tidyverse.org)**: Für große Datensätze im Arbeitsspeicher. Übersetzt `dplyr`-Code in leistungsstarken `[data.table](https://rdatatable.gitlab.io/data.table/)`-Code.
+
+- **[dbplyr](https://dbplyr.tidyverse.org)**: Für Daten, die in relationalen Datenbanken gespeichert sind. Wandelt `dplyr```-Anweisungen in SQL-Abfragen um.
+
+- **[duckplyr](https://duckplyr.tidyverse.org)**: Für die Nutzung von _duckdb_ bei großen In-Memory-Datensätzen ohne zusätzliche Kopien. Übersetzt `dplyr`-Code in effiziente *duckdb*-Abfragen und greift bei nicht möglicher Übersetzung automatisch auf R zurück.
+
+- **[duckdb](https://duckdb.org/docs/stable/clients/r.html)**: Für große Datensätze, die dennoch vollständig auf einem lokalen Rechner verarbeitet werden können.
+
+- **[sparklyr](https://spark.posit.co)**: Für sehr große Datensätze, die in [Apache Spark](https://spark.apache.org) gespeichert sind.
+
+
+## Spalten zu Tabellen hinzufügen mit  `mutate()`
+
+Wir nutzen dazu das Paket `dplyr` und den Befehl `mutate()`:
 
 ```{r}
 #| eval: true
@@ -480,7 +513,7 @@ tib[1, ] # Liefert die erste Zeile!
 ```
 
 
-## Spalten und Zeilen auswählen mit dem Paket `dplyr`
+## Spalten und Zeilen auswählen mit `dem Paket `select()` und `filter()`
 
 Einfacher ist es mit dem Paket `dplyr` zu arbeiten. 
 Spalten können wir mit dem Befehl `select()` auswählen:
@@ -513,7 +546,7 @@ tib3 |> filter(Geschlecht == "männlich")
 ```
 
 
-## Etwas komplizierter
+## Zusammenfassungen von Daten mit `summerise()`
 
 Wir wollen eine Zusammenfassung (eng. *summarise*) erstellen. 
 Wir wollen wissen wie viele Beobachtungen (*n*) die Grundlage für den Mittelwert des Gewichts (*mean*) bzw des Median der Größe (*median*) sind:
@@ -529,7 +562,7 @@ tib3 |>
 ```
 
 
-## Gruppieren
+## Gruppieren mit `group_by()`
 
 Mit dem Befehl `group_by()` können wir kategoriale Variablen (also Spalten) nutzen um einzelne Fälle (also Kategorien) zu unterscheiden:
 
@@ -556,9 +589,9 @@ Aufgrund der Einfachheit ist das Format weit verbreitet, aber nicht streng stand
 Ein Beispiel für eine typische CSV-Struktur:
 
 ```
-Name,Alter,Beruf
-Anna,34,Lehrerin
-Bert,29,Ingenieur
+        Name,Alter,Beruf,Stellenwert
+        Anna,34,Lehrerin,1.0
+        Bert,29,Ingenieur,0.5
 ```
 
 Komma ist das Standardtrennzeichen, jedoch werden manchmal auch Semikolon, Tabulator oder andere Zeichen verwendet, abhängig von den regionalen und programmbezogenen Einstellungen.
@@ -571,12 +604,13 @@ Hierbei werden als Feldtrennzeichen **Semikolons** (`;`) statt Kommas genutzt, d
 Hierbei erwartet die Funktion, dass Felder durch Semikolons getrennt sind und Zahlen das Komma als Dezimaltrennzeichen verwenden. Beispielhafter Aufbau einer CSV2-Datei:
 
 ```
-Name;Alter;Beruf
-Anna;34;Lehrerin
-Bert;29;Ingenieur
+        Name;Alter;Beruf;Stellenwert
+        Anna;34;Lehrerin;1.0
+        Bert;29;Ingenieur;0.5
 ```
 
 Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendungen, die diese Formatierung benötigen.
+
 
 ## Daten aus einer Datei einlesen (CSV-Version)
 
@@ -598,6 +632,7 @@ here("data", "tips.csv") |> read_csv() -> tips_csv
 
 spec(tips_csv)
 ```
+
 
 ## Daten aus einer Datei einlesen (CSV2-Version)
 
@@ -677,7 +712,7 @@ glimpse(tips_xslx)
 
 ## Etwas den Speicher aufräumen!
 
-Ab und zu ist einfach mal Zeit zum Aufräumen. 
+Ab und zu ist einfach mal Zeit zum Aufräumen. -- 
 Und einer kleinen Pause.
 
 ```{r}
@@ -752,6 +787,7 @@ Als Antwort eines kombinierten logischen Vergleichs erhält man erneut entweder 
 
 **Tipp:** Um sicherzugehen, dass _R_ alle Symbole in der von uns gewünschten Reihenfolge auswertet, kann es sinnvoll sein Klammern zu setzen!
 
+
 ## Beispiele
 
 **Beispiel 1:** \
@@ -776,7 +812,6 @@ Ist die Zahl 7 größer als 5 ODER ist die Zahl 9 kleiner als 8 (oder beides)?
 
 (7 > 5) | (9 < 8)
 ```
-
 
 
 ## Datentypen

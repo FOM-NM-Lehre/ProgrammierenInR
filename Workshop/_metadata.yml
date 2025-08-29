@@ -1,0 +1,39 @@
+author: "Norman Markgraf"
+date: today
+copyright: "Norman Markgaf in 2025"
+lang: de-DE
+slide-number: c
+format:
+    revealjs:
+        toc: true
+        toc-depth: 1
+        number-sections: true
+        reference-location: document
+        mermaid-format: png
+        footer: "Workshop: Sechs Dinge über R &nbsp; | &nbsp; Dipl.-Math. Norman Markgraf"
+        html-math-method: katex
+        main-font: Arial
+        monofont: "Courier New" #Roboto
+        # 16x10 : 1920 x 1200 (Apple macOS)
+        # 16x 9 : 1920 x 1080 (?)
+        width: 1920
+        height: 1200 #    height: 1200 oder 1080
+        margin: 0
+        history: true
+        center: false
+        slide-number: true
+        fig-width: 8
+        fig-height: 6
+        fig-align: "center"
+        lightbox: true
+        theme:
+          - fom.scss
+    html:
+        toc: true
+        html-math-method: katex
+        fig-width: 8
+        fig-height: 6
+        fig-align: "center"
+    docx:
+        toc: true
+        number-sections: true

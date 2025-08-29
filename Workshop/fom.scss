@@ -66,10 +66,15 @@ div.quarto-title-block > div.slide-background-content {
 }
 
 .reveal #title-slide p.subtitle,
+.reveal #title-slide p.date,
 .quarto-title-authors {
     font-size: 50px!important;
     color: #C6E4E2;
     margin-right: 5%;
+}
+
+.reveal #title-slide p.date{
+    font-size: 80%!important;
 }
 
 /*

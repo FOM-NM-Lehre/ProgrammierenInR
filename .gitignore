@@ -54,3 +54,5 @@ rsconnect/
 **.html
 **/**.html
 **.Rmarkdown
+
+/.quarto/
