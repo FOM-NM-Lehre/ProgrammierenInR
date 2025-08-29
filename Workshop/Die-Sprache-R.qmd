@@ -15,7 +15,7 @@
 
 - R kann als freie Implementierung von S angesehen werden, wobei viele Programme für S auch mit R kompatibel sind. 
 
-- Der Name „R“ leitet sich von den Anfangsbuchstaben der Vornamen der Entwickler Ross und Robert ab, gleichzeitig als Anspielung auf die Sprache S.
+- Der Name „_R_“ leitet sich von den Anfangsbuchstaben der Vornamen der Entwickler Ross und Robert ab, gleichzeitig als Anspielung auf die Sprache S.
 
 ## Eine kurze Geschichte von R
 
@@ -36,24 +36,25 @@
 
 Bis 2010 prägten mehrere Meilensteine die Entwicklung der Programmiersprache R:
 
-- 1997: Gründung von CRAN (Comprehensive R Archive Network) als zentrale Plattform für Pakete und Erweiterungen, die es Anwendern ermöglicht, selbst geschriebene Funktionen einfach zu teilen und damit die Verbreitung und Nutzung von R erheblich zu fördern.
+- 1997: Gründung von _CRAN_ (_Comprehensive R Archive Network_) als zentrale Plattform für Pakete und Erweiterungen, die es Anwendern ermöglicht, selbst geschriebene Funktionen einfach zu teilen und damit die Verbreitung und Nutzung von R erheblich zu fördern.
 
-- 2000: Veröffentlichung von R Version 1.0, der ersten stabilen Version von R, die wichtige Funktionen wie Fehlerbehandlung (try()), Datenrahmenbearbeitung (by(), merge()) enthielt.
+- 2000: Veröffentlichung von R Version 1.0, der ersten stabilen Version von R, die wichtige Funktionen wie Fehlerbehandlung (`try()`), Datenrahmenbearbeitung (`by()`, `merge()`) enthielt.
 
 - 2001: Gründung von Bioconductor, ein Open-Source-Projekt für Genomdatenanalysen, das neben CRAN über 2000 weitere Pakete bereitstellt.
 
-- 2007: Veröffentlichung von ggplot2, einem Paket basierend auf der Grammar of Graphics von Leland Wilkinson, entwickelt von Hadley Wickham. Dieses Paket revolutionierte die grafische Darstellung in R und wurde zu einem zentralen Bestandteil der R-Community und später des tidyverse.
+- 2007: Veröffentlichung von ggplot2, einem Paket basierend auf der [Grammar of Graphics](https://doi.org/10.1007/0-387-28695-0) von Leland Wilkinson, entwickelt von [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham). 
+    Dieses Paket revolutionierte die grafische Darstellung in R und wurde zu einem zentralen Bestandteil der R-Community und später des tidyverse.
 
-- 2009: Einführung des R Journals, das die R News ersetzte und als Fachjournal Themen rund um R-Abdeckte, z. B. Erweiterungspakete, Reviews und Anwendungen.
+- 2009: Einführung des _R Journals_, welches die _R News_ ersetzte und als Fachjournal Themen rund um R-Abdeckte, z. B. Erweiterungspakete, Reviews und Anwendungen.
 
-- 2014: Das Paket dplyr mit seinen modernen Datenmanipulationsfunktionen wurde veröffentlicht. Eines der einflussreichsten Pakete im R-Ökosystem.
+- 2014: Das Paket *dplyr* mit seinen modernen Datenmanipulationsfunktionen wurde veröffentlicht. Eines der einflussreichsten Pakete im R-Ökosystem.
 
 Diese Meilensteine zeigen eine kontinuierliche Verbesserung von R bezüglich Stabilität, Erweiterbarkeit und Benutzerfreundlichkeit.
 
 
 ## Unser erstes R, ein R-Skript
 
-Wir beginnen in dem wir uns in *posit.cloud* ein R-Skript Dokument erstellen und gemeinsam einige Schritte durch gehen um unser erstes (gemeinsames) R zu programmieren.
+Wir beginnen in dem wir uns in *posit.cloud* ein __R-Skript_ Dokument erstellen und gemeinsam einige Schritte durch gehen um unser erstes (gemeinsames) _R_ zu programmieren.
 
 Wir beginnen mit den folgenden Zeilen:
 
@@ -70,14 +71,15 @@ y
 mean(x)
 median(y)
 
-x+y
+x + y
 
 z <- x*y
 
 z
 ```
 
-**Beachten Sie:** _Zuweisungen an eine Variable erfolgen durch "<-" oder "->"! An der Pfeilspitze steht immer die Variabel, auf der anderen Seite das, was sie Zuweisen wollen!_
+**Beachten Sie:** _Zuweisungen an eine Variable erfolgen durch "<-" oder "->"!_
+_An der Pfeilspitze steht immer die Variabel, auf der anderen Seite das, was sie Zuweisen wollen!_
 
 
 ## Was passiert, wenn wir das in R ausführen?
@@ -95,6 +97,7 @@ Zunächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektoren
 ```{r}
 #| eval: true
 #| echo: true
+
 Gewicht <- c(60, 72, 57, 90, 95, 72)
 Groesse <- c(1.75, 1.80, 1.65, 1.90, 1.74, 1.91)
 ```
@@ -105,6 +108,7 @@ Jetzt können wir den BMI (also den _Body Mass Index_) einfach berechnen:
 ```{r}
 #| eval: true
 #| echo: true
+
 BMI <- Gewicht / Groesse^2
 
 BMI
@@ -137,7 +141,7 @@ mean(Gewicht)
 
 ## Noch ein paar weitere Zeilen
 
-Die Standardabweichung ist die Wurzel der Varianz, welches wiederum die durchschnittliche Summe der quadratischen Abweichungen vom Mittelwert ist:
+Die Standardabweichung ist die Wurzel der Varianz, welche wiederum die durchschnittliche Summe der quadratischen Abweichungen vom Mittelwert ist:
 
 ```{r}
 #| eval: true
@@ -145,7 +149,7 @@ Die Standardabweichung ist die Wurzel der Varianz, welches wiederum die durchsch
 
 mittelwert <-  sum(Gewicht) / length(Gewicht)
 Gewicht - mittelwert
-sqrt((sum((Gewicht - mittelwert)^2))/(length(Gewicht)-1))
+sqrt((sum((Gewicht - mittelwert)^2))/(length(Gewicht) - 1))
 ```
 
 
@@ -171,20 +175,22 @@ sd(Gewicht)
 
 ## Unsere erste Tabelle
 
-Normalerweise werden in R Datenrahmen (data.frame) zur Speicherung von Tabellen benutzt. 
+Normalerweise werden in R Datenrahmen (`data.frame`) zur Speicherung von Tabellen benutzt. 
 
-Wir nutzen hier aber *tibble*s aus dem Paket `tibble`. 
+Wir nutzen hier aber `tibble`s aus dem Paket `tibble`. 
 Es sind im Prinzip Datenrahmen nur etwas moderner implementiert:
 
 ```{r}
 #| eval: true
 #| echo: true
+
 library(tibble)
 
 tib <- tibble(
     Gewicht = Gewicht,
     Groesse = Groesse
 )
+
 tib
 ```
 **Bitte beachten Sie:** _Parameterzuweisungen, also Zuweisungen innerhalb von Funktionsaufrufen, erfolgen mit "="!_
@@ -224,12 +230,17 @@ df <- data.frame(
     Gewicht = Gewicht,
     Groesse = Groesse
 )
+# Der Datenrahmen
 df
+
+# Die Strzktur des Datenrahmens
 str(df)
+
+# Der Blick auf den Datenrahmen
 glimpse(tib)
 ```
 
-Für uns als Nutzer:in sind diese beiden Datentabellenarten (annähernd) gleich zu benutzen.
+Für uns als Anfänger:in sind die unterschiedlichen Datentypen (`tibble`, `data.frame`, `datatable`, `tbl`, ..)  (annähernd) gleich zu benutzen. Auch wenn die Implementierungen sich teilweise strakt unterscheiden.
 
 
 ## Umwandeln von `tibble` nach `data.frame` und zurück
@@ -240,7 +251,10 @@ Wir können wie folgend zwischen den beiden Datentypen umwandeln:
 #| eval: true
 #| echo: true
 
+# Datenrahmen als tibble
 str(as_tibble(df))
+
+# Tibble als Datenrahmen
 str(as.data.frame(tib))
 ```
 

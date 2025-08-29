@@ -1,0 +1,37 @@
+---
+title: "Vorbereitungen-Datei-Einleseformate"
+author: "Norman Markgraf"
+date: today
+lang: de
+execute:
+  echo: true
+  eval: true
+format: html
+---
+
+Wir erstellen als den *tipping* Daten die Dateien "tips.csv", "tips.csv2", "tips.tsv"
+und "tips.xlsx". 
+Damit können wir die enterschiedlichen Einleseroutinen "CSV-Datei", "CSV2-Datei", "TSV-Datei" und "Excel-Datei" zeigen.
+
+```{r}
+install.packages('openxlsx2')
+```
+
+```{r}
+library(reshape2)
+library(here)
+library(readr)
+library(openxlsx2)
+library(tibble)
+data(tips)
+as_tibble(tips) -> tips
+
+here("Workshop", "data") -> path
+
+write_csv(tips, here(path, "tips.csv"))
+write_csv2(tips, here(path, "tips.csv2"))
+write_tsv(tips, here(path, "tips.tsv"))
+write_xlsx(tips, here(path, "tips.xlsx"), col_names = TRUE, sheet = "tips")
+```
+
+
