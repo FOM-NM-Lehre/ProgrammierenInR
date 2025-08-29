@@ -134,6 +134,11 @@ div.quarto-title-block > div.slide-background-content {
     color: #FFFFFF;
 }
 
+.reveal .slide.Übung h2:not(.default),
+.reveal .slide.Uebung h2:not(.default) {
+    background-image: url("../../../../../images/layout/fom-kopfzeile-übung.png")!important;
+}
+
 .reveal #TOC nav p,
 .reveal #TOC nav ul,
 .reveal #TOC nav ol,

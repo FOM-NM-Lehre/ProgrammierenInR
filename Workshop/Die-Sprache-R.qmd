@@ -311,9 +311,10 @@ table(tib$Groesse)
 ```
 
 
-## Aufgabe
+## Aufgaben {.Übung}
 
-1. Erzeugen sie eine neue Tabelle mit dem Namen *tib2*, welche die Spalten _Groesse_, _Gewicht_ und _BMI_ enthält.
+1. Erzeugen Sie eine neue Tabelle mit dem Namen *tib2*, welche die Spalten
+    _Groesse_, _Gewicht_ und _BMI_ enthält.
 
 2. Geben Sie die Mittelwerte aller drei Spalten aus.
 
@@ -390,7 +391,7 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 ```
 
 
-## Aufgaben
+## Aufgaben {.Übung}
 
 1. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Varable *BMI*.
 
@@ -704,7 +705,7 @@ glimpse(tips_xslx)
 ```
 
 
-## Aufgaben
+## Aufgaben {.Übung}
 
 1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen (Tipp: `sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben
 
