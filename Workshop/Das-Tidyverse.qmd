@@ -40,6 +40,7 @@ Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. --
 
 **Pipes:** Kette Schritte mit dem Base-Pipe `|>` (oder `%>%`), um lineare, lesbare Workflows zu bauen.
 
+
 ## Anmerkung zu den Beispiel Daten "palmerpenguins"
 
 Wir schauen uns die Daten der "[Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/)" an.
@@ -47,6 +48,7 @@ Wir schauen uns die Daten der "[Palmer Penguins](https://allisonhorst.github.io/
 Es wurden auf drei Inseln ("Biscoe", "Dream" und "Torgersen") der Antarktic drei Arten von Piguinen ("Adelie", "Chinstrap" und "Gentoo") beobachtet.^[Paper zu den Daten finden Sie [hier](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081)]
 
 ![.](./images/iter_penguins.png){width=60%}
+
 
 ## Anmerkung zu den Beispiel Daten "palmerpenguins"
 
@@ -61,6 +63,7 @@ Wir haben schon ein wenig mit dem `tidyverse` gearbeitet, daher können Sie sich
 #| warning: false
 #| echo: true
 #| eval: false
+#| 
 library(tidyverse)
 library(palmerpenguins)
 
@@ -91,6 +94,8 @@ penguins |>
   arrange(desc(mean_bmi))
 
 ```
+
+
 ## Einlesen von Daten - Vorbereitung
 
 Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org). Es gibt aber auch Bord-Mittel. Schauen Sie sich gerne einmal die Befehle `read.csv()" und `read.csv2()` an. 
@@ -100,7 +105,9 @@ Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Pake
 #| eval: true
 
 library(readr)
+library(here)
 ```
+
 
 ## Einlesen
 
@@ -108,7 +115,9 @@ library(readr)
 #| echo: true
 #| eval: true
 
-df <- read_csv("data/sales.csv") 
+here("data", "sales.csv") |> 
+    read_csv() -> 
+    df 
 ```
 
 ```{r}
@@ -129,7 +138,8 @@ Sind diese Variabel-/Spaltennamen "schön"? - Was ist Ihre Meinung?
 #| eval: true
 library(janitor)
 
-read_csv("data/sales.csv") |>
+here("data", "sales.csv") |> 
+    read_csv() |>
     clean_names()  ->  # macht spalten_namen_einheitlich 
     df
 ```
@@ -197,6 +207,7 @@ df_aug |>
 by_region
 ```
 
+
 ## Eine andere Aufgabe
 
 Etwas trikreichen müssen wir vorgehen, wenn wir für den Gesamtumsatz (*total_revenue*), die Gesamtkosten (*total_cots*) und den Gesamtgewinn (*total_profit*) die Durchschnitte und deren Standardabweichungen in eine neue Tabelle speichern wollen: 
@@ -232,6 +243,7 @@ df |>
 df_stats
 ```
 
+
 ## Ein neues Beispiel: New York City Flüge aus dem Jahre 2013
 
 Wir schauen uns zunächst die Daten an:
@@ -248,9 +260,10 @@ colnames(flights)
 
 ![.](./images/nycflights13-er-diagramm.png)
 
+
 ## Wir identifizieren Fluggesellschaft über ihre Abkürzungen
 
-Dazu erstellen wir einen *left join*, so wie Sie ihn als SQL sicher schon kennen:
+Dazu erstellen wir einen *left join*, so wie Sie ihn aus SQL kennen:
 
 ```{r}
 #| echo: true
@@ -282,6 +295,7 @@ flights_named |>
     select(name) |>
     unique()
 ```
+
 
 ## Umformen mittels `tidyr`
 
@@ -352,6 +366,7 @@ penguins |>
   theme_minimal()
 ```
 
+
 ## Beispiel: Flossenlänge vs. Schnabellänge
 
 ```{r}
@@ -373,6 +388,7 @@ ggplot(
        shape = "Penguin Art") +
   theme_minimal()
 ```
+
 
 ## Beispiel: Histogramm der Körpermasse:
 
@@ -401,6 +417,7 @@ ggplot(data = penguins, aes(x = species, y = body_mass_g, fill = species)) +
   theme_minimal()
 ```
 
+
 ## Datum mit dem Paket `labridate`
 
 Die R-Bibliothek `lubridate` wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
@@ -427,7 +444,6 @@ flights |>
 ```
 
 
-
 ## Säulendiagramm: Flüge nach Wochentag im Januar
 
 ```{r}
@@ -439,6 +455,7 @@ ggplot(jan_flights, aes(x = wday)) +
   geom_bar(fill = "coral") +
   labs(title = "Flüge nach Wochentag im Januar", x = "Wochentag", y = "Anzahl Flüge")
 ```
+
 
 ## Streudiagramm Ankunfts- vs. Abflugverzögerungen im Januar
 
@@ -455,7 +472,8 @@ ggplot(jan_flights,
        y = "Ankunftsverspätung (in Minuten)")
 ```
 
-## Aufgaben
+
+## Aufgaben {.Übung}
 
 1. Erstellen Sie eine Tabelle für den August mit dem Namen *aug_flights*
 
