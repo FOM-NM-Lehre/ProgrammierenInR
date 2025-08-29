@@ -14,7 +14,10 @@ und "tips.xlsx".
 Damit können wir die enterschiedlichen Einleseroutinen "CSV-Datei", "CSV2-Datei", "TSV-Datei" und "Excel-Datei" zeigen.
 
 ```{r}
+#| eval: false
+#| echo: false
 install.packages('openxlsx2')
+install.packages('reshape2')
 ```
 
 ```{r}

@@ -563,7 +563,7 @@ Bert,29,Ingenieur
 
 Komma ist das Standardtrennzeichen, jedoch werden manchmal auch Semikolon, Tabulator oder andere Zeichen verwendet, abhängig von den regionalen und programmbezogenen Einstellungen.
 
-### Deutsche Besonderheiten führen zu CSV2
+## Deutsche Besonderheiten führen zu CSV2
 
 **CSV2** ist eine Variation des CSV-Formats, die vor allem im deutschsprachigen Raum verwendet wird. 
 Hierbei werden als Feldtrennzeichen **Semikolons** (`;`) statt Kommas genutzt, da das Komma oft als Dezimaltrennzeichen (z.B. bei Zahlenwerten) verwendet wird.
@@ -607,6 +607,7 @@ Zum Einlesen einer CSV2-Datei nutzen wir aus dem Paket *readr* den Befehle `read
 #| warning: false
 #| echo: true
 #| eval: true
+
 library(here)
 library(readr)
 
@@ -726,6 +727,9 @@ Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE```.
 
 
 ```{r}
+#| echo: true
+#| eval: true
+
 5 > 3
 5 < 3
 3 == 3
@@ -767,6 +771,9 @@ Ist die Zahl 6 größer als 5 UND ist die Zahl 7 kleiner als 6?
 Ist die Zahl 7 größer als 5 ODER ist die Zahl 9 kleiner als 8 (oder beides)?
 
 ```{r}
+#| echo: true
+#| eval: true
+
 (7 > 5) | (9 < 8)
 ```
 
@@ -781,11 +788,15 @@ numeric, integer, double
     Für unsere Anwendungen ist es in der Regel egal, ob eine Zahl von _R_ als _numeric_, _integer_ oder _double_ verstanden wird. 
     Wir werden die Unterschiede daher nicht im Detail besprechen.
 
+\
+
 logical
 : Wir haben gesehen, dassnach einem logischen Vergleich eine Information erhalten, die nur zwei Ausprägungen haben kann: `TRUE` oder `FALSE`. 
     Diese Informationen haben in _R_ den Datentyp _logical_. 
     Ist für einen Wert nun der Datentyp logical hinterlegt, weiß _R_, dass eben nur diese beiden Ausprägungen möglich sind.
-    
+
+\
+
 character (string)
 : Eine weitere wichtige Funktion von _R_ ist der Umgang mit Texten. 
     Ein Text kann dabei unterschiedlich lang sein (ein Buchstabe, ein Name, ein Absatz, ein ganzes Buch). 
@@ -793,5 +804,3 @@ character (string)
     Die Übersetzung dieses Begriffs auf Englisch wäre _character string_. 
     Deshalb findet sich in _R_ für Text häufig die Bezeichnung _character_ oder _string_ die synonym verwendet werden.
 
-
-## 
