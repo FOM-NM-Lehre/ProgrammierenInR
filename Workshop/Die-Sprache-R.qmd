@@ -614,7 +614,7 @@ Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendung
 
 ## Daten aus einer Datei einlesen (CSV-Version)
 
-Zum Einlesen einer CSV  Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
+Zum Einlesen einer CSV-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
 
 ```{r}
 #| warning: false
@@ -625,6 +625,9 @@ library(readr)
 
 here("data", "tips.csv") |> read_csv() -> tips_csv
 ```
+
+
+R hat nun die Spalten wir folgt gelesen:
 
 ```{r}
 #| echo: true
@@ -650,6 +653,9 @@ here("data", "tips.csv2") |> read_csv2() -> tips_csv2
 
 ```
 
+
+R hat nun die Spalten wir folgt gelesen:
+
 ```{r}
 #| echo: true
 #| eval: true
@@ -660,13 +666,16 @@ spec(tips_csv2)
 
 ## Vergleich der eingelesenen Tabellen
 
-Wir erhalten damit die selben Inhalte:
+Wir erhalten damit die selben Tabellen. Schauen wir kurz hinein:
 
 ```{r}
 #| echo: true
 #| eval: true
 
+# CSV
 glimpse(tips_csv)
+
+# CSV2
 glimpse(tips_csv2)
 ```
 
@@ -700,10 +709,10 @@ glimpse(tips_xslx)
 1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen (Tipp: `sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben
 
 
-2. Gruppieren Sie nun die Ausgabe aus Aufage 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
+2. Gruppieren Sie nun die Ausgabe aus Aufgabe 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
 
 
-3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen sie im Paket `dplyr`. ;-) ) 
+3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket `dplyr` nach dem Befehl `arrange()`. ;-) ) 
 
     a) Einmal in aufsteigender Reihenfolge!
 
