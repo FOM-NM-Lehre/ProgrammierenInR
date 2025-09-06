@@ -746,7 +746,7 @@ rm(linreg)
 
 Wir können in R zwei Zahlen miteinander vergleichen und feststellen, ob diese gleich oder ungleich sind.
 Wir können auch überprüfen, ob eine Zahl größer oder kleiner ist als eine andere Zahl.
-Eine solche Frage wird dann in *R* mit entweder _Ja_ (`TRUE`) oder _Nein_ (`FALSE```) beantwortet. 
+Eine solche Frage wird dann in *R* mit entweder _Ja_ (`TRUE`) oder _Nein_ (`FALSE`) beantwortet. 
 Solche Vergleiche werden _logische Vergleich_ genannt und sind auch nicht nur auf Zahlen beschränkt.
 
 Wenn wir uns zum Beispiel dafür interessieren, ob die Zahl 5 größer ist als die Zahl 3 können wir dies mit dem Code 5 > 3 herausfinden:
@@ -758,16 +758,17 @@ Wenn wir uns zum Beispiel dafür interessieren, ob die Zahl 5 größer ist als d
 5 > 3
 ```
 
-Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE```.
+Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE`.
+
 
 ## Vergleichsoperatoren
 
 
-| Symbol auf der Tastatur | Rechnung oder Operation |
-|:------------------------|:------------------------|  
-| `==`                    | Gleich                  |
-| `!=`                    | Ungleich                |
-| `>`  bzw. `<`           | Größer bzw. Kleiner     |
+| Symbol auf der Tastatur | Rechnung oder Operation         |
+|:------------------------|:--------------------------------|  
+| `==`                    | Gleich                          |
+| `!=`                    | Ungleich                        |
+| `>`  bzw. `<`           | Größer bzw. Kleiner             |
 | `>=` bzw. `<=`          | Größergleich bzw. Kleinergleich |
 
 
@@ -788,10 +789,12 @@ Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE```.
 Neben den einfachen Vergleichsoperatoren ist es auch möglich, mehrere logische Vergleiche miteinander zu kombinieren. 
 Als Verknüpfung sind vor allem das logische _UND_ sowie das logische _ODER_ relevant.
 
-| Symbol auf der Tastatur | Operation        | Bedeutung |
-|:------------------------|:-----------------|:----------|  
-| `&`                     | logisches _UND_  | Sind beide Vergleiche wahr? |
+
+| Symbol auf der Tastatur | Operation        | Bedeutung                                    |
+|:------------------------|:-----------------|:---------------------------------------------|  
+| `&`                     | logisches _UND_  | Sind beide Vergleiche wahr?                  |
 | `|`                     | logisches _ODER_ | Ist mindestens eine der Vergleiche wahr? |
+
 
 Als Antwort eines kombinierten logischen Vergleichs erhält man erneut entweder den Rückgabewert `TRUE` oder `FALSE`. 
 
@@ -826,6 +829,7 @@ Ist die Zahl 7 größer als 5 ODER ist die Zahl 9 kleiner als 8 (oder beides)?
 
 ## Datentypen
 
+
 numeric, integer, double
 : Intern wird für Zahlen in _R_ der Begriff _numeric_ verwendet. 
     Es gibt manchmal Situationen, in denen R weiter unterscheidet ob es sich um eine ganze Zahl (_integer_) oder eine Dezimalzahl (_double_) handelt. 
@@ -849,3 +853,4 @@ character (string)
     Die Übersetzung dieses Begriffs auf Englisch wäre _character string_. 
     Deshalb findet sich in _R_ für Text häufig die Bezeichnung _character_ oder _string_ die synonym verwendet werden.
 
+\
