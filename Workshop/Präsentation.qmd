@@ -18,6 +18,8 @@ title: "Präsentation: Sechs Dinge über R"
 # Das Tidyverse
 
 {{< include Das-Tidyverse.qmd >}}
+{{< include Das-Tidyverse-tidyr.qmd >}}
+{{< include Das-Tidyverse-ggplot2.qmd >}}
 
 
 # Datenbanken als Datenquelle

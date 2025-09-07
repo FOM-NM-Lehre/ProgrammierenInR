@@ -1,0 +1,34 @@
+<!--
+
+# Das Tidyverse - tidyr
+
+-->
+
+## Umformen mittels `tidyr`
+
+Manchmal möchten wir Tabellen für Menschen lesbarer machen. Oder umgekehrt, für den Computer. 
+
+Hier kann das Paket `tidyr` helfen.
+
+```{webr-r}
+#| autorun: true
+library(tidyr)
+```
+
+Stellen wir uns vor, wie möchten wissen wie viele Tiere welcher Art (*species*) auf welcher Insel (*island*) gesichtet wurden, dann geht das sehr gut mir dem Befehl `count()`:
+
+```{webr-r}
+#| autorun: true
+penguins |>
+  count(species, island) 
+```
+
+Das Problem ist, es ist nicht die Tabelle, die wir als Menschen gut lesen können. Daher nutzen wir die Funktion `pivot_wider()` aus dem Paket `tidyr`:
+
+```{webr-r}
+#| autorun: true
+penguins |>
+  count(species, island) |>
+  pivot_wider(names_from = island, values_from = n, values_fill = 0)
+```
+

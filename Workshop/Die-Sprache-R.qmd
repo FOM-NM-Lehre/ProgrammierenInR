@@ -4,6 +4,7 @@
     
 -->
 
+
 ## Eine kurze Geschichte von R
 
 - Die Geschichte von R als Programmiersprache begann 1992 an der Universität Auckland in Neuseeland. 
@@ -374,9 +375,7 @@ Nachfolgend dine Übersicht alternativer Backends:
 Wir nutzen dazu das Paket [`dplyr`](http://dplyr.tidyverse.org) und den Befehl `mutate()`:
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 library(dplyr)
 
 tib |> mutate(BMI = Gewicht / Groesse^2) -> tib2
@@ -391,9 +390,7 @@ tib2 |> mutate(Geschlecht = rep(c("weiblich", "männlich"), 3)) -> tib3
 Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
 ```
 
@@ -401,9 +398,7 @@ tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
 ## Alternative (y- und x-Achse getauscht)
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 ```
 
@@ -420,21 +415,17 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: `geom_point`):
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht)) +
     geom_point()
 ```
 
 
-Der Korrellationkoeffizent berechnet sich zu:
+Der Korrellationskoeffizent berechnet sich zu:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 cor(tib3$Groesse, tib3$Gewicht)
 ```
 
@@ -445,9 +436,7 @@ cor(tib3$Groesse, tib3$Gewicht)
 Eine lineare Regression scheint keine schlechte Idee zu sein:
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 linreg <- lm(Gewicht ~ Groesse, data = tib3)
 linreg
 ```
@@ -456,9 +445,7 @@ linreg
 Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls `summary()`:
 
 ```{webr-r}
-#| eval: true
-#| echo: true
-
+#| autorun: true
 summary(linreg)
 ```
 
@@ -468,9 +455,7 @@ summary(linreg)
 Wir können nun diese Regressionsgerade in unsere Grafik einbauen:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-#| 
+#| autorun: true
 tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht)) +
     geom_point() +
@@ -481,8 +466,7 @@ tib3 |>
 ## Ein kleiner Ausblick
 
 ```{webr-r}
-#| echo: true
-#| eval: true
+#| autorun: true
 tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht, color = Geschlecht)) +
     geom_point() +
@@ -508,9 +492,7 @@ Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meist
 Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 tib$Gewicht   # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
 
 tib["Gewicht"] #. Eine Tabelle mit nur den Einträgen aus der Spalte Gewicht
@@ -553,9 +535,7 @@ tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 Die Tabellenspalten können wir in einen Vektor umwandeln:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 tib3 |> select(Geschlecht) |> c() # Als Vektor
 ```
 
@@ -563,9 +543,7 @@ tib3 |> select(Geschlecht) |> c() # Als Vektor
 Zeilen werden mit dem Befehl `filter()` ausgewählt:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 tib3 |> filter(Geschlecht == "männlich")
 ```
 
@@ -576,9 +554,7 @@ Wir wollen eine Zusammenfassung (eng. *summarise*) erstellen.
 Wir wollen wissen wie viele Beobachtungen (*n*) die Grundlage für den Mittelwert des Gewichts (*mean*) bzw des Median der Größe (*median*) sind:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 tib3 |> 
     filter(Geschlecht == "männlich") |> 
     select(Gewicht, Groesse) |> 
@@ -591,9 +567,7 @@ tib3 |>
 Mit dem Befehl `group_by()` können wir kategoriale Variablen (also Spalten) nutzen um einzelne Fälle (also Kategorien) zu unterscheiden:
 
 ```{webr-r}
-#| echo: true
-#| eval: true
-
+#| autorun: true
 tib3 |> 
     group_by(Geschlecht) |> 
     summarise(
@@ -640,23 +614,21 @@ Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendung
 
 Zum Einlesen einer CSV-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
 
-```{webr-r}
+```{r}
 #| warning: false
 #| echo: true
 #| eval: true
 library(here)
 library(readr)
-
 here("data", "tips.csv") |> read_csv() -> tips_csv
 ```
 
 
 R hat nun die Spalten wir folgt gelesen:
 
-```{webr-r}
+```{r}
 #| echo: true
 #| eval: true
-
 spec(tips_csv)
 ```
 
@@ -665,25 +637,22 @@ spec(tips_csv)
 
 Zum Einlesen einer CSV2-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv2()`:
 
-```{webr-r}
+```{r}
 #| warning: false
 #| echo: true
 #| eval: true
-
 library(here)
 library(readr)
 
 here("data", "tips.csv2") |> read_csv2() -> tips_csv2
-
 ```
 
 
 R hat nun die Spalten wir folgt gelesen:
 
-```{webr-r}
+```{r}
 #| echo: true
 #| eval: true
-
 spec(tips_csv2)
 ```
 
@@ -691,43 +660,58 @@ spec(tips_csv2)
 ## Vergleich der eingelesenen Tabellen
 
 Wir erhalten damit die selben Tabellen. Schauen wir kurz hinein:
+```{r}
+#| include: false
+library(dplyr)
+```
 
-```{webr-r}
+::: {.columns}
+::: {.column width="49%"}
+```{r}
 #| echo: true
 #| eval: true
-
 # CSV
 glimpse(tips_csv)
-
+```
+:::
+::: {.column width="49%"}
+```{r}
+#| echo: true
+#| eval: true
 # CSV2
 glimpse(tips_csv2)
 ```
+:::
+:::
 
 
 ## Daten aus einer Datei einlesen (Excel-Version)
 
 Um Daten aus einer Excel-Datei zu lesen brauchen wir das Paket [`readxl`](https://readxl.tidyverse.org).
 
-```{webr-r}
+```{r}
 #| warning: false
-#| autorun: true
+#| echo: true 
+#| eval: true
 library(here)
 library(readxl)
 ```
 
 
-Wir können u.a. das Sheet "tips" auswählen, wenn das Dokument mehrere Tabellen enhält:
+Wir können u.a. das Sheet "tips" auswählen, wenn das Dokument mehrere Tabellen enthält:
 
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true 
+#| eval: true
 here("data", "tips.xlsx") |> read_xlsx(sheet="tips") -> tips_xslx
 ```
 
 
-Wir den nun den die selben Daten in der Tabelle:
+Wir haben nun die selben Daten in der Tabelle:
 
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true 
+#| eval: true
 glimpse(tips_xslx)
 ```
 
@@ -752,14 +736,15 @@ glimpse(tips_xslx)
 Ab und zu ist einfach mal Zeit zum Aufräumen! -- 
 Und einer kleinen Pause!
 
-```{webr-r}
-#| echo: true
-#| eval: true
-
-rm(tib)
-rm(tib2)
+```{r}
+#| warning: false
 rm(tips_csv2)
 rm(tips_xslx)
+```
+
+```{webr-r}
+#| autorun: true
+#| warning: false
 rm(df)
 rm(BMI)
 rm(Gewicht)
