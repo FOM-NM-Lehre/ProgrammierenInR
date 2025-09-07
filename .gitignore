@@ -56,3 +56,6 @@ rsconnect/
 **.Rmarkdown
 
 /.quarto/
+_extensions/*
+**_extensions/*
+**.docx
