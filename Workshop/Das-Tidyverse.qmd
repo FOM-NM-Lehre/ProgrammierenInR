@@ -217,6 +217,7 @@ df_stats
 ::: {.columns}
 ::: {.column width="39%"}
 Im Paket `nycflights13` sind Tabellen über Die An- und Abflüge auf dem Flughafen New York City aus dem Jahre 2013 gespeichert.
+
 ```{webr-r}
 #| autorun: true
 library(nycflights13)
@@ -228,9 +229,12 @@ Wir schauen uns zunächst die Daten an:
 #| autorun: true
 colnames(flights)
 ```
+
 ::: 
-::: {column width="60%"}
+::: {.column width="60%"}
+
 ![.](./images/nycflights13-er-diagramm.png)
+
 :::
 :::
 
