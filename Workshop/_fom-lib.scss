@@ -1,0 +1,221 @@
+/*-- scss:uses --*/
+
+@use 'default-var';
+@use 'colors';
+@use 'fontsstyles';
+
+/*-- scss:rules --*/
+
+/*
+ * Damit werden alle (erzeugten) Bilder zentriert.
+ */
+.reveal .slide figure {
+    text-align: center;
+}
+
+.reveal .quarto-title-block .quarto-title-authors .quarto-title-author,
+.reveal .quarto-title-block .quarto-title-authors {
+  padding-right: 0px;
+  padding-left: 0px;
+  display: block;
+}
+
+div.quarto-title-block > div.slide-background-content { 
+  background-image: default-var.$background-image;
+  background-repeat: no-repeat;
+  background-size: 100% 100% !important;
+}
+/*
+ * Titelseite
+*/ 
+#title-slide h1,
+#title-slide p,
+#title-slide div,
+#title-slide div > div.quarto-title-authors,
+#title-slide div > div.quarto-title-author,
+#title-slide div > div.quarto-title-author-name,
+#title-slide div > p.quarto-title-affiliation {
+    display: block;
+    text-align: right !important;
+  }
+.reveal .slide h1 {
+  /*background-color: #00998A;
+  color: white; */
+    padding-left: 200px;
+}
+
+.reveal h1.title {
+    font-size: 80px!important;
+    color: default-var.$presentation-heading-color;
+    margin-left: 30%;
+    margin-top: 25%;
+    margin-right: 5%;
+}
+
+.reveal #title-slide p.subtitle,
+.reveal #title-slide p.date,
+.quarto-title-authors {
+    font-size: 45px!important;
+    margin-right: 5%;
+    color: default-var.$presentation-heading-color;
+}
+
+.reveal #title-slide p.date{
+    font-size: 80%!important;
+}
+
+
+/*
+ * Kapitel (H1)
+ */
+
+.reveal section.title-slide.level1 {
+  height: 100%;
+}
+
+.reveal .slide h1 {
+  position: absolute;
+  top: 52dvh;
+  right: 0.01dvh;
+
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start;
+  
+  background-color: default-var.$kapitel-bg;
+  color: default-var.$kapitel-fc;
+  font-size: 44px!important;
+
+  padding-left: 1%;
+  width: 70%;
+  height: 170px;
+  text-align: left;
+}
+
+.reveal .slide h1 span.header-section-number {
+  position: absolute;
+  left: -300px;
+  
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  text-align: center;
+  
+  font-size:150px!important;
+  
+  width: 20%;
+  height: 170px;
+  background-color: default-var.$kapitel-number-bg;
+}
+
+/*
+ Gehört zu section.slide und hält rechts genug Platz frei für das Logo.
+ Zusätzlich wird der Text mit "..." an der rechten Seite abgeschnitten.
+*/
+.reveal .slide h2 {
+  background-image: default-var.$kopfzeilen-image;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+  padding-top: 30px;
+  padding-left: 25px;
+  width: calc(100% - 0.46em);
+  height: 100px;
+  font-size: 56px!important;
+  color: white;
+}
+
+.reveal .slide.Uebung h2 {
+  background-image: default-var.$kopfzeilen-uebungs-image!important;
+}
+
+.reveal p, 
+.reveal .slides section {
+  font-size: 45px;
+}
+
+.reveal .slide p,
+.reveal .slide ol,
+.reveal .slide ul {
+    padding-left: 25px!important;
+    padding-right: 25px!important;
+  }
+
+.reveal div.footnote,
+.reveal div.footnote p,
+div.footnote {
+  font-size: 18px;
+}
+
+/*
+ * Fusszeile
+ */
+div.footer {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+div.footer {
+  //border-top: solid default-var.$border-color-left !important;
+  border-top: solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(to left,default-var.$border-color-left, default-var.$border-color-right);
+}
+
+.reveal div.footer p, 
+div.footer p {
+  font-size: 14px!important;
+}
+
+@page :last {
+  display: none;
+}
+
+figcaption,
+p.caption,
+div.caption {
+  font-size: 40% !important;
+  padding-left: 10px!important;
+  padding-right: 10px!important;
+  /* padding-top: 5px!important; */
+  /* text-align: left!important; */
+  margin-top: 0 !important;
+}
+
+figcaption {
+  /* display: inline-block !important;*/
+  vertical-align: top;
+}
+
+#quarto-log-error-modal .modal__overlay {
+  display: none !important;
+}
+
+
+.right {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/*
+  Damit die QR Codes richtig positioniert werden können müssen
+  die display Werte auf inline-blocks und nicht blocks gesetzt werden.
+*/
+.qrcode img {
+  display: inline-block!important;
+}
+
+/*
+By default, KaTeX math is rendered in a 1.21× larger font than the surrounding context, which makes super- and subscripts easier to read. You can control this using CSS, for example, to set to 1.1×:
+*/
+.katex { 
+  font-size: 1.0em!important;
+}

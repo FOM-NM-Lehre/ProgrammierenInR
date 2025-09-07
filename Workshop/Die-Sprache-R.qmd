@@ -4,7 +4,6 @@
     
 -->
 
-
 ## Eine kurze Geschichte von R
 
 - Die Geschichte von R als Programmiersprache begann 1992 an der Universität Auckland in Neuseeland. 
@@ -31,23 +30,20 @@
 
 - Die Sprache bietet eine breite Palette an statistischen Methoden und Möglichkeiten zur grafischen Visualisierung und wird von einer großen Community stetig weiterentwickelt.
 
+
 ## Noch ein paar Meilensteine in der Entwickliung
 
 
 Bis 2010 prägten mehrere Meilensteine die Entwicklung der Programmiersprache R:
 
-- 1997: Gründung von _CRAN_ (_Comprehensive R Archive Network_) als zentrale Plattform für Pakete und Erweiterungen, die es Anwendern ermöglicht, selbst geschriebene Funktionen einfach zu teilen und damit die Verbreitung und Nutzung von R erheblich zu fördern.
-
 - 2000: Veröffentlichung von R Version 1.0, der ersten stabilen Version von R, die wichtige Funktionen wie Fehlerbehandlung (`try()`), Datenrahmenbearbeitung (`by()`, `merge()`) enthielt.
 
 - 2001: Gründung von Bioconductor, ein Open-Source-Projekt für Genomdatenanalysen, das neben CRAN über 2000 weitere Pakete bereitstellt.
 
-- 2007: Veröffentlichung von ggplot2, einem Paket basierend auf der [Grammar of Graphics](https://doi.org/10.1007/0-387-28695-0) von Leland Wilkinson, entwickelt von [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham). 
+- 2007: Veröffentlichung von ggplot2, einem Paket basierend auf der [Grammar of Graphics](https://doi.org/10.1007/0-387-28695-0) von [Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson), entwickelt von [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham). 
     Dieses Paket revolutionierte die grafische Darstellung in R und wurde zu einem zentralen Bestandteil der R-Community und später des tidyverse.
 
-- 2009: Einführung des _R Journals_, welches die _R News_ ersetzte und als Fachjournal Themen rund um R-Abdeckte, z. B. Erweiterungspakete, Reviews und Anwendungen.
-
-- 2014: Das Paket *dplyr* mit seinen modernen Datenmanipulationsfunktionen wurde veröffentlicht. Eines der einflussreichsten Pakete im R-Ökosystem.
+- 2014: Das Paket [dplyr](https://dplyr.tidyverse.) mit seinen modernen Datenmanipulationsfunktionen wurde veröffentlicht. Eines der einflussreichsten Pakete im R-Ökosystem.
 
 Diese Meilensteine zeigen eine kontinuierliche Verbesserung von R bezüglich Stabilität, Erweiterbarkeit und Benutzerfreundlichkeit.
 
@@ -58,9 +54,35 @@ Wir beginnen in dem wir uns in *posit.cloud* ein __R-Skript_ Dokument erstellen 
 
 Wir beginnen mit den folgenden Zeilen:
 
-```{r, erstesBeispiel}
-#| eval: false
+::: {.columns}
+::: {.column width="49%"}
+```{r}
+#| label: erstesBeispiel
 #| echo: true
+#| eval: false
+
+x <- c(1, 2, 3, 9, 8, 7)
+y <- c(10, 2.3, 4.5, 6.7, -1.2, -9.0)
+
+x
+y
+
+mean(x)
+median(y)
+
+x + y
+
+z <- x*y
+
+z
+```
+:::
+::: {.column width="49%"}
+Ausgabe:
+```{webr-r}
+#| context: output
+#| label: erstesBeispiel
+#| echo: false
 
 x <- c(1, 2, 3, 9, 8, 7)
 y <- c(10, 2.3, 4.5, 6.7, -1.2, -9.0)
@@ -78,26 +100,18 @@ z <- x*y
 z
 ```
 
+:::
+:::
 **Beachten Sie:** _Zuweisungen an eine Variable erfolgen durch "<-" oder "->"!_
 _An der Pfeilspitze steht immer die Variabel, auf der anderen Seite das, was sie Zuweisen wollen!_
-
-
-## Was passiert, wenn wir das in R ausführen?
-
-Wir erhalten die folgende Ausgabe:
-
-```{r, ref.label="erstesBeispiel", echo=F}
-```
 
 
 ## Wir machen etwas einfache Statistik
 
 Zunächst bauen wir von Hand ein paar Daten auf, dazu erzeugen wir zwei Vektoren mit dem *combine*-Befehl `c()`:
 
-```{r}
-#| eval: true
-#| echo: true
-
+```{webr-r}
+#| autorun: true
 Gewicht <- c(60, 72, 57, 90, 95, 72)
 Groesse <- c(1.75, 1.80, 1.65, 1.90, 1.74, 1.91)
 ```
@@ -105,10 +119,9 @@ Groesse <- c(1.75, 1.80, 1.65, 1.90, 1.74, 1.91)
 
 Jetzt können wir den BMI (also den _Body Mass Index_) einfach berechnen:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 BMI <- Gewicht / Groesse^2
 
 BMI
@@ -119,10 +132,9 @@ BMI
 
 Den Mittelwert können wir, quasi von Hand, berechnen in dem wir die Summe durch die Anzahl teilen:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 sum(Gewicht)
 length(Gewicht)
 sum(Gewicht) / length(Gewicht)
@@ -131,10 +143,9 @@ sum(Gewicht) / length(Gewicht)
 
 Es gibt aber auch den Befehl `mean()` dafür:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 mean(Gewicht)
 ```
 
@@ -143,10 +154,9 @@ mean(Gewicht)
 
 Die Standardabweichung ist die Wurzel der Varianz, welche wiederum die durchschnittliche Summe der quadratischen Abweichungen vom Mittelwert ist:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 mittelwert <-  sum(Gewicht) / length(Gewicht)
 Gewicht - mittelwert
 sqrt((sum((Gewicht - mittelwert)^2))/(length(Gewicht) - 1))
@@ -155,20 +165,18 @@ sqrt((sum((Gewicht - mittelwert)^2))/(length(Gewicht) - 1))
 
 Aber auch hierfür gibt es einfachere Befehle:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 sqrt(var(Gewicht))
 ```
 
 
 Oder noch kürzer mit dem Befehl `sd()` ( _sd_ = _standard derivation_, zu deutsch _Standardabweichung_ ):
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
-
 sd(Gewicht)
 ```
 
@@ -180,10 +188,9 @@ Normalerweise werden in R Datenrahmen (`data.frame`) zur Speicherung von Tabelle
 Wir nutzen hier aber `tibble`s aus dem Paket `tibble`. 
 Es sind im Prinzip Datenrahmen nur etwas moderner implementiert:
 
-```{r}
-#| eval: true
+```{webr-r}
+#| autorun: true
 #| echo: true
-
 library(tibble)
 
 tib <- tibble(
@@ -198,87 +205,99 @@ tib
 
 ## Die Struktur einer Tabelle 
 
-Um auch in Skripten die Struktur einer Tabelle darstellen zu können nutzen wir den Befehl `str()`:
+Um die Struktur einer Tabelle darstellen zu können ...
 
-```{r}
-#| eval: true
-#| echo: true
-
+::: {.columns}
+::: {.column width="49%"}
+nutzen wir den Befehl `str()`:
+```{webr-r}
+#| autorun: true
 str(tib)
 ```
+:::
+::: {.column width="49%"}
+Oder moderner den Befehl `glimpse()`:
 
-
-Oder auch moderner mit dem Befehl `glimpse()`:
-
-```{r}
-#| eval: true
-#| echo: true
-
+```{webr-r}
+#| autorun: true
 glimpse(tib)
 ```
+:::
+:::
 
+## Unterschied zum Standard-Datenrahmen
 
-## Unterschied zu Datenrahmen?
+R hat auch eine Standard Implementierung für Datenrahmen. Der `data.fram` ist dem `tibble` sehr ähnlich.
 
-Hätten wir die im R normalerweise implementierten Datenrahmen (`data.frames`) benutzt hätten wir das folgende Ergebnis:
-
-```{r}
-#| eval: true
-#| echo: true
-
+::: {.columns}
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
 df <- data.frame(
     Gewicht = Gewicht,
     Groesse = Groesse
 )
 # Der Datenrahmen
 df
-
-# Die Strzktur des Datenrahmens
+```
+:::
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
+# Struktur des Datenrahmens
 str(df)
-
-# Der Blick auf den Datenrahmen
-glimpse(tib)
 ```
 
-Für uns als Anfänger:in sind die unterschiedlichen Datentypen (`[tibble](https://tibble.tidyverse.org)`, `data.frame`, `[data.table](https://rdatatable.gitlab.io/data.table/)`, `tbl`, ..) 
+```{webr-r}
+#| autorun: true
+# Blick auf den Datenrahmen
+glimpse(tib)
+```
+:::
+:::
+
+Für Anfänger:in sind die unterschiedlichen Datentypen ([`tibble`](https://tibble.tidyverse.org), `data.frame`, [`data.table`](https://rdatatable.gitlab.io/data.table/), `tbl`, ...) 
 (annähernd) gleich zu benutzen. 
-Auch wenn die Implementierungen sich teilweise starkt unterscheiden.
+Auch wenn die Implementierungen sich teilweise starkt unterscheiden und es kontekt dann vor- bzw. nachteile geben kann.
 
 
 ## Umwandeln von `tibble` nach `data.frame` und zurück
 
-Wir können wie folgend zwischen den beiden Datentypen umwandeln:
+Wir können zwischen den beiden Datentypen umwandeln:
 
-```{r}
-#| eval: true
-#| echo: true
 
+::: {.columns}
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
 # Datenrahmen als tibble
 str(as_tibble(df))
-
+```
+::: 
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
 # Tibble als Datenrahmen
 str(as.data.frame(tib))
 ```
-
+:::
+:::
 
 ## Unsere erste Graphik
 
 Für Grafiken wollen wir `ggplot()` aus dem Paket `ggplot2` benutzen.
 Dafür müssen wir zunächst das Paket laden:
 
-```{r}
+```{webr-r}
 #| warning: false
-#| eval: true
-#| echo: true
-
+#| autorun: true
 library(ggplot2)
 ```
 
 
 Nun wollen wir ein Säulendiagramm erstellen:
 
-```{r}
-#| eval: true
+```{webr-r}
 #| echo: true
 
 ggplot(data = tib,                       # Woher die Daten?
@@ -287,28 +306,24 @@ ggplot(data = tib,                       # Woher die Daten?
 ```
 
 
-## Oder etwas kompakter:
-
-```{r}
-#| eval: true
-#| echo: true
-
-ggplot(tib, aes(x = Gewicht)) + geom_bar()
-```
-
-
 ## Die Kennzahlen
 
 Die Kennzahlen erhalten wir z.B. wie folgt:
 
-```{r}
-#| eval: true
-#| echo: true
-
+::: {.columns}
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
 table(tib$Gewicht)
-
+```
+:::
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
 table(tib$Groesse)
 ```
+:::
+:::
 
 
 ## Aufgaben {.Übung}
@@ -323,40 +338,42 @@ table(tib$Groesse)
 
 ## Das Paket `dplyr`
 
-`dplyr` ist eine Grammatik zur Datenmanipulation und bietet eine konsistente Sammlung von Verben, die helfen, die häufigsten Herausforderungen bei der Datenbearbeitung zu lösen:
+[`dplyr`](http://dplyr.tidyverse.org) ist eine _Grammatik zur Datenmanipulation_ und bietet eine konsistente Sammlung von Verben, die helfen, die häufigsten Herausforderungen bei der Datenbearbeitung zu lösen. 
 
-- `mutate()` fügt neue Variablen hinzu, die Funktionen bestehender Variablen sind.
-- `select()` wählt Variablen basierend auf ihren Namen aus.
-- `filter()` wählt Fälle basierend auf ihren Werten aus.
-- `summarise()` reduziert mehrere Werte auf eine einzelne Zusammenfassung.
-- `arrange()` verändert die Reihenfolge der Zeilen.
+Ein Überblick:
 
-Diese Funktionen lassen sich mit `group_by()` kombinieren, wodurch jede Operation „nach Gruppe“ ausgeführt werden kann.
+- [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) fügt neue Variablen hinzu, die Funktionen bestehender Variablen sind.
+- [`select()`](https://dplyr.tidyverse.org/reference/select.html) wählt Variablen basierend auf ihren Namen aus.
+- [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) wählt Fälle basierend auf ihren Werten aus.
+- [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) reduziert mehrere Werte auf eine einzelne Zusammenfassung.
+- [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) verändert die Reihenfolge der Zeilen.
+
+Diese Funktionen lassen sich mit [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) kombinieren, wodurch jede Operation „nach Gruppe“ ausgeführt werden kann.
 
 
 ## Backends zu `dplyr`
 
-Neben der Arbeit mit Data Frames bzw. Tibbles ermöglicht `dplyr` auch einen effizienten und benutzerfreundlichen Umgang mit verschiedenen Backends. 
+Neben der Arbeit mit Data Frames bzw. Tibbles ermöglicht [`dplyr`](http://dplyr.tidyverse.org) auch einen effizienten und benutzerfreundlichen Umgang mit verschiedenen Backends. 
 Nachfolgend dine Übersicht alternativer Backends:
 
-- **[arrow](https://arrow.apache.org/docs/r/)**: Für Datensätze, die größer sind als der verfügbare Arbeitsspeicher – einschließlich solcher, die in entfernten Cloud-Speichern wie AWS S3 abgelegt sind.
+- [**arrow**](https://arrow.apache.org/docs/r/): Für Datensätze, die größer sind als der verfügbare Arbeitsspeicher – einschließlich solcher, die in entfernten Cloud-Speichern wie AWS S3 abgelegt sind.
 
-- **[dtplyr](https://dtplyr.tidyverse.org)**: Für große Datensätze im Arbeitsspeicher. Übersetzt `dplyr`-Code in leistungsstarken `[data.table](https://rdatatable.gitlab.io/data.table/)`-Code.
+- [**dtplyr**](https://dtplyr.tidyverse.org)**: Für große Datensätze im Arbeitsspeicher. Übersetzt `dplyr`-Code in leistungsstarken [`data.table`](https://rdatatable.gitlab.io/data.table/)-Code.
 
-- **[dbplyr](https://dbplyr.tidyverse.org)**: Für Daten, die in relationalen Datenbanken gespeichert sind. Wandelt `dplyr```-Anweisungen in SQL-Abfragen um.
+- [**dbplyr**](https://dbplyr.tidyverse.org): Für Daten, die in relationalen Datenbanken gespeichert sind. Wandelt `dplyr`-Anweisungen in SQL-Abfragen um.
 
-- **[duckplyr](https://duckplyr.tidyverse.org)**: Für die Nutzung von _duckdb_ bei großen In-Memory-Datensätzen ohne zusätzliche Kopien. Übersetzt `dplyr`-Code in effiziente *duckdb*-Abfragen und greift bei nicht möglicher Übersetzung automatisch auf R zurück.
+- [**duckplyr**](https://duckplyr.tidyverse.org): Für die Nutzung von _duckdb_ bei großen In-Memory-Datensätzen ohne zusätzliche Kopien. Übersetzt `dplyr`-Code in effiziente *duckdb*-Abfragen und greift bei nicht möglicher Übersetzung automatisch auf R zurück.
 
-- **[duckdb](https://duckdb.org/docs/stable/clients/r.html)**: Für große Datensätze, die dennoch vollständig auf einem lokalen Rechner verarbeitet werden können.
+- [**duckdb**](https://duckdb.org/docs/stable/clients/r.html): Für große Datensätze, die dennoch vollständig auf einem lokalen Rechner verarbeitet werden können.
 
-- **[sparklyr](https://spark.posit.co)**: Für sehr große Datensätze, die in [Apache Spark](https://spark.apache.org) gespeichert sind.
+- [**sparklyr**](https://spark.posit.co): Für sehr große Datensätze, die in [Apache Spark](https://spark.apache.org) gespeichert sind.
 
 
 ## Spalten zu Tabellen hinzufügen mit  `mutate()`
 
-Wir nutzen dazu das Paket `dplyr` und den Befehl `mutate()`:
+Wir nutzen dazu das Paket [`dplyr`](http://dplyr.tidyverse.org) und den Befehl `mutate()`:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -373,7 +390,7 @@ tib2 |> mutate(Geschlecht = rep(c("weiblich", "männlich"), 3)) -> tib3
 
 Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -383,7 +400,7 @@ tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
 
 ## Alternative (y- und x-Achse getauscht)
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -402,7 +419,7 @@ tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
 
 Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: `geom_point`):
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -414,7 +431,7 @@ tib3 |>
 
 Der Korrellationkoeffizent berechnet sich zu:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -427,7 +444,7 @@ cor(tib3$Groesse, tib3$Gewicht)
 
 Eine lineare Regression scheint keine schlechte Idee zu sein:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -438,7 +455,7 @@ linreg
 
 Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls `summary()`:
 
-```{r}
+```{webr-r}
 #| eval: true
 #| echo: true
 
@@ -450,7 +467,7 @@ summary(linreg)
 
 Wir können nun diese Regressionsgerade in unsere Grafik einbauen:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 #| 
@@ -463,7 +480,7 @@ tib3 |>
 
 ## Ein kleiner Ausblick
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 tib3 |>
@@ -481,7 +498,6 @@ tib3 |>
         caption = "Etwas mehr Text als vielleicht nötig?",
         tag = "WICHTIG!"
     )
-
 ```
 
 
@@ -491,7 +507,7 @@ Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meist
 
 Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -505,31 +521,38 @@ tib["Gewicht"] #. Eine Tabelle mit nur den Einträgen aus der Spalte Gewicht
 
 **Aber Vorsicht!** Reines R kann ab und zu sehr ähnlich aussehen, aber unterschiedliche Ergebnisse liefern:
 
-```{r}
-#| echo: true
-#| eval: true
-
-tib[1] # Liefert die erste Spalte!
-tib[1, ] # Liefert die erste Zeile!
+::: {.columns}
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: false
+# Liefert die erste Spalte!
+tib[1] 
 ```
+:::
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: false
+# Liefert die erste Zeile!
+tib[1, ] 
+```
+:::
+:::
 
 
 ## Spalten und Zeilen auswählen mit `dem Paket `select()` und `filter()`
 
 Einfacher ist es mit dem Paket `dplyr` zu arbeiten. 
-Spalten können wir mit dem Befehl `select()` auswählen:
+So können wir Spalten mit dem Befehl `select()` auswählen bzw. selektieren:
 
-```{r}
-#| echo: true
-#| eval: true
-
+```{webr-}
+#| autorun: start
 tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 ```
 
 
 Die Tabellenspalten können wir in einen Vektor umwandeln:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -539,7 +562,7 @@ tib3 |> select(Geschlecht) |> c() # Als Vektor
 
 Zeilen werden mit dem Befehl `filter()` ausgewählt:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -552,7 +575,7 @@ tib3 |> filter(Geschlecht == "männlich")
 Wir wollen eine Zusammenfassung (eng. *summarise*) erstellen. 
 Wir wollen wissen wie viele Beobachtungen (*n*) die Grundlage für den Mittelwert des Gewichts (*mean*) bzw des Median der Größe (*median*) sind:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -567,7 +590,7 @@ tib3 |>
 
 Mit dem Befehl `group_by()` können wir kategoriale Variablen (also Spalten) nutzen um einzelne Fälle (also Kategorien) zu unterscheiden:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -617,7 +640,7 @@ Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendung
 
 Zum Einlesen einer CSV-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv()`:
 
-```{r}
+```{webr-r}
 #| warning: false
 #| echo: true
 #| eval: true
@@ -630,7 +653,7 @@ here("data", "tips.csv") |> read_csv() -> tips_csv
 
 R hat nun die Spalten wir folgt gelesen:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -642,7 +665,7 @@ spec(tips_csv)
 
 Zum Einlesen einer CSV2-Datei nutzen wir aus dem Paket *readr* den Befehle `read_csv2()`:
 
-```{r}
+```{webr-r}
 #| warning: false
 #| echo: true
 #| eval: true
@@ -657,7 +680,7 @@ here("data", "tips.csv2") |> read_csv2() -> tips_csv2
 
 R hat nun die Spalten wir folgt gelesen:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -669,7 +692,7 @@ spec(tips_csv2)
 
 Wir erhalten damit die selben Tabellen. Schauen wir kurz hinein:
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -683,24 +706,28 @@ glimpse(tips_csv2)
 
 ## Daten aus einer Datei einlesen (Excel-Version)
 
-```{r}
-#| warning: false
-#| echo: true
-#| eval: true
+Um Daten aus einer Excel-Datei zu lesen brauchen wir das Paket [`readxl`](https://readxl.tidyverse.org).
 
+```{webr-r}
+#| warning: false
+#| autorun: true
 library(here)
 library(readxl)
+```
 
+
+Wir können u.a. das Sheet "tips" auswählen, wenn das Dokument mehrere Tabellen enhält:
+
+```{webr-r}
+#| autorun: true
 here("data", "tips.xlsx") |> read_xlsx(sheet="tips") -> tips_xslx
 ```
 
 
-Und auch hier erhalten wir den selben Inhalt:
+Wir den nun den die selben Daten in der Tabelle:
 
-```{r}
-#| echo: true
-#| eval: true
-
+```{webr-r}
+#| autorun: true
 glimpse(tips_xslx)
 ```
 
@@ -713,19 +740,19 @@ glimpse(tips_xslx)
 2. Gruppieren Sie nun die Ausgabe aus Aufgabe 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
 
 
-3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket `dplyr` nach dem Befehl `arrange()`. ;-) ) 
+3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket [`dplyr`](https://dplyr.tidyverse.org/) nach dem Befehl [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html). ;-) ) 
 
     a) Einmal in aufsteigender Reihenfolge!
 
-    b) Einmal in nabsteigender Reihenfolge!
+    b) Einmal in absteigender Reihenfolge!
 
 
 ## Etwas den Speicher aufräumen!
 
-Ab und zu ist einfach mal Zeit zum Aufräumen. -- 
-Und einer kleinen Pause.
+Ab und zu ist einfach mal Zeit zum Aufräumen! -- 
+Und einer kleinen Pause!
 
-```{r}
+```{webr-r}
 #| echo: true
 #| eval: true
 
@@ -744,17 +771,15 @@ rm(linreg)
 
 ## Logische Vergleiche
 
-Wir können in R zwei Zahlen miteinander vergleichen und feststellen, ob diese gleich oder ungleich sind.
+Wir können in _R_ zwei Zahlen miteinander vergleichen und feststellen, ob diese gleich oder ungleich sind.
 Wir können auch überprüfen, ob eine Zahl größer oder kleiner ist als eine andere Zahl.
-Eine solche Frage wird dann in *R* mit entweder _Ja_ (`TRUE`) oder _Nein_ (`FALSE`) beantwortet. 
+Eine solche Frage wird dann in _R_ mit entweder _Ja_ (`TRUE`) oder _Nein_ (`FALSE`) beantwortet. 
 Solche Vergleiche werden _logische Vergleich_ genannt und sind auch nicht nur auf Zahlen beschränkt.
 
 Wenn wir uns zum Beispiel dafür interessieren, ob die Zahl 5 größer ist als die Zahl 3 können wir dies mit dem Code 5 > 3 herausfinden:
 
-```{r}
-#| echo: true
-#| eval: true
-
+```{webr-r}
+#| autorun: true
 5 > 3
 ```
 
@@ -763,6 +788,7 @@ Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE`.
 
 ## Vergleichsoperatoren
 
+Überblick:
 
 | Symbol auf der Tastatur | Rechnung oder Operation         |
 |:------------------------|:--------------------------------|  
@@ -771,17 +797,38 @@ Da 5 tatsächlich größer ist als 3, erhalten wir von _R_ die Antwort `TRUE`.
 | `>`  bzw. `<`           | Größer bzw. Kleiner             |
 | `>=` bzw. `<=`          | Größergleich bzw. Kleinergleich |
 
+Beispiele:
 
-```{r}
-#| echo: true
-#| eval: true
+::: {.columns}
+::: {.column width="49%"}
 
+```{webr-r}
+#| autorun: false
 5 > 3
+```
+```{webr-r}
+#| autorun: false
 5 < 3
+```
+```{webr-r}
+#| autorun: false
 3 == 3
+```
+
+:::
+::: {.column width="49%"}
+
+```{webr-r}
+#| autorun: false
 5 == 3
+```
+```{webr-r}
+#| autorun: false
 5 != 3
 ```
+
+:::
+:::
 
 
 ## Die logische Verknüpfungen _UND_ bzw. _ODER_
@@ -807,10 +854,8 @@ Als Antwort eines kombinierten logischen Vergleichs erhält man erneut entweder 
 
 Ist die Zahl 6 größer als 5 UND ist die Zahl 7 kleiner als 6?
 
-```{r}
-#| echo: true
-#| eval: true
-
+```{webr-r}
+#| autorun: false
 (6 > 5) & (7 < 6)
 ```
 
@@ -819,16 +864,15 @@ Ist die Zahl 6 größer als 5 UND ist die Zahl 7 kleiner als 6?
 
 Ist die Zahl 7 größer als 5 ODER ist die Zahl 9 kleiner als 8 (oder beides)?
 
-```{r}
-#| echo: true
-#| eval: true
-
+```{webr-r}
+#| autorun: false
 (7 > 5) | (9 < 8)
 ```
 
 
 ## Datentypen
 
+\
 
 numeric, integer, double
 : Intern wird für Zahlen in _R_ der Begriff _numeric_ verwendet. 
@@ -843,6 +887,8 @@ logical
 : Wir haben gesehen, dassnach einem logischen Vergleich eine Information erhalten, die nur zwei Ausprägungen haben kann: `TRUE` oder `FALSE`. 
     Diese Informationen haben in _R_ den Datentyp _logical_. 
     Ist für einen Wert nun der Datentyp logical hinterlegt, weiß _R_, dass eben nur diese beiden Ausprägungen möglich sind.
+
+## Datentypen
 
 \
 

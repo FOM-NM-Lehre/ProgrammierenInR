@@ -3,6 +3,13 @@ date: today
 copyright: "Norman Markgaf in 2025"
 lang: de-DE
 slide-number: c
+engine: knitr
+filters:
+  - webr
+webr:
+    show-header-message: false
+    show-startup-message: false    # Disable displaying status of webR initialization
+    packages: ['tibble', 'here', 'ggplot2', 'dplyr', 'readr', 'readxl'] # Install R packages on document open
 format:
     revealjs:
         toc: true
@@ -27,7 +34,7 @@ format:
         fig-align: "center"
         lightbox: true
         theme:
-          - fom.scss
+          - bcw-gruppe.scss
     html:
         toc: true
         html-math-method: katex

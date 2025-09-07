@@ -1,0 +1,13 @@
+/*-- scss:uses --*/
+
+@use 'default-var' with (
+  $background-image: url("../../../../../img/Layout/BCW-Gruppe-background.png"),
+  $kopfzeilen-image: url("../../../../../img/Layout/BCW-Gruppe-kopfzeile.png"),
+  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/BCW-Gruppe-kopfzeile-uebung.png"),
+  $kapitel-bg: #727D86,
+  $kapitel-number-bg: #2a2458,
+  $border-color-left: #2a2458,
+  $border-color-right: #2a2458
+);
+
+@use 'fom-lib';
