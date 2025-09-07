@@ -17,9 +17,10 @@ Ebenso sind aber auch direkte R-Treiben möglich, wie etwa [RPostgreSQL](https:/
 
 ## Für den Einstieg eine SQLite Datenbank
 
-Um mit einer Datenbank zu Arbeiten gibt es mehrere Wege.
+Um mit einer Datenbank zu Arbeiten gibt es mehrere Wege. 
+Wir wollen mit einer [SQLite](https://sqlite.org) Datenbank beginnen.
 
-Wir brauchen um Beginn ein paar neine  Pakete:
+Dazu brauchen  ein paar Pakete:
 
 ```{r}
 #| echo: true
@@ -28,7 +29,8 @@ Wir brauchen um Beginn ein paar neine  Pakete:
 install.packages(c("DBI", "RSQLite", "RPostgreSQL", "dbplyr", "odbc"))
 ```
 
-Wir beginnen damit die nötigen Pakete für eine einer ODBC-Verbindung zu laden:
+Wir können direkt mit SQLite arbeiten oder aber via einer ODBC-API.
+Für letzteres müssen wir ein paar Pakete in den Sopeicher laden:
 
 ```{r}
 #| echo: true
@@ -63,7 +65,7 @@ Wir können mit dem Paket `RSQLite` direkt eine Verbindung mit der Datenbank her
 
 library(tidyverse)
 library(DBI)
-library("RSQLite")
+library(RSQLite)
 ```
 
 Erzeugen wir nun die Verbindung zur Datenbank mit Hilfe des `dbConnect`-Befehls:

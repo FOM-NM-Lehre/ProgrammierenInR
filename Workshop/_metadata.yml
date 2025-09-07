@@ -8,6 +8,7 @@ filters:
   - webr
 webr:
     home-dir: "Workshop/"
+    autoload-packages: false
     show-header-message: false
     show-startup-message: false    # Disable displaying status of webR initialization
     packages: ['tibble', 'here', 'ggplot2', 'dplyr', 'readr', 'readxl', 'tidyr'] # Install R packages on document open
@@ -35,7 +36,8 @@ format:
         fig-align: "center"
         lightbox: true
         theme:
-          - bcw-gruppe.scss
+#          - bcw-gruppe.scss #
+          - fom.scss
     html:
         toc: true
         html-math-method: katex

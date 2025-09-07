@@ -1,0 +1,11 @@
+Der Treiber muss installiert werden mittels:
+
+> brew install sqliteodbc
+
+Dann muss noch die Datei /opt/homebrew/etc/odbcinst.ini angepasst werden, durch die folgenden Zeilen:
+
+```
+[SQLite3]
+Driver = /opt/homebrew/Cellar/sqliteodbc/0.99991/lib/libsqlite3odbc.dylib
+```
+

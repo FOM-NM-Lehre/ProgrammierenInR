@@ -38,7 +38,6 @@ title: "Präsentation: Sechs Dinge über R"
 
 -------------------------------------------------------------------------------
 
-
 ## Wir sind am Ende ... {.unnumbered}
 
 \ 
