@@ -8,7 +8,7 @@
 
 ### Die Grundidee {.unnumbered}
 
-Der erste Teil von "**gg**plot2" steht für "*G*rammar of *G*raphics", also "Grammatik der Grafiken".
+Der erste Teil von "**gg**plot2" steht für "*G*rammar of *G*raphics", also "Grammatik von Grafiken".
 
 Diese Idee Grafiken nicht einfach nur zu Programmieren, sondern den gesamten Prozess der Erstellung von Grafiken zu analysieren und für Nutzer:innen handhabbar zu machen geht u.a. auf das Buch ["The Grammar of Graphics"](https://doi.org/10.1007/0-387-28695-0) von [Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson) zurück.
 
