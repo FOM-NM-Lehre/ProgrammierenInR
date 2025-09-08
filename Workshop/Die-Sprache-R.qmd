@@ -4,6 +4,11 @@
     
 -->
 
+```{r}
+#| include: false
+#| warning: false
+library(tidyverse)
+```
 
 ## Eine kurze Geschichte von R
 
@@ -51,7 +56,7 @@ Diese Meilensteine zeigen eine kontinuierliche Verbesserung von R bezüglich Sta
 
 ## Unser erstes R, ein R-Skript
 
-Wir beginnen in dem wir uns in *posit.cloud* ein __R-Skript_ Dokument erstellen und gemeinsam einige Schritte durch gehen um unser erstes (gemeinsames) _R_ zu programmieren.
+Wir beginnen in dem wir uns in *posit.cloud* ein _R-Skript_ Dokument erstellen und gemeinsam einige Schritte durch gehen um unser erstes (gemeinsames) _R_ zu programmieren.
 
 Wir beginnen mit den folgenden Zeilen:
 
@@ -327,7 +332,7 @@ table(tib$Groesse)
 :::
 
 
-## Aufgaben {.Übung}
+## Aufgaben {.Uebung}
 
 1. Erzeugen Sie eine neue Tabelle mit dem Namen *tib2*, welche die Spalten
     _Groesse_, _Gewicht_ und _BMI_ enthält.
@@ -385,34 +390,46 @@ tib2 |> mutate(Geschlecht = rep(c("weiblich", "männlich"), 3)) -> tib3
 ```
 
 
-## Geben wir nun einen Boxplot aus
+## Ein Boxplot in zwei Dimensionen
 
-Wir nutzen nun die Tabelle *tib3* um Boxplot auszugeben:
+Um die Unterschiede zwischen den weiblichen und männlichen Beobachtungen zu charaterisieren, können wir die Tabelle *tib3* nutzen und Boxplots erstellen:
 
+::: {.columns}
+::: {.column width="49%"}
+ Horizontal:
 ```{webr-r}
 #| autorun: true
-tib3 |> ggplot(aes(x = BMI, y = Geschlecht)) + geom_boxplot()
+tib3 |> 
+    ggplot(aes(x = BMI, y = Geschlecht)) + 
+    geom_boxplot()
 ```
-
-
-## Alternative (y- und x-Achse getauscht)
-
+:::
+::: {.column width="49%"}
+Vertikal:
 ```{webr-r}
 #| autorun: true
-tib3 |> ggplot(aes(x = Geschlecht, y = BMI)) + geom_boxplot()
+tib3 |> 
+    ggplot(aes(x = Geschlecht, y = BMI)) + 
+    geom_boxplot()
 ```
+:::
+:::
 
+## Aufgaben {.Uebung}
 
-## Aufgaben {.Übung}
+1. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Varable *Größe*.
 
-1. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Varable *BMI*.
-
-2. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Variable *BMI*, aber nach Geschlechtern getrennt!
+2. Nutzen Sie die Tabelle *tib3* und erstellen Sie einen Boxplot für die Variable *Größe*, aber nach Geschlechtern getrennt!
 
 
 ## Streudiagramme
 
-Zur Darstellung von (vermuteten) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: `geom_point`):
+Zur Darstellung von (vermuteten, linearen) Zusammenhängen zweier numerischer Variablen nutzen wir _Streudiagramme_ (engl. _Scatterplot_, hier mit Hilfe des Geoms: `geom_point()`).
+
+::: {.columns}
+::: {.column width="55%"}
+
+So können wir das Geom nutzen für die Darstellung:
 
 ```{webr-r}
 #| autorun: true
@@ -420,20 +437,26 @@ tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht)) +
     geom_point()
 ```
+:::
+::: {.column width="45%"}
 
-
-Der Korrellationskoeffizent berechnet sich zu:
+Der Korrelationskoeffizient berechnet sich zu:
 
 ```{webr-r}
 #| autorun: true
 cor(tib3$Groesse, tib3$Gewicht)
 ```
-
-
+:::
+:::
 
 ## Eine lineare Regression
 
-Eine lineare Regression scheint keine schlechte Idee zu sein:
+Eine lineare Regression scheint keine schlechte Idee zu sein.
+
+::: {.columns}
+::: {.column width="49%"}
+
+Wir erstellen daher ein lineares Modell (`lm()`):
 
 ```{webr-r}
 #| autorun: true
@@ -441,18 +464,28 @@ linreg <- lm(Gewicht ~ Groesse, data = tib3)
 linreg
 ```
 
+::: 
+::: {.column width="49%"}
 
-Eine etwas ausführlichere Darstellung erhalten wir mittels des Befehls `summary()`:
+Eine ausführlichere Darstellung erhalten wir mit dem Befehls `summary()`:
 
 ```{webr-r}
 #| autorun: true
 summary(linreg)
 ```
 
+:::
+:::
 
-## Eine Grafik dazu
 
-Wir können nun diese Regressionsgerade in unsere Grafik einbauen:
+## Eine Grafik statt nur die Kennzahlen
+
+Wir können in das Streudiagramm auch die Regressionsgerade zeichnen lassen.
+
+::: {.columns}
+::: {.column width="49%"}
+
+Ohne grossen Aufwand geht es so:
 
 ```{webr-r}
 #| autorun: true
@@ -462,11 +495,14 @@ tib3 |>
     geom_smooth(method = lm, se=FALSE, formula = y ~ x)
 ```
 
+::: 
+::: {.column width="49%"}
 
-## Ein kleiner Ausblick
+Mit etwas Aufwand geht mehr:
 
 ```{webr-r}
 #| autorun: true
+#| context: output
 tib3 |>
     ggplot(aes(x = Groesse, y = Gewicht, color = Geschlecht)) +
     geom_point() +
@@ -480,10 +516,13 @@ tib3 |>
         title = "Unser Streudiagramm",
         subtitle = "Daten nach 'männlich' und 'weiblich' unterschieden",
         caption = "Etwas mehr Text als vielleicht nötig?",
-        tag = "WICHTIG!"
+        tag = "WICHTIG!",
+        x = "Größe in Metern",
+        y = "Gewicht in Kilogramm"
     )
 ```
-
+:::
+:::
 
 ## Tabellen und das Dollarzeichen
 
@@ -491,30 +530,34 @@ Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meist
 
 Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
 
+::: {.columns}
+::: {.column width="49%}
+Ein Vektor mit den Daten aus der Spalte Gewicht:
 ```{webr-r}
 #| autorun: true
 tib$Gewicht   # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
-
-tib["Gewicht"] #. Eine Tabelle mit nur den Einträgen aus der Spalte Gewicht
 ```
-
-
-## Spalten und Zeilen in R
+::: {.column width="49%}
+Tabelle nur den Einträgen aus der Spalte Gewicht:
+```{webr-r}
+#| autorun: true
+tib["Gewicht"] 
+```
 
 **Aber Vorsicht!** Reines R kann ab und zu sehr ähnlich aussehen, aber unterschiedliche Ergebnisse liefern:
 
 ::: {.columns}
 ::: {.column width="49%"}
+Liefert die erste Spalte!
 ```{webr-r}
 #| autorun: false
-# Liefert die erste Spalte!
 tib[1] 
 ```
 :::
 ::: {.column width="49%"}
+Liefert die erste Zeile!
 ```{webr-r}
 #| autorun: false
-# Liefert die erste Zeile!
 tib[1, ] 
 ```
 :::
@@ -526,7 +569,7 @@ tib[1, ]
 Einfacher ist es mit dem Paket `dplyr` zu arbeiten. 
 So können wir Spalten mit dem Befehl `select()` auswählen bzw. selektieren:
 
-```{webr-}
+```{webr-r}
 #| autorun: start
 tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 ```
@@ -586,11 +629,15 @@ CSV-Dateien werden häufig für den Datenaustausch zwischen verschiedenen Progra
 Aufgrund der Einfachheit ist das Format weit verbreitet, aber nicht streng standardisiert. Häufig sind die erste Zeile die Spaltennamen (*Header*) und jede Zeile danach enthält die eigentlichen Daten. 
 Ein Beispiel für eine typische CSV-Struktur:
 
+\
+
 ```
         Name,Alter,Beruf,Stellenwert
         Anna,34,Lehrerin,1.0
         Bert,29,Ingenieur,0.5
 ```
+
+\
 
 Komma ist das Standardtrennzeichen, jedoch werden manchmal auch Semikolon, Tabulator oder andere Zeichen verwendet, abhängig von den regionalen und programmbezogenen Einstellungen.
 
@@ -601,11 +648,15 @@ Hierbei werden als Feldtrennzeichen **Semikolons** (`;`) statt Kommas genutzt, d
 
 Hierbei erwartet die Funktion, dass Felder durch Semikolons getrennt sind und Zahlen das Komma als Dezimaltrennzeichen verwenden. Beispielhafter Aufbau einer CSV2-Datei:
 
+\
+
 ```
         Name;Alter;Beruf;Stellenwert
         Anna;34;Lehrerin;1.0
         Bert;29;Ingenieur;0.5
 ```
+
+\
 
 Das CSV2-Format eignet sich damit besonders für Kontinentaleuropa und Anwendungen, die diese Formatierung benötigen.
 
@@ -716,7 +767,7 @@ glimpse(tips_xslx)
 ```
 
 
-## Aufgaben {.Übung}
+## Aufgaben {.Uebung}
 
 1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen (Tipp: `sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben
 
@@ -724,7 +775,8 @@ glimpse(tips_xslx)
 2. Gruppieren Sie nun die Ausgabe aus Aufgabe 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
 
 
-3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! (Tipp: Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket [`dplyr`](https://dplyr.tidyverse.org/) nach dem Befehl [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html). ;-) ) 
+3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! 
+    **Tipp:** _Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket [`dplyr`](https://dplyr.tidyverse.org/) nach dem Befehl [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)._
 
     a) Einmal in aufsteigender Reihenfolge!
 
@@ -738,6 +790,7 @@ Und einer kleinen Pause!
 
 ```{r}
 #| warning: false
+#| echo: true
 rm(tips_csv2)
 rm(tips_xslx)
 ```
