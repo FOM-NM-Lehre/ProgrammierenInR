@@ -6,11 +6,82 @@
 
 ## Datum mit dem Paket `lubridate`
 
-Die R-Bibliothek `lubridate` wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
+Die _R_-Bibliothek [`lubridate`](http://lubridate.tidyverse.org) wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
 
-Wir nutzen hier die Befehle `make_datetime()` um aus den Datumsangaben eine `datetime()` zu bilden.
+```{webr-r}
+#| warning: false
+#| autorun: true
+library(lubridate)
+```
 
-Und den Befehl `wday()`, der und aus einem Datum den Wochentag berechnet.
+`Lubridate` nutzt für Datums/Zeit-Angaben die Form "datetime". Dabei wird aus Jahr, Monat, Tag, Stunde, Minute, Sekunde eine standardisierte Zeichenkette erzeugt.
+
+Im Beispiel wollen wir die Datetime vom 25. Oktober 2025 um 14 Uhr 2 Minuten und 1 Sekunde erzeugt:
+
+```{webr-r}
+#| autorun: true
+make_datetime(year = 1971, month = 10, day = 25, hour = 14, min = 2, sec=1)
+```
+
+Dabei wandelt der Befehle `make_datetime()` die Angaben um.
+
+Wollen wir das Jahr ändern, so können wir das wie folgt machen
+
+```{webr-r}
+#| autorun: true
+datetime <- make_datetime(year = 1971, month = 10, day = 25, hour = 14, min = 2, sec=1)
+year(datetime) <- 2025
+datetime
+```
+
+
+
+## Bestimmung des Wochentags mit `wday()`
+
+Mit den Befehl `wday()` können wir nun bestimmen was für ein Wochentag es war:
+
+::: {.columns}
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
+datetime <- make_datetime(year = 1971, month = 10, day = 25, hour = 14, min = 2, sec=1)
+wday(datetime)
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE)
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE, abbr = FALSE)
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE, abbr = FALSE, locale = "de_DE.UTF-8")
+```
+:::
+::: {.column width="49%"}
+```{webr-r}
+#| autorun: true
+year(datetime) <- 2025
+wday(datetime)
+Sys.getlocale("LC_TIME")
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE)
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE, abbr = FALSE)
+```
+```{webr-r}
+#| autorun: true
+wday(datetime, label = TRUE, abbr = FALSE, locale = "de_DE.UTF-8")
+```
+
+:::
+:::
 
 
 ## Vorbereitung
@@ -25,6 +96,8 @@ flights |>
     mutate(
         dep_datetime = make_datetime(year, month, day, hour, minute),
         wday = wday(dep_datetime, label = TRUE, locale="de_DE")) -> jan_flights
+
+head(jan_flights)
 ```
 
 

@@ -44,15 +44,9 @@ title: "Präsentation: Sechs Dinge über R"
 \ 
 ... unserer kleinen Reise der "Sechs Dinge über R" angekommen.
 
-\
-
 Sicher sind viele Fragen offen. -- Falls Sie noch nicht gleich eine zur Hand haben, aber später dennoch Fragen wollen:
 
-\
-
 Sie erreichen mich unter [norman.markgraf@fom-net.de](mailto:norman.markgraf@fom-net.de?subject=Sechs-Dinge-über-R-2025)!
-
-\
 
 Die (jeweils) aktuelle Version dieses Workshops finden Sie im GutHub-Repository unter <https://github.com/FOM-NM-Lehre/ProgrammierenInR.git>
 
@@ -77,7 +71,6 @@ Dieses Werk steht unter der [CC BY-NC-ND 4.0](https://creativecommons.org/licens
 :::
 :::
 
-\
 
 Vielen Dank für Ihre Aufmerksamkeit.
 
