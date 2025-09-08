@@ -6,17 +6,23 @@
 
 ## Visualisierung mit dem Paket `ggplot2`
 
-### Die Grundidee
+### Die Grundidee {.unnumbered}
 
-Der erste Teil von "_gg_plot2" steht für "Grammar of Graphics", also "Grammatik der Grafiken".
+Der erste Teil von "**gg**plot2" steht für "*G*rammar of *G*raphics", also "Grammatik der Grafiken".
 
-Diese Idee Grafiken nicht einfach nur zu Programmieren, sonden den gesamtn Prozess der Erstellung von Grafiken zu analysieren und für Nutzer:innen handhabbar zu machen geht u.a. auf das Buch "The Grammar of Graphics" <https://doi.org/10.1007/0-387-28695-0> von _Leland Wilkinson_ zurück.
+Diese Idee Grafiken nicht einfach nur zu Programmieren, sondern den gesamten Prozess der Erstellung von Grafiken zu analysieren und für Nutzer:innen handhabbar zu machen geht u.a. auf das Buch ["The Grammar of Graphics"](https://doi.org/10.1007/0-387-28695-0) von [Leland Wilkinson](https://en.wikipedia.org/wiki/Leland_Wilkinson) zurück.
 
 Es versucht die Bereiche
 
-Daten + Ästhetiken (aes) + Geome + Skalen + Facets + Themen
+$$
+\text{Daten} + \text{Ästhetiken (aes)} + \text{Geome} + \text{Skalen} + \text{Facets} + \text{Themen}
+$$
 
-zu komibieren, so Grafiken einfach,klar zu beschreiben und den Computer dann daraus eine Graphik erstellen zu lassen.
+zu kombinieren, so Grafiken einfach, klar zu beschreiben und den Computer daraus eine Graphik erstellen zu lassen. 
+
+\
+
+**Hinweis:** Ein _Geom_ ist, in Analogie zum _Biom_, ein eingeführter Begriff, der den "Normtyp" einer Graphik kennzeichnet.
 
 
 ## Beispiel: Streudiagram Körpermasse vs. Flossenlänge:
@@ -25,13 +31,13 @@ zu komibieren, so Grafiken einfach,klar zu beschreiben und den Computer dann dar
 #| warning: false
 #| autorun: true
 penguins |>
-    ggplot(aes(x = flipper_length_mm, 
-               y = body_mass_g, 
-               color = species, 
-               shape = species)) +
+  ggplot(aes(x = flipper_len, 
+             y = body_mass, 
+             color = species, 
+             shape = species)) +
   geom_point(size = 3, alpha = 0.8) +
-  labs(title = "Penguin Größe, Palmer Station LTER",
-       subtitle = "Flossenlänge und Körpermasse von Adelie, Chinstrap und Gentoo Penguinen",
+  labs(title = "Pinguin Größe, Palmer Station LTER",
+       subtitle = "Flossenlänge und Körpermasse von Adelie, Chinstrap und Gentoo Pinguinen",
        x = "Flossenlänge (in mm)", 
        y = "Körpermasse (in g)", 
        color = "Penguin Art", 
@@ -47,17 +53,17 @@ penguins |>
 #| autorun: true
 ggplot(
     data = penguins, 
-    aes(x = flipper_length_mm, 
-        y = bill_length_mm, 
+    aes(x = flipper_len, 
+        y = bill_len, 
         color = species, 
         shape = species)) +
   geom_point(size = 3, alpha = 0.8) +
   labs(title = "Flossen- und Schnabellänge",
-       subtitle = "Dimensionen von Adelie, Chinstrap and Gentoo Penguinen",
+       subtitle = "Dimensionen von Adelie, Chinstrap and Gentoo Pinguinen",
        x = "Flossenlänge (in mm)", 
        y = "Schnabellänge (in mm)", 
-       color = "Penguin Art", 
-       shape = "Penguin Art") +
+       color = "Pinguin Art", 
+       shape = "Pinguin Art") +
   theme_minimal()
 ```
 
@@ -67,9 +73,9 @@ ggplot(
 ```{webr-r}
 #| warning: false
 #| autorun: true
-ggplot(data = penguins, aes(x = body_mass_g)) +
+ggplot(data = penguins, aes(x = body_mass)) +
   geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
-  labs(title = "Verteilung der Körpermasse von Palmer Penguinen", x = "Körpergewicht (in g)", y = "Anzahl") +
+  labs(title = "Verteilung der Körpermasse von Palmer Pinguinen", x = "Körpergewicht (in g)", y = "Anzahl") +
   theme_minimal()
 ```
 
@@ -79,67 +85,9 @@ ggplot(data = penguins, aes(x = body_mass_g)) +
 ```{webr-r}
 #| warning: false
 #| autorun: true
-ggplot(data = penguins, aes(x = species, y = body_mass_g, fill = species)) +
+ggplot(data = penguins, aes(x = species, y = body_mass, fill = species)) +
   geom_boxplot() +
-  labs(title = "Körpermasse der Penguin Arten", x = "Arten", y = "Körpermasse (in g)") +
+  labs(title = "Körpermasse der Pinguin Arten", x = "Arten", y = "Körpermasse (in g)") +
   theme_minimal()
 ```
-
-
-## Datum mit dem Paket `lubridate`
-
-Die R-Bibliothek `lubridate` wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
-
-Wir nutzen hier die Befehle `make_datetime()` um aus den Datumsangaben eine `datetime()` zu bilden.
-
-Und den Befehl `wday()`, der und aus einem Datum den Wochentag berechnet.
-
-
-## Vorbereitung
-
-Wir schauen uns jetzt nur die Flüge im Januar an und fügen den Wochentag (*wday*) und die Abflugszeit (*dep_datetime*) hinzu:
-
-```{webr-r}
-#| warning: false
-#| autorun: true
-flights |> 
-    filter(month == 1) |>
-    mutate(
-        dep_datetime = make_datetime(year, month, day, hour, minute),
-        wday = wday(dep_datetime, label = TRUE, locale="de_DE")) -> jan_flights
-```
-
-
-## Säulendiagramm: Flüge nach Wochentag im Januar
-
-```{webr-r}
-#| warning: false
-#| autorun: true
-ggplot(jan_flights, aes(x = wday)) +
-  geom_bar(fill = "coral") +
-  labs(title = "Flüge nach Wochentag im Januar", x = "Wochentag", y = "Anzahl Flüge")
-```
-
-
-## Streudiagramm Ankunfts- vs. Abflugverzögerungen im Januar
-
-```{webr-r}
-#| warning: false
-#| autorun: true
-ggplot(jan_flights, 
-       aes(x = dep_delay, y = arr_delay, color = carrier)) +
-  geom_point(alpha = 0.5) +
-  labs(title = "Ankunfts- vs. Abflugverzögerungen im Januar", 
-       x = "Abflugverspätung (in Minuten)", 
-       y = "Ankunftsverspätung (in Minuten)")
-```
-
-
-## Aufgaben {.Übung}
-
-1. Erstellen Sie eine Tabelle für den August mit dem Namen *aug_flights*
-
-2. Fügen Sie von den Fluggesellschaftkürzen auch die ensprechenden Namen der Fluggesellschaften in diese Tabelle ein.
-
-3. Eben Sie die Flüge nach Wochentag im August als Säulendiagramm aus.
 

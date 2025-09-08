@@ -531,18 +531,29 @@ Intern speichert R Tabellen _spaltenweise_ und nicht, wie zum Beispiel die meist
 Das ermöglicht einen schnellen Zugriff auf einzelne Spalten:
 
 ::: {.columns}
-::: {.column width="49%}
+::: {.column width="49%"}
+
 Ein Vektor mit den Daten aus der Spalte Gewicht:
+
 ```{webr-r}
 #| autorun: true
-tib$Gewicht   # Ergebnis ein Vektor mit den Daten aus der Spalte Gewicht
+tib$Gewicht
 ```
-::: {.column width="49%}
+
+:::
+::: {.column width="49%"}
+
 Tabelle nur den Einträgen aus der Spalte Gewicht:
+
 ```{webr-r}
 #| autorun: true
-tib["Gewicht"] 
+tib["Gewicht"]
 ```
+
+:::
+:::
+
+## Spalten und Zeilen in R
 
 **Aber Vorsicht!** Reines R kann ab und zu sehr ähnlich aussehen, aber unterschiedliche Ergebnisse liefern:
 
@@ -564,16 +575,18 @@ tib[1, ]
 :::
 
 
-## Spalten und Zeilen auswählen mit `dem Paket `select()` und `filter()`
+## Spalten und Zeilen auswählen mit `select()` und `filter()` aus `dplyr`
 
 Einfacher ist es mit dem Paket `dplyr` zu arbeiten. 
-So können wir Spalten mit dem Befehl `select()` auswählen bzw. selektieren:
 
+
+::: {.columns}
+::: {.column width="49%"}
+So können wir Spalten mit dem Befehl `select()` auswählen bzw. selektieren:
 ```{webr-r}
 #| autorun: start
 tib3 |> select(Geschlecht) # Als Spalte einer Tabelle
 ```
-
 
 Die Tabellenspalten können wir in einen Vektor umwandeln:
 
@@ -581,15 +594,17 @@ Die Tabellenspalten können wir in einen Vektor umwandeln:
 #| autorun: true
 tib3 |> select(Geschlecht) |> c() # Als Vektor
 ```
+:::
+::: {.column width="49%"}
 
-
-Zeilen werden mit dem Befehl `filter()` ausgewählt:
+Zeilen werden mit dem Befehl `filter()` ausgewählt bzw. filtriert:
 
 ```{webr-r}
 #| autorun: true
 tib3 |> filter(Geschlecht == "männlich")
 ```
-
+:::
+:::
 
 ## Zusammenfassungen von Daten mit `summerise()`
 
@@ -769,19 +784,20 @@ glimpse(tips_xslx)
 
 ## Aufgaben {.Uebung}
 
-1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen (Tipp: `sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben
+1. Versuchen Sie aus der Tabelle *tips_csv* die Anzahl der Frauen die Zahlen. \
+    **Tipp:** _`sex == "Female"`) und deren Rechnungsbeträge (Tipp: `total_bill`) auszugeben_
 
 
-2. Gruppieren Sie nun die Ausgabe aus Aufgabe 1. so, dass sie nach Tagen ausgegeben wird (Tipp: `days`).
+2. Gruppieren Sie nun die Ausgabe aus Aufgabe 1. so, dass sie nach Tagen ausgegeben wird. \
+    **Tipp:** _`days`_
 
 
-3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! 
-    **Tipp:** _Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket [`dplyr`](https://dplyr.tidyverse.org/) nach dem Befehl [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)._
-
+3. Nutzen Sie die Hilfe um die Ausgabe der Größe der Rechnungsbeträge nach zu sortieren! \
     a) Einmal in aufsteigender Reihenfolge!
-
+    
     b) Einmal in absteigender Reihenfolge!
-
+    
+    **Tipp:** _Ist etwas schwerer! Suchen Sie mit der Hilfe im Paket [`dplyr`](https://dplyr.tidyverse.org/) nach dem Befehl [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)._
 
 ## Etwas den Speicher aufräumen!
 

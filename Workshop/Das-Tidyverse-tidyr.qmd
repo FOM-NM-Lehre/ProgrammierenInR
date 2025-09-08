@@ -8,12 +8,14 @@
 
 Manchmal möchten wir Tabellen für Menschen lesbarer machen. Oder umgekehrt, für den Computer. 
 
-Hier kann das Paket `tidyr` helfen.
+Hier kann das Paket [`tidyr`](http://tidyr.tidyverse.org) helfen.
 
 ```{webr-r}
 #| autorun: true
 library(tidyr)
 ```
+
+## Gute Lesbarkeit für den Computer / Menschen
 
 Stellen wir uns vor, wie möchten wissen wie viele Tiere welcher Art (*species*) auf welcher Insel (*island*) gesichtet wurden, dann geht das sehr gut mir dem Befehl `count()`:
 

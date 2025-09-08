@@ -1,3 +1,8 @@
+---
+engine: knitr
+filters:
+  - webr
+---
 <!--
 
 # Das Tidyverse
@@ -6,14 +11,12 @@
 
 ## Vorbereitung
 
-Pakete kann mensch bequem über die IDE installieren, oder einfach mit einem Befehl:
+Pakete kann mensch bequem über die IDE installieren oder einfach mit einem _R_-Befehl:
 
-```{webr-r}
+```{r}
 #| eval: false
 #| echo: true
-
 install.packages(c("tidyverse", "palmerpenguins", "nycflights13", "janitor", "lubridate", "stringr"))
-
 ```
 
 Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. -- Aber keine Angst, sollten Sie ein Paket schon istalliert haben, dann wird es maximal auf die aktuelle Version upgedated!
@@ -25,20 +28,26 @@ Es ist wichtig, dass Sie für diesen Abschnitt alle Pakete installiert haben. --
 
 **Kernpakete:** 
 
+::: {.columns}
+::: {.column width="49%"}
 - [`readr`](https://readr.tidyverse.org) (Einlesen),
 - [`tibble`](https://tibble.tidyverse.org) (Datenstruktur),
 - [`dplyr`](https://dplyr.tidyverse.org/reference/tbl.html) (Transformation), 
 - [`tidyr`](https://tidyr.tidyverse.org) (Umformen), 
+:::
+::: {.column width="49%"}
 - [`ggplot2`](https://ggplot2.tidyverse.org) (Graphiken), 
 - [`stringr`](https://stringr.tidyverse.org) (Text), 
 - [`forcats`](https://forcats.tidyverse.org) (Kategorielle Variablen/Faktoren), 
 - [`lubridate`](https://lubridate.tidyverse.org) (Daten/Zeit).
-
+:::
+:::
 
 **Philosophie:** Ein Datenzusammenhang pro Tabelle, eine Variable pro Spalte, eine Beobachtung pro Zeile; klare, “verb”-artige Funktionen.
 
+\
 
-**Pipes:** Kette Schritte mit dem Base-Pipe `|>` (oder `%>%`), um lineare, lesbare Workflows zu bauen.
+**Pipes:** Verkette Schritte mit dem Base-Pipe `|>` (oder `%>%`) um lineare, lesbare Workflows zu bauen.
 
 
 ## Anmerkung zu den Beispiel Daten "palmerpenguins"
@@ -78,24 +87,29 @@ penguins |>
 
 Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org). Es gibt aber auch Bord-Mittel. Schauen Sie sich gerne einmal die Befehle `read.csv()" und `read.csv2()` an. 
 
-```{webr-r}
-#| autorun: true
+```{r}
+#| warning: false
+#| echo: true
+#| eval: true
 library(readr)
 library(here)
 ```
 
+Wir lesen nun die Daten "sales.csv" aus dem Verzeichnis "data" ein:
 
-## Einlesen
-
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true
+#| eval: true
 here("data", "sales.csv") |> 
     read_csv() -> 
     df 
 ```
 
-```{webr-r}
-#| autorun: false
+Und geben die Spaltennamen aus:
+
+```{r}
+#| echo: true
+#| eval: true
 colnames(df)
 ```
 
@@ -103,11 +117,11 @@ colnames(df)
 **Fragen an Sie:** _Sind diese Variabel-/Spaltennamen "schön"? - Was ist Ihre Meinung?_
 
 
-## Einlesen von Daten und Variabelnamen vereinheitlich
+## Einlesen von Daten und Variabelnamen vereinheitlich mit dem Paket `janitor`
 
-```{webr-r}
-#| warning: false
-#| autorun: true
+```{r}
+#| echo: true
+#| eval: true
 library(janitor)
 
 here("data", "sales.csv") |> 
@@ -119,8 +133,9 @@ here("data", "sales.csv") |>
 
 Wie schauen die Spaltennamen nun aus?
 
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true
+#| eval: true
 colnames(df) 
 ```
 
@@ -133,7 +148,8 @@ Erzeugen wir also eine neue Tabelle mit dem Namen `df_small`, die
 - nur die Spalten *order_date*, *region* und alle Spalten die mit *total_* beginnen enthält. 
 - Danach nur die Regionen "Europa" und "North America" enthält, die einen "total_revenue" von mit als 50000 Dollar haben: 
 
-```{webr-r}
+
+```{r}
 #| echo: true
 #| eval: true
 library(dplyr)
@@ -148,10 +164,11 @@ df |>
 
 Fügen wir die Marge als neue Spalte *margin* hinzu. Die Marge ist der Quotient aus *total_profit* und *total_revenue*. 
 Sortieren wir dann das Ergebnis absteigend (vgl: `desc()`) bzgl. der Spalte *margin*., speichern das Ergebnis in `df_aug` und
-geben anschliessend die ersten 6 Zeilen der neuen Tabelle (`head()`) aus:
+geben anschließend die ersten 6 Zeilen der neuen Tabelle (`head()`) aus:
 
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true
+#| eval: true
 df_small |>
     mutate(margin = total_profit / total_revenue) |>
     arrange(desc(margin)) -> 
@@ -165,8 +182,9 @@ head(df_aug)
 
 Wenn wir nun die mittleren Marge (*mean_margin*) und die Gesamtumsatz (*total_rev*) für jeweils unsere Regionen bestimmen möchten können wir den Befehll (`summarize()`) nutzen:
 
-```{webr-r}
-#| autorun: false
+```{r}
+#| echo: true
+#| eval: true
 df_aug |>
     group_by(region) |>
     summarise(
@@ -182,11 +200,14 @@ by_region
 
 ## Eine andere Aufgabe
 
-Etwas trickreicher müssen wir vorgehen, wenn wir für den Gesamtumsatz (*total_revenue*), die Gesamtkosten (*total_cots*) und den Gesamtgewinn (*total_profit*) die Durchschnitte und deren Standardabweichungen in eine neue Tabelle speichern wollen: 
+Etwas trickreicher müssen wir vorgehen, wenn wir für den Gesamtumsatz (*total_revenue*), die Gesamtkosten (*total_costs*) und den Gesamtgewinn (*total_profit*) die Durchschnitte und deren Standardabweichungen in eine neue Tabelle speichern wollen: 
 
+::: {.columns}
+::: {.column width="43%"}
 Wir beginnen mit einer Funktion, die uns für jeden übergebenen Wert eine Tabelle (`tibble`) mit dem Mittelwert *mean* und der Standardabweiung *sd* zurückliefert:
-```{webr-r}
-#| autorun: true
+```{r}
+#| echo: true
+#| eval: true
 mean_sd <- function(x) {
     tibble(
         mean = mean(x),
@@ -195,10 +216,15 @@ mean_sd <- function(x) {
 }
 ```
 
-Diese Funktion nutzen wir und erzeugen eine neue Tabelle, in dem wir durch alle Spalten von *total_revenue* bis *total_profit* durchlaufen und diese der Funktion `mean_sd()` übergeben. Das Ergebnis kommt dann in die Tabelle *df_stats*:
+Diese Funktion nutzen wir und erzeugen eine neue Tabelle, in dem wir durch alle Spalten von *total_revenue* bis *total_profit* durchlaufen und diese der Funktion `mean_sd()` übergeben.
+:::
+::: {.column width="57%"}
 
-```{webr-r}
-#| autorun: true
+ Das Ergebnis kommt dann in die Tabelle *df_stats*:
+
+```{r}
+#| echo: true
+#| eval: true
 df |>
     reframe(
         across(
@@ -210,7 +236,8 @@ df |>
 
 df_stats
 ```
-
+:::
+:::
 
 ## Ein neues Beispiel: New York City Flüge aus dem Jahre 2013
 
@@ -221,7 +248,7 @@ Im Paket `nycflights13` sind Tabellen über Die An- und Abflüge auf dem Flughaf
 ```{webr-r}
 #| autorun: true
 library(nycflights13)
-````
+```
 
 Wir schauen uns zunächst die Daten an:
 
@@ -246,7 +273,7 @@ Dazu erstellen wir einen *left join*, so wie Sie ihn aus SQL kennen:
 ```{webr-r}
 #|  autorun: false
 flights |>
-    left_join(airlines, by = "carrier")  ->
+    left_join(airlines, by = "carrier") ->
     flights_named
 
 colnames(flights_named)
@@ -263,10 +290,12 @@ Wir wollen wissen welche Fluggesellschaften im Februar mit einem Airbus A320 (eg
 
 ```{webr-r}
 #|  autorun: false
+library(stringr)
+
 flights_named |>
     left_join(planes, by = "tailnum") |>
     filter(month == 2) |>
-    filter(str_detect(model, "^A320")) |>
+    filter(str_detect(model, "^A320")) |>  # str_detect aus stringr
     select(name) |>
     unique()
 ```

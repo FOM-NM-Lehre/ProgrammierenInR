@@ -1,0 +1,63 @@
+<!--
+
+# Das Tidyverse - lubridate
+
+-->
+
+## Datum mit dem Paket `lubridate`
+
+Die R-Bibliothek `lubridate` wird verwendet, um Datums- und Zeitangaben einfach zu verarbeiten und zu manipulieren. 
+
+Wir nutzen hier die Befehle `make_datetime()` um aus den Datumsangaben eine `datetime()` zu bilden.
+
+Und den Befehl `wday()`, der und aus einem Datum den Wochentag berechnet.
+
+
+## Vorbereitung
+
+Wir schauen uns jetzt nur die Flüge im Januar an und fügen den Wochentag (*wday*) und die Abflugszeit (*dep_datetime*) hinzu:
+
+```{webr-r}
+#| warning: false
+#| autorun: true
+flights |> 
+    filter(month == 1) |>
+    mutate(
+        dep_datetime = make_datetime(year, month, day, hour, minute),
+        wday = wday(dep_datetime, label = TRUE, locale="de_DE")) -> jan_flights
+```
+
+
+## Säulendiagramm: Flüge nach Wochentag im Januar
+
+```{webr-r}
+#| warning: false
+#| autorun: true
+ggplot(jan_flights, aes(x = wday)) +
+  geom_bar(fill = "coral") +
+  labs(title = "Flüge nach Wochentag im Januar", x = "Wochentag", y = "Anzahl Flüge")
+```
+
+
+## Streudiagramm Ankunfts- vs. Abflugverzögerungen im Januar
+
+```{webr-r}
+#| warning: false
+#| autorun: true
+ggplot(jan_flights, 
+       aes(x = dep_delay, y = arr_delay, color = carrier)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Ankunfts- vs. Abflugverzögerungen im Januar", 
+       x = "Abflugverspätung (in Minuten)", 
+       y = "Ankunftsverspätung (in Minuten)")
+```
+
+
+## Aufgaben {.Übung}
+
+1. Erstellen Sie eine Tabelle für den August mit dem Namen *aug_flights*
+
+2. Fügen Sie von den Fluggesellschaftskürzeln auch die entsprechenden Namen der Fluggesellschaften in die Tabelle *aug_flights* ein.
+
+3. Geben Sie die Anzahl der Flüge im August nach Wochentagen sortiert als Säulendiagramm aus.
+
