@@ -364,7 +364,7 @@ Nachfolgend dine Übersicht alternativer Backends:
 
 - [**arrow**](https://arrow.apache.org/docs/r/): Für Datensätze, die größer sind als der verfügbare Arbeitsspeicher – einschließlich solcher, die in entfernten Cloud-Speichern wie AWS S3 abgelegt sind.
 
-- [**dtplyr**](https://dtplyr.tidyverse.org)**: Für große Datensätze im Arbeitsspeicher. Übersetzt `dplyr`-Code in leistungsstarken [`data.table`](https://rdatatable.gitlab.io/data.table/)-Code.
+- [**dtplyr**](https://dtplyr.tidyverse.org): Für große Datensätze im Arbeitsspeicher. Übersetzt `dplyr`-Code in leistungsstarken [`data.table`](https://rdatatable.gitlab.io/data.table/)-Code.
 
 - [**dbplyr**](https://dbplyr.tidyverse.org): Für Daten, die in relationalen Datenbanken gespeichert sind. Wandelt `dplyr`-Anweisungen in SQL-Abfragen um.
 
