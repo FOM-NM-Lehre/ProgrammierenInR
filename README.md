@@ -26,4 +26,4 @@ Beachten Sie, dass Sie zu Beginn die Datei "Workshop/setup/setup.R" ausführen, 
 
 Dieses Repository steht unter der CC Lizenz, genauer CC-BY-ND-SA 4.0. Brauchen Sie eine andere Lizenzform, so sprechen Sie mich, Norman Markgraf, bitte an.
 
-
+Eine Version der Präsentation finden Sie auch unter: <https://www.sefiroth.net/Archiv/Präsentation.html>

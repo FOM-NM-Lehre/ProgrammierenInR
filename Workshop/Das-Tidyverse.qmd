@@ -85,7 +85,8 @@ penguins |>
 
 ## Einlesen von Daten - Vorbereitung
 
-Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org). Es gibt aber auch Bord-Mittel. Schauen Sie sich gerne einmal die Befehle `read.csv()" und `read.csv2()` an. 
+Wir wollen nun Daten aus einer csv Datei einlesen. Dafür verwenden wir das Paket [`readr`](https://readr.tidyverse.org) aus dem [`tidyverse`](https://www.tidyverse.org). 
+Es gibt aber auch Bord-Mittel. Schauen Sie sich gerne einmal die Befehle `read.csv()` und `read.csv2()` an. 
 
 ```{r}
 #| warning: false
