@@ -1,3 +1,6 @@
+
+.PHONY: website clean
+
 website:
 	mkdir _site
 	cp Workshop/Präsentation.html _site
@@ -11,3 +14,10 @@ website:
 	cd ..
 	mv _site/Archive.zip .
 	rm -rf _site
+
+clean:
+	rm Archive.zip
+	cd Workshop
+	rm *.html
+	rm *.docx
+	rm -rf *_files

@@ -20,14 +20,14 @@
   display: block;
 }
 
-div.quarto-title-block > div.slide-background-content { 
+div.quarto-title-block > div.slide-background-content {
   background-image: default-var.$background-image;
   background-repeat: no-repeat;
   background-size: 100% 100% !important;
 }
 /*
  * Titelseite
-*/ 
+*/
 #title-slide h1,
 #title-slide p,
 #title-slide div,
@@ -79,9 +79,9 @@ div.quarto-title-block > div.slide-background-content {
   right: 0.01dvh;
 
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: flex-start;
-  
+
   background-color: default-var.$kapitel-bg;
   color: default-var.$kapitel-fc;
   font-size: 44px!important;
@@ -95,14 +95,14 @@ div.quarto-title-block > div.slide-background-content {
 .reveal .slide h1 span.header-section-number {
   position: absolute;
   left: -300px;
-  
+
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   text-align: center;
-  
+
   font-size:150px!important;
-  
+
   width: 20%;
   height: 170px;
   background-color: default-var.$kapitel-number-bg;
@@ -112,6 +112,7 @@ div.quarto-title-block > div.slide-background-content {
  Gehört zu section.slide und hält rechts genug Platz frei für das Logo.
  Zusätzlich wird der Text mit "..." an der rechten Seite abgeschnitten.
 */
+.reveal h2#toc-title,
 .reveal .slide h2 {
   background-image: default-var.$kopfzeilen-image;
   background-repeat: no-repeat;
@@ -129,7 +130,14 @@ div.quarto-title-block > div.slide-background-content {
   background-image: default-var.$kopfzeilen-uebungs-image!important;
 }
 
-.reveal p, 
+.reveal section#TOC ul {
+    list-style-type: none;
+}
+.reveal ul li a span.header-section-number::after {
+    content: ". ";
+}
+
+.reveal p,
 .reveal .slides section {
   font-size: 45px;
 }
@@ -163,7 +171,7 @@ div.footer {
   border-image-source: linear-gradient(to left,default-var.$border-color-left, default-var.$border-color-right);
 }
 
-.reveal div.footer p, 
+.reveal div.footer p,
 div.footer p {
   font-size: 14px!important;
 }
@@ -216,6 +224,6 @@ figcaption {
 /*
 By default, KaTeX math is rendered in a 1.21× larger font than the surrounding context, which makes super- and subscripts easier to read. You can control this using CSS, for example, to set to 1.1×:
 */
-.katex { 
+.katex {
   font-size: 1.0em!important;
 }
