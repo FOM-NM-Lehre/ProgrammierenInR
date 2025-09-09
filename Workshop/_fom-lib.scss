@@ -131,8 +131,46 @@ div.quarto-title-block > div.slide-background-content {
 }
 
 .reveal section#TOC ul {
+    border-left: 2px solid default-var.$border-color;
+    border-right: 2px solid default-var.$border-color;
     list-style-type: none;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    //justify-items: start;
+    margin-left: 15%;
+    margin-top: 5%;
 }
+
+.reveal section#TOC ul li{
+    padding-top: 10px;
+    //padding-bottom: 3px;
+    height: 1.7em;
+    width: 99%;
+    padding-left: 15px;
+    background-color: #EAF4F2;
+    border-bottom: 2px solid default-var.$border-color;
+}
+
+.reveal section#TOC ul li:nth-child(even) {
+  background-color: white;
+}
+
+.reveal section#TOC ul li{
+}
+
+.reveal section#TOC ul::before {
+    content: "Kapitel";
+    width: 98.5%;
+    text-align: left;
+    padding-left: 20px;
+    background-color: default-var.$kapitel-number-bg;
+    color: default-var.$kapitel-fc;
+    font-weight: bold;
+}
+
+
 .reveal ul li a span.header-section-number::after {
     content: ". ";
 }
