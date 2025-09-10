@@ -2,10 +2,13 @@
 
 @use 'default-var' with (
   $background-image: url("../../../../../img/Layout/dls-background.png"),
-  $kopfzeilen-image: url("../../../../../img/Layout/dls-kopfzeile.png"),
-  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/dls-kopfzeile-uebung.png"),
   $border-color-left: #3070D7,
   $border-color-right: #59C3B2
+/*
+ * Einstellungen für die Kopfzeile (normal und für Übungen)
+ */
+  $kopfzeilen-image: url("../../../../../img/Layout/dls-kopfzeile.png"),
+  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/dls-kopfzeile-uebung.png"),
 );
 
 @use 'fom-lib';

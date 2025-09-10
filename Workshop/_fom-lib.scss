@@ -139,18 +139,20 @@ div.quarto-title-block > div.slide-background-content {
     align-items: center;
     flex-direction: column;
     //justify-items: start;
-    margin-left: 15%;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right:auto;
     margin-top: 5%;
 }
 
 .reveal section#TOC ul li{
-    padding-top: 10px;
+    padding-top: 0.5em;
     //padding-bottom: 3px;
     height: 1.7em;
     width: 99%;
     padding-left: 15px;
-    background-color: #EAF4F2;
-    border-bottom: 2px solid default-var.$border-color;
+    background-color: default-var.$toc-light-bc;
+    border-bottom: 2px solid default-var.$toc-border-color;
 }
 
 .reveal section#TOC ul li:nth-child(even) {

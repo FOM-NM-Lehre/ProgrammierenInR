@@ -36,8 +36,8 @@ format:
         fig-align: "center"
         lightbox: true
         theme:
-#          - bcw-gruppe.scss #
-          - fom.scss
+          - bcw-gruppe.scss #
+#          - fom.scss
     html:
         toc: true
         html-math-method: katex

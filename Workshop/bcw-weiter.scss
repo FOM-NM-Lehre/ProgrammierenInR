@@ -2,12 +2,20 @@
 
 @use 'default-var' with (
   $background-image: url("../../../../../img/Layout/BCW-Weiterbildung-background.png"),
-  $kopfzeilen-image: url("../../../../../img/Layout/BCW-Weiterbildung-kopfzeile.png"),
-  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/BCW-Weiterbildung-kopfzeile-uebung.png"),
   $kapitel-bg: #727D86,
   $kapitel-number-bg: #E16E38,
   $border-color-left: #E16E38,
-  $border-color-right: #E16E38
+  $border-color-right: #E16E38,
+  /*
+ * Einstellungen für die Kopfzeilen (norman und Übung)
+ */
+  $kopfzeilen-image: url("../../../../../img/Layout/BCW-Weiterbildung-kopfzeile.png"),
+  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/BCW-Weiterbildung-kopfzeile-uebung.png"),
+  /*
+   * Einstellungen für das Inhaltsverzeichnis
+   */
+  $toc-light-bc: #EEE7E7,
+  $toc-border-color:  #E16E38
 );
 
 @use 'fom-lib';

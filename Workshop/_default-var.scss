@@ -11,5 +11,13 @@ $border-color-right: #00998A !default;
 $presentation-heading-color: white !default;
 $presentation-title-slide-text-align: right !default;
 $background-image: url("../../../../../img/Layout/fom-background-neu.png") !default;
+/*
+ * Einstellungen für die Kopfzeile (normal und für Übungen)
+ */
 $kopfzeilen-image: url("../../../../../img/Layout/fom-kopfzeile.png") !default;
 $kopfzeilen-uebungs-image: url("../../../../../img/Layout/fom-kopfzeile-uebung.png") !default;
+  /*
+   * Einstellungen für das Inhaltsverzeichnis
+   */
+$toc-light-bc: #EAF4F2!default;
+$toc-border-color:  #00998A !default;
