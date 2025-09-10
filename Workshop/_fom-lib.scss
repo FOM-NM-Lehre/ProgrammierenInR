@@ -25,9 +25,11 @@ div.quarto-title-block > div.slide-background-content {
   background-repeat: no-repeat;
   background-size: 100% 100% !important;
 }
+
+/* ========================================================================= */
 /*
  * Titelseite
-*/
+ */
 #title-slide h1,
 #title-slide p,
 #title-slide div,
@@ -38,6 +40,7 @@ div.quarto-title-block > div.slide-background-content {
     display: block;
     text-align: right !important;
   }
+
 .reveal .slide h1 {
   /*background-color: #00998A;
   color: white; */
@@ -64,13 +67,18 @@ div.quarto-title-block > div.slide-background-content {
     font-size: 80%!important;
 }
 
-
+/* ========================================================================= */
 /*
  * Kapitel (H1)
  */
 
 .reveal section.title-slide.level1 {
   height: 100%;
+  background-color: #f8f8f9;
+  background-image: default-var.$background-logo-image;
+  background-repeat: no-repeat;
+  background-position: default-var.$background-logo-position;
+  background-size: default-var.$background-logo-size;
 }
 
 .reveal .slide h1 {
@@ -108,6 +116,10 @@ div.quarto-title-block > div.slide-background-content {
   background-color: default-var.$kapitel-number-bg;
 }
 
+/* ========================================================================= */
+/*
+ * Kopfzeilen (normal und Übung)
+ */
 /*
  Gehört zu section.slide und hält rechts genug Platz frei für das Logo.
  Zusätzlich wird der Text mit "..." an der rechten Seite abgeschnitten.
@@ -130,6 +142,10 @@ div.quarto-title-block > div.slide-background-content {
   background-image: default-var.$kopfzeilen-uebungs-image!important;
 }
 
+/* ========================================================================= */
+/*
+ * Inhaltsverzeichnis
+ */
 .reveal section#TOC ul {
     border-left: 2px solid default-var.$border-color;
     border-right: 2px solid default-var.$border-color;
@@ -141,7 +157,7 @@ div.quarto-title-block > div.slide-background-content {
     //justify-items: start;
     vertical-align: middle;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
     margin-top: 5%;
 }
 
@@ -162,6 +178,9 @@ div.quarto-title-block > div.slide-background-content {
 .reveal section#TOC ul li{
 }
 
+/*
+ * Über der Kapitelübersicht das Wort "Kapitel" einfügen.
+ */
 .reveal section#TOC ul::before {
     content: "Kapitel";
     width: 98.5%;
@@ -172,11 +191,17 @@ div.quarto-title-block > div.slide-background-content {
     font-weight: bold;
 }
 
-
+/*
+ * Hinter der Kapitelnummer ein Punkt einfügen
+ */
 .reveal ul li a span.header-section-number::after {
     content: ". ";
 }
 
+/* ========================================================================= */
+/*
+ *
+ */
 .reveal p,
 .reveal .slides section {
   font-size: 45px;
@@ -189,12 +214,17 @@ div.quarto-title-block > div.slide-background-content {
     padding-right: 25px!important;
   }
 
+/* ========================================================================= */
+/*
+ * Fussnoten
+ */
 .reveal div.footnote,
 .reveal div.footnote p,
 div.footnote {
   font-size: 18px;
 }
 
+/* ========================================================================= */
 /*
  * Fusszeile
  */
@@ -216,6 +246,7 @@ div.footer p {
   font-size: 14px!important;
 }
 
+/* ========================================================================= */
 @page :last {
   display: none;
 }
@@ -241,6 +272,7 @@ figcaption {
 }
 
 
+/* ========================================================================= */
 .right {
   text-align: right;
   margin-left: auto;
@@ -253,6 +285,7 @@ figcaption {
   margin-right: auto;
 }
 
+/* ========================================================================= */
 /*
   Damit die QR Codes richtig positioniert werden können müssen
   die display Werte auf inline-blocks und nicht blocks gesetzt werden.
@@ -261,9 +294,12 @@ figcaption {
   display: inline-block!important;
 }
 
+/* ========================================================================= */
 /*
-By default, KaTeX math is rendered in a 1.21× larger font than the surrounding context, which makes super- and subscripts easier to read. You can control this using CSS, for example, to set to 1.1×:
-*/
+ * By default, KaTeX math is rendered in a 1.21× larger font than the 
+ * surrounding context, which makes super- and subscripts easier to read. 
+ * You can control this using CSS, for example, to set to 1.1×:
+ */
 .katex {
   font-size: 1.0em!important;
 }

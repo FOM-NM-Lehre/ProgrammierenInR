@@ -1,16 +1,26 @@
 /*-- scss:uses --*/
 
 @use 'default-var' with (
-  $background-image: url("../../../../../img/Layout/BCW-Gruppe-background.png"),
   $kapitel-bg: #727D86,
   $kapitel-number-bg: #2a2458,
   $border-color-left: #2a2458,
   $border-color-right: #2a2458,
-/*
- * Einstellungen für die Kopfzeile (normal und für Übungen)
- */
+
+ /*
+  * Einstellungen für den Hintergrund der Titelseite
+  */
+  $background-image: url("../../../../../img/Layout/BCW-Gruppe-background.png"),
+  $background-logo-image: url(../../../../../img/Layout/BCW-Gruppe-logo.png),
+  $background-logo-size: 270px 78px,
+  $background-logo-position: right 20px top 25px,
+
+
+  /*
+   * Einstellungen für die Kopfzeile (normal und für Übungen)
+   */
   $kopfzeilen-image: url("../../../../../img/Layout/BCW-Gruppe-kopfzeile.png"),
   $kopfzeilen-uebungs-image: url("../../../../../img/Layout/BCW-Gruppe-kopfzeile-uebung.png"),
+
   /*
    * Einstellungen für das Inhaltsverzeichnis
    */

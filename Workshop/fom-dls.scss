@@ -1,14 +1,22 @@
 /*-- scss:uses --*/
 
 @use 'default-var' with (
-  $background-image: url("../../../../../img/Layout/dls-background.png"),
   $border-color-left: #3070D7,
-  $border-color-right: #59C3B2
-/*
- * Einstellungen für die Kopfzeile (normal und für Übungen)
- */
+  $border-color-right: #59C3B2,
+
+ /*
+  * Einstellungen für den Hintergrund der Titelseite
+  */
+  $background-image: url("../../../../../img/Layout/dls-background.png"),
+  $background-logo-image: url(../../../../../img/Layout/dls-logo.png),
+  $background-logo-size: 270px 90px,
+
+
+  /*
+   * Einstellungen für die Kopfzeile (normal und für Übungen)
+   */
   $kopfzeilen-image: url("../../../../../img/Layout/dls-kopfzeile.png"),
-  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/dls-kopfzeile-uebung.png"),
+  $kopfzeilen-uebungs-image: url("../../../../../img/Layout/dls-kopfzeile-uebung.png")
 );
 
 @use 'fom-lib';

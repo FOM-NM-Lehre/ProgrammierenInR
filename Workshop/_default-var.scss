@@ -10,14 +10,22 @@ $border-color-left: #00998A !default;
 $border-color-right: #00998A !default;
 $presentation-heading-color: white !default;
 $presentation-title-slide-text-align: right !default;
+
+/*
+* Einstellungen für den Hintergrund der Titelseite
+*/
 $background-image: url("../../../../../img/Layout/fom-background-neu.png") !default;
+$background-logo-image: url(../../../../../img/Layout/fom-logo.png) !default;
+$background-logo-size: 75px 75px !default;
+$background-logo-position: right 10px top 10px !default;
 /*
  * Einstellungen für die Kopfzeile (normal und für Übungen)
  */
 $kopfzeilen-image: url("../../../../../img/Layout/fom-kopfzeile.png") !default;
 $kopfzeilen-uebungs-image: url("../../../../../img/Layout/fom-kopfzeile-uebung.png") !default;
-  /*
-   * Einstellungen für das Inhaltsverzeichnis
-   */
+
+/*
+ * Einstellungen für das Inhaltsverzeichnis
+ */
 $toc-light-bc: #EAF4F2!default;
 $toc-border-color:  #00998A !default;
